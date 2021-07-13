@@ -8,7 +8,7 @@ year: 2021
 date: 2022-01-01
 lastMod: 2021-05-31
 urls:
-  notes: ../20-21-homotopie/homotopie.pdf
+  notes: homotopie.pdf
   custom:
     - label: M2 Fundamental mathematics
       url: https://master-math-fonda.imj-prg.fr/

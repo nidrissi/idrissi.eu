@@ -8,7 +8,7 @@ year: 2020
 date: 2021-01-01
 lastMod: 2021-04-02
 urls:
-  notes: homotopie.pdf
+  notes: ../21-22-homotopie/homotopie.pdf
   video: https://www.youtube.com/playlist?list=PLTt5PyNwzdilR4GnUNxvTBGlKzma9imTf
   custom:
     - label: M2 Fundamental mathematics
