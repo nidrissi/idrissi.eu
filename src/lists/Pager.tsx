@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 import { Link } from "gatsby";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDoubleLeft, faAngleDoubleRight, faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
@@ -14,10 +14,10 @@ const Pager: React.FC<PagerProps> = ({ numPages, currentPage, type }) => {
   }
 
   const buttonStyle = "block border text-purple-700 border-purple-700 hover:bg-purple-700 hover:text-white dark:text-purple-400 dark:border-purple-400 dark:hover:bg-purple-400 dark:hover:text-black px-2 rounded-md";
-  const disabledStyle = "text-gray-600 border-gray-600 pointer-events-none"
+  const disabledStyle = "text-gray-600 border-gray-600 pointer-events-none";
 
   function indexToLink(i: number): string {
-    return `/${type}${i === 1 ? `/${i}` : ""}`;
+    return `/${type}${i > 1 ? `/${i}` : ""}`;
   }
 
   return (
@@ -71,6 +71,6 @@ const Pager: React.FC<PagerProps> = ({ numPages, currentPage, type }) => {
         <FontAwesomeIcon icon={faAngleDoubleRight} />
       </Link>
     </nav>
-  )
+  );
 };
 export default Pager;
