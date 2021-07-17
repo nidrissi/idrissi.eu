@@ -66,5 +66,8 @@
   },
   "browserslist": [
     "defaults"
-  ]
+  ],
+  "devDependencies": {
+    "eslint-config-react-app": "^6.0.0"
+  }
 }

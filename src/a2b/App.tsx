@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // these components are always loaded
@@ -33,7 +33,7 @@ export default function App() {
       // has used the app, I still want to use defaultInitialState as fallback
       dispatch(saveSettings({ ...initialState, ...JSON.parse(persistentState) }));
     }
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (authors.length > 0 || ids.length > 0 || titles.length > 0) {

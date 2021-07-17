@@ -9,7 +9,9 @@ interface EmbedProps {
 export default function Embed({ url, alt }: EmbedProps) {
   const content = url.endsWith(".pdf") ? (
     <div className="aspect-w-16 aspect-h-9">
-      <object type="application/pdf" data={url} title={alt} className="block w-full max-h-full" />
+      <object type="application/pdf" data={url} title={alt} className="block w-full max-h-full">
+        {alt}
+      </object>
     </div>
   ) : (
     <Link to={url}>

@@ -149,6 +149,7 @@ function EntryLink({ url, definition, title }: EntryLinkProps) {
   const href: string = definition.urlBuilder?.(actualUrl) ?? actualUrl;
 
   return (
+    // eslint-disable-next-line react/jsx-no-target-blank
     <a
       href={href}
       className="block border border-gray-200 text-gray-900 hover:bg-blue-800 hover:border-transparent hover:text-white hover:shadow-md dark:text-gray-300 dark:border-gray-700 rounded-md px-2 py-1 text-sm"
