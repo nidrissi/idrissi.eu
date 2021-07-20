@@ -13,7 +13,7 @@ module.exports = {
       email: `najib.idrissi-kaitouni@imj-prg.fr`,
       organizations: [
         { name: "Université de Paris", url: "https://u-paris.fr" },
-        { name: "IMJ-PRG", url: "https://www.imj-prg.fr" },
+        { name: "Institut de Mathématiques de Jussieu–Paris Rive Gauche", url: "https://www.imj-prg.fr" },
       ],
       address: {
         url: `https://goo.gl/maps/2nQKHG6pEdb6w4f5A`,

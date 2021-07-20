@@ -2,7 +2,7 @@
 title: "Git for Mathematicians (1/3): Preliminaries"
 date: 2021-04-13
 lastMod: 2021-04-26
-tags: [code]
+tags: [code, math]
 urls:
   custom:
     - label: "Part 2: The Theory"
