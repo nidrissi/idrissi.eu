@@ -7,7 +7,7 @@ module.exports = {
   siteMetadata: {
     siteUrl: `https://idrissi.eu`,
     siteTitle: `Najib Idrissi’s math page`,
-    siteDescription: `Hello! I am Najib Idrissi, a mathematician working at Université de Paris, and this is my personal webpage.`,
+    siteDescription: `I am Najib Idrissi, a mathematician. I am maître de conférences at Université de Paris and the Institut de Mathématiques de Jussieu-Paris Rive Gauche.`,
     author: {
       name: `Najib Idrissi`,
       email: `najib.idrissi-kaitouni@imj-prg.fr`,
