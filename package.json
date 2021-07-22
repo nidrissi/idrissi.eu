@@ -1,13 +1,9 @@
 {
   "name": "nidrissi",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "private": true,
   "description": "My personal website",
   "author": "Najib Idrissi",
-  "keywords": [
-    "gatsby",
-    "math"
-  ],
   "scripts": {
     "develop": "gatsby develop",
     "start": "gatsby develop",
@@ -15,7 +11,6 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean"
   },
-  "license": "none",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.3",
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
@@ -39,7 +34,7 @@
     "gatsby": "^3.9.1",
     "gatsby-plugin-catch-links": "^3.8.0",
     "gatsby-plugin-google-gtag": "^3.9.0",
-    "gatsby-plugin-image": "^1.8.0",
+    "gatsby-plugin-image": "^1.10.1",
     "gatsby-plugin-manifest": "^3.8.0",
     "gatsby-plugin-mdx": "^2.9.0",
     "gatsby-plugin-offline": "^4.8.0",
@@ -62,12 +57,7 @@
     "rehype-slug": "^4.0.1",
     "remark-external-links": "^8.0.0",
     "remark-math": "^3.0.1",
-    "tailwindcss": "^2.2.4"
-  },
-  "browserslist": [
-    "defaults"
-  ],
-  "devDependencies": {
+    "tailwindcss": "^2.2.4",
     "eslint-config-react-app": "^6.0.0"
   }
 }
