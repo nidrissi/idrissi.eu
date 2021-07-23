@@ -41,25 +41,22 @@ export default function Index({ children }: { children: React.ReactNode; }) {
   return (
     <Layout title={siteTitle} description={siteDescription}>
       <article>
-        <div className="float-right w-28 sm:w-40 md:w-56 m-3">
-          <StaticImage
-            src="photo.jpg"
-            alt="Photo of myself."
-            className="rounded-md"
-            loading="eager"
-            placeholder="tracedSVG" />
-        </div>
-        <header>
-          <h1 role="banner" className="text-4xl font-bold mb-4 text-black dark:text-gray-200">
+        <StaticImage
+          src="photo.jpg"
+          alt="Photo of myself."
+          className="block rounded-md float-right w-28 sm:w-40 md:w-56 m-3"
+          loading="eager"
+          placeholder="tracedSVG"
+        />
+        <div className="prose prose-blue dark:prose-dark max-w-none mb-3">
+          <h1>
             {siteTitle}
           </h1>
-        </header>
-        <div className="prose prose-blue dark:prose-dark max-w-none mb-3">
           {children}
         </div>
         <Contact />
       </article>
-      <div className="flex flex-col gap-8 mt-8">
+      <div className="grid grid-cols-1 gap-8 mt-8">
         <Research />
         <Class />
         <Talk />

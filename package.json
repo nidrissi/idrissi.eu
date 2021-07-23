@@ -30,11 +30,14 @@
     "@types/react-helmet": "^6.1.2",
     "@types/react-redux": "^7.1.18",
     "autoprefixer": "^10.3.1",
+    "cssnano": "^5.0.7",
+    "eslint-config-react-app": "^6.0.0",
     "formik": "^2.2.8",
     "gatsby": "^3.10.1",
     "gatsby-plugin-catch-links": "^3.10.0",
     "gatsby-plugin-google-gtag": "^3.10.0",
     "gatsby-plugin-image": "^1.10.1",
+    "gatsby-plugin-less": "^5.10.0",
     "gatsby-plugin-manifest": "^3.10.0",
     "gatsby-plugin-mdx": "^2.10.0",
     "gatsby-plugin-offline": "^4.10.0",
@@ -57,7 +60,6 @@
     "rehype-slug": "^4.0.1",
     "remark-external-links": "^8.0.0",
     "remark-math": "^3.0.1",
-    "tailwindcss": "^2.2.6",
-    "eslint-config-react-app": "^6.0.0"
+    "tailwindcss": "^2.2.6"
   }
 }
