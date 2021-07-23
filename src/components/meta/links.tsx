@@ -157,7 +157,12 @@ function EntryLink({ url, definition, title }: EntryLinkProps) {
       rel={href.startsWith("http") ? "noopener noreferrer" : null}
       title={definition.titleBuilder ? definition.titleBuilder(title) : null}
     >
-      {definition.icon && <FontAwesomeIcon icon={definition.icon} /> & nbsp;}
+      {definition.icon && (
+        <>
+          <FontAwesomeIcon icon={definition.icon} />
+          &nbsp;
+        </>
+      )}
       {label}
     </a>
   );

@@ -116,7 +116,12 @@ export default function Footer() {
           className={linkStyle + " " + (link.extraStyle || "")}
           key={link.label}
         >
-          {link.icon && <FontAwesomeIcon icon={link.icon} /> & nbsp;}
+          {link.icon && (
+            <>
+              <FontAwesomeIcon icon={link.icon} />
+              &nbsp;
+            </>
+          )}
           {link.label}
         </a>
       ))}
