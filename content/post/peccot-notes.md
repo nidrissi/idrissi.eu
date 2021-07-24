@@ -1,9 +1,9 @@
 ---
-title: "Peccot Lecture: Notes"
+title: 'Notes for my Peccot lecture, "Real Homotopy of Configuration Spaces"'
 date: 2021-04-06
 tags: [math, peccot, notes, class]
 urls:
-    notes: ../research/peccot.pdf
+  notes: ../research/peccot.pdf
 ---
 
 import Embed from "../../src/components/Embed";

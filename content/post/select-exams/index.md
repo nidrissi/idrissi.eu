@@ -1,5 +1,5 @@
 ---
-title: Select-Exams
+title: "Select-Exams.ps1: a script to extract exams from a multi-page PDF"
 date: 2021-04-19
 lastMod: 2021-04-30
 tags: [code, class]

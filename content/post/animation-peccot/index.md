@@ -1,5 +1,5 @@
 ---
-title: Video
+title: Animated illustration of the Fulton-MacPherson operad
 date: 2020-02-28
 tags: [math, class, peccot, animation]
 ---
