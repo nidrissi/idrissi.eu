@@ -11,7 +11,7 @@ I am not a 3D artist, obviously, but (with oral explanations) I think it explain
 
 <div class="aspect-w-16 aspect-h-9">
 <video controls>
-<source src="./animation.mp4" type="video/mp4" />
-This is supposed to be a video illustrating the Fulton-MacPherson compactification, but apparently your browser does not support showing HTML5 videos.
+<source src="./animation-peccot.webm" type="video/webm" />
+This is supposed to be a video illustrating the Fulton&ndash;MacPherson compactification, but apparently your browser does not support showing <a href="https://en.wikipedia.org/wiki/WebM" target="_blank" rel="noopener noreferrer">HTML5/WebM</a> videos.
 </video>
 </div>

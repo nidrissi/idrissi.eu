@@ -12,7 +12,7 @@ So I took the opportunity to prepare a little illustration to explain the connec
 
 <div class="aspect-w-16 aspect-h-9">
 <video controls>
-<source src="braid.mp4" type="video/mp4" />
-This is supposed to be a video showing a braid and a path in the configuration space, but apparently your browser does not support showing HTML5 videos.
+<source src="braid.webm" type="video/webm" />
+This is supposed to be a video showing a braid and a path in the configuration space, but apparently your browser does not support showing <a href="https://en.wikipedia.org/wiki/WebM" target="_blank" rel="noopener noreferrer">HTML5/WebM</a> videos.
 </video>
 </div>
