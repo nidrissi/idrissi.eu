@@ -15,7 +15,7 @@ function extractBytes(index: number): Uint8Array {
 }
 
 /**
- * Returns a random color in (Hue, Saturation, Value) format.
+ * Returns a random color in (Hue, Saturation, Luminance) format.
  * @param index A 32-bit number.
  */
 function getColor(index: number): string {
