@@ -1,0 +1,12 @@
+namespace Idrissi
+{
+    public class Comment
+    {
+        public string id { get; set; }
+        public string pageId { get; set; }
+        public string date { get; set; }
+        public string content { get; set; }
+        public string authorId { get; set; }
+        public string authorName { get; set; }
+    }
+}
