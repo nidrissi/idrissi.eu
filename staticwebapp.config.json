@@ -19,14 +19,6 @@
         {
             "route": "/fr/expose/*",
             "redirect": "/talk/"
-        },
-        {
-            "route": "/en/cv",
-            "redirect": "/cv"
-        },
-        {
-            "route": "/fr/cv",
-            "redirect": "/cv/fr"
         }
     ],
     "responseOverrides": {
