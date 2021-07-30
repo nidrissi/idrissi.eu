@@ -1,4 +1,34 @@
 {
+    "routes": [
+        {
+            "route": "/en/*",
+            "redirect": "/"
+        },
+        {
+            "route": "/fr/cours/*",
+            "redirect": "/class/"
+        },
+        {
+            "route": "/fr/recherche/*",
+            "redirect": "/research/"
+        },
+        {
+            "route": "/fr/billet/*",
+            "redirect": "/blog/"
+        },
+        {
+            "route": "/fr/expose/*",
+            "redirect": "/talk/"
+        },
+        {
+            "route": "/en/cv",
+            "redirect": "/cv"
+        },
+        {
+            "route": "/fr/cv",
+            "redirect": "/cv/fr"
+        }
+    ],
     "responseOverrides": {
         "404": {
             "rewrite": "/404.html"
