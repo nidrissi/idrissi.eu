@@ -132,7 +132,7 @@ Moreover, while you are going off on your tangent, you may also want to make cha
 Branches are a solution to these questions.
 A branch is merely a **named pointer** to a specific commit.
 Nothing more, nothing less.
-Every Git repository typically starts with a single branch called `master` (in the sense of [master record](https://en.wikipedia.org/wiki/Mastering_(audio))).
+Every Git repository typically starts with a single branch called `master` (in the sense of [master record](<https://en.wikipedia.org/wiki/Mastering_(audio)>)).
 Nowadays, the default branch is sometimes called `main`.
 The name is not important.
 
@@ -244,4 +244,3 @@ In the meantime, there are some resources online, such as the [_Pro Git Book_](h
 
 As you may know, this entire website is hosted in a [Git repository on GitHub](https://github.com/nidrissi/nidrissi).
 If you see anything wrong above, please [raise an issue there 🙂](https://github.com/nidrissi/nidrissi/issues).
-If you'd just like to talk or comment about this article, [you can also start a new discussion](https://github.com/nidrissi/nidrissi/discussion).
