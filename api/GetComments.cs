@@ -6,9 +6,8 @@ using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Text.Json;
 
-namespace Idrissi
+namespace Idrissi.Blogging
 {
-
     public static class GetComments
     {
         [FunctionName("GetComments")]
@@ -17,7 +16,7 @@ namespace Idrissi
             HttpRequest req,
             [CosmosDB(databaseName: "Blogging", collectionName: "Comments",
                 ConnectionStringSetting = "CosmosDbConnectionString",
-                SqlQuery = "select * from Blogging c where c.pageId = {pageId} order by c.date")]
+                SqlQuery = "select * from Blogging c where c.pageId = {pageId} order by c.date desc")]
             IEnumerable<Comment> comments,
             ILogger log)
         {

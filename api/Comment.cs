@@ -1,4 +1,4 @@
-namespace Idrissi
+namespace Idrissi.Blogging
 {
     public class Comment
     {
