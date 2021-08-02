@@ -15,7 +15,11 @@ export interface Comment {
   authorName: string;
 }
 
-export default function SingleComment({ comment }: { comment: Comment; }) {
+interface SingleProps {
+  comment: Comment;
+}
+
+export default function Single({ comment }: SingleProps) {
   return (
     <div className="flex items-start">
       <div className="mr-2">
@@ -27,7 +31,7 @@ export default function SingleComment({ comment }: { comment: Comment; }) {
             <strong>
               {comment.authorName}
             </strong>
-            {" "}
+            {", "}
             <em>
               {new Date(comment.date).toLocaleString()}
             </em>

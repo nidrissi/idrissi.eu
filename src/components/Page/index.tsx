@@ -2,13 +2,13 @@ import { MDXRenderer } from "gatsby-plugin-mdx";
 import { graphql } from "gatsby";
 import React from "react";
 
-import Layout from "./Layout";
-import Meta, { Frontmatter } from "./meta";
-import NextPrevious, { NextOrPreviousItem } from "./NextPrevious";
-import Embed from "./Embed";
+import Layout from "../Layout";
+import Meta, { Frontmatter } from "../meta";
+import NextPrevious, { NextOrPreviousItem } from "../NextPrevious";
+import Embed from "../Embed";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faNetworkWired } from "@fortawesome/free-solid-svg-icons";
-import CommentList from "./CommentList";
+import CommentBlock from "./CommentBlock";
 
 interface PageTemplateProps {
   data: {
@@ -99,7 +99,7 @@ export default function PageTemplate({ data }: PageTemplateProps) {
         <Embed url={frontmatter.urls.read.publicURL} alt={`Read the research document: ${parsedTitle}`} />
       )}
 
-      {type === "post" && <CommentList slug={slug} />}
+      {type === "post" && <CommentBlock slug={slug} />}
 
       <NextPrevious next={data.next} previous={data.previous} type={type} />
     </Layout>
