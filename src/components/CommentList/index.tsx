@@ -51,9 +51,11 @@ export default function Comments({ slug }: CommentListProp) {
   } else {
     return (
       <CommentListWrapper num={comments.length}>
-        {comments?.map(c => (
-          <SingleComment key={c.id} comment={c} />
-        ))}
+        <div className="flex flex-col gap-2">
+          {comments?.map(c => (
+            <SingleComment key={c.id} comment={c} />
+          ))}
+        </div>
       </CommentListWrapper>
     );
   }
