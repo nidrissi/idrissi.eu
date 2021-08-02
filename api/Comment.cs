@@ -4,7 +4,7 @@ namespace Idrissi.Blogging
     {
         public string id { get; set; }
         public string pageId { get; set; }
-        public string date { get; set; }
+        public int timestamp { get; set; }
         public string content { get; set; }
         public string authorId { get; set; }
         public string authorName { get; set; }

@@ -9,7 +9,7 @@ import Identicon from "./Identicon";
 export interface Comment {
   id: string;
   pageId: string;
-  date: string;
+  timestamp: number;
   content: string;
   authorId: string;
   authorName: string;
@@ -20,6 +20,8 @@ interface SingleProps {
 }
 
 export default function Single({ comment }: SingleProps) {
+  const date = new Date(comment.timestamp);
+
   return (
     <div className="flex items-start">
       <div className="mr-2">
@@ -27,13 +29,13 @@ export default function Single({ comment }: SingleProps) {
       </div>
       <div>
         <div>
-          <p className="leading-none border-b pb-1 border-opacity-50">
+          <p className="leading-none border-b pb-1 border-opacity-50 border-dashed">
             <strong>
               {comment.authorName}
             </strong>
             {", "}
             <em>
-              {new Date(comment.date).toLocaleString()}
+              {date.toLocaleString()}
             </em>
           </p>
         </div>

@@ -31,7 +31,7 @@ namespace Idrissi.Blogging
 
             var comments = from c in client.CreateDocumentQuery<Comment>(commentsCollectionUri)
                            where c.pageId == pageId
-                           orderby c.date descending
+                           orderby c.timestamp descending
                            select c;
 
             return new OkObjectResult(comments);
