@@ -78,7 +78,7 @@ Online sessions for students that cannot be physically present in Paris at that 
 
 ## Lectures
 
-<div class="flex flex-col sm:grid sm:grid-cols-3 lg:grid-cols-4 gap-3">
+<div class="flex flex-col sm:grid sm:grid-cols-2 gap-3">
 <HomotopyCard number={1} date="2021-01-11" hours="10:45-12:45" video="https://youtu.be/cilKcPVEnX0">
   Analogies between different homotopy theories: topological spaces, simplicial sets, chain complexes. Motivation for the definition of model categories. (Co)fibrations vs. injections/surjections. Definition of model categories. (Sections 1.1 and 1.2)
 </HomotopyCard>
