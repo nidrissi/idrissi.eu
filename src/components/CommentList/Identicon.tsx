@@ -68,7 +68,13 @@ export default function Identicon({ size, seed }: IdenticonProps) {
   });
 
   return (
-    <svg width={size} height={size} viewBox={`0 0 ${viewSize} ${viewSize}`}>
+    <svg
+      role="img"
+      width={size}
+      height={size}
+      viewBox={`0 0 ${viewSize} ${viewSize}`}
+    >
+      <title>Avatar of user #{seed}.</title>
       <rect x={0} y={0} width={viewSize} height={viewSize} fill={bgColor} />
       {matrix.map((row, i) => row.map((cell, j) => (
         cell && <React.Fragment key={`${i}-${j}`}>
