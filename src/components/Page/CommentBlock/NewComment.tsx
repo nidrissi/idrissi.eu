@@ -32,7 +32,6 @@ export default function Post() {
     }, []);
 
     useEffect(() => { fetchClient(); }, [fetchClient]);
-    useEffect(() => console.log(client), [client]);
 
     return (
         <div className="mb-2">
@@ -56,7 +55,7 @@ export default function Post() {
                     You must be logged-in to comment.
                     {" "}
                     <button
-                        className="p-1 leading-none bg-yellow-400 text-black dark:bg-yellow-900 dark:text-white"
+                        className="p-1 leading-none rounded-md bg-yellow-400 text-black dark:bg-yellow-900 dark:text-white"
                         onClick={() => alert("Unimplemented!")}
                     >
                         Click here to login.

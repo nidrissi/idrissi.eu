@@ -4,7 +4,7 @@ import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 import Single, { Comment } from "./Single";
 import Wrapper from "./Wrapper";
-import Post from "./Post";
+import NewComment from "./NewComment";
 import Alert from "./Alert";
 
 interface CommentBlockProps {
@@ -66,7 +66,7 @@ export default function CommentBlock({ slug }: CommentBlockProps) {
     } else {
         return (
             <Wrapper num={comments.length}>
-                <Post />
+                <NewComment />
                 <div className="flex flex-col gap-2">
                     {comments?.map(c => (
                         <Single key={c.id} comment={c} />
