@@ -25,15 +25,31 @@ namespace Idrissi.Blogging
                 return new BadRequestResult();
             }
 
+            log.LogInformation("Parsing identity");
+            var identity = Auth.Parse(req);
+
             log.LogInformation("Fetching comments for {pageId}", pageId);
 
             var commentsCollectionUri = UriFactory.CreateDocumentCollectionUri("Blogging", "Comments");
 
-            var comments = from c in client.CreateDocumentQuery<Comment>(commentsCollectionUri)
-                           where c.pageId == pageId
-                           orderby c.timestamp descending
-                           select c;
+            var query =
+                from c in client.CreateDocumentQuery<Comment>(commentsCollectionUri)
+                where c.pageId == pageId
+                orderby c.timestamp descending
+                select c;
 
+            var comments = query.ToArray();
+
+            if (!identity.IsInRole("admin"))
+            {
+                foreach (var c in comments)
+                {
+                    if (c.deleted)
+                    {
+                        c.content = null;
+                    }
+                }
+            }
             return new OkObjectResult(comments);
         }
     }

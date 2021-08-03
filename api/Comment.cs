@@ -1,5 +1,3 @@
-using System;
-
 namespace Idrissi.Blogging
 {
     public class Comment
@@ -10,5 +8,6 @@ namespace Idrissi.Blogging
         public string content { get; set; }
         public string authorId { get; set; }
         public string authorName { get; set; }
+        public bool deleted { get; set; }
     }
 }
