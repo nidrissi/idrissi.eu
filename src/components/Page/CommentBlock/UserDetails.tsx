@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { useLocation } from "@reach/router";
-import { faSignInAlt, faSignOutAlt, faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { faSignOutAlt, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import Alert from "./Alert";
+import LoginButton from "./LoginButton";
 import { ClientPrincipal } from "./ClientPrincipal";
 
 interface UserDetailsProps {
@@ -12,8 +12,6 @@ interface UserDetailsProps {
 }
 
 export default function UserDetails({ client, setClient }: UserDetailsProps) {
-  const { pathname } = useLocation();
-
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
@@ -68,7 +66,8 @@ export default function UserDetails({ client, setClient }: UserDetailsProps) {
         <button
           className="hover:bg-red-400 dark:hover:bg-red-900 leading-none p-1 rounded-md"
           onClick={() => {
-            window.location.assign(`/.auth/logout?post_logout_redirect_uri=${encodeURI(pathname)}`);
+            const location = window.location.pathname;
+            window.location.assign(`/.auth/logout?post_logout_redirect_uri=${encodeURI(location)}#__comments`);
           }}
         >
           <FontAwesomeIcon icon={faSignOutAlt} />
@@ -80,14 +79,7 @@ export default function UserDetails({ client, setClient }: UserDetailsProps) {
   }
   else {
     return (
-      <button
-        className="block w-full p-2 leading-none rounded-md hover:bg-yellow-400 dark:hover:bg-yellow-800"
-        onClick={() => alert("Unimplemented!")}
-      >
-        <FontAwesomeIcon icon={faSignInAlt} />
-        &nbsp;
-        Login to comment
-      </button>
+      <LoginButton />
     );
   }
 }
