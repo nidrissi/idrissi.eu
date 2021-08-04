@@ -5,13 +5,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Alert from "./Alert";
 import LoginButton from "./LoginButton";
 import { ClientPrincipal } from "./ClientPrincipal";
+import UserName from "./UserName";
 
 interface UserDetailsProps {
-  client: ClientPrincipal;
-  setClient: React.Dispatch<React.SetStateAction<ClientPrincipal>>;
+  onOk: () => void;
 }
 
-export default function UserDetails({ client, setClient }: UserDetailsProps) {
+export default function UserDetails({ onOk }: UserDetailsProps) {
+  const [client, setClient] = useState<ClientPrincipal>(null);
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
@@ -32,7 +34,7 @@ export default function UserDetails({ client, setClient }: UserDetailsProps) {
     } finally {
       setLoading(false);
     }
-  }, [setClient]);
+  }, []);
 
   useEffect(() => { fetchClient(); }, [fetchClient]);
 
@@ -61,7 +63,7 @@ export default function UserDetails({ client, setClient }: UserDetailsProps) {
   else if (client) {
     return (
       <div>
-        Logged-in as {client.userId}.
+        <UserName client={client} onOk={onOk} />
         {" "}
         <button
           className="hover:bg-red-400 dark:hover:bg-red-900 leading-none p-1 rounded-md"

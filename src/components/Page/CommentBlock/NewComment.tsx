@@ -1,13 +1,19 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import UserDetails from "./UserDetails";
-import { ClientPrincipal } from "./ClientPrincipal";
 
 export default function NewComment() {
-  const [client, setClient] = useState<ClientPrincipal>(null);
+  const [okToPost, setOkToPost] = useState(false);
+
+  const onOk = useCallback(() => setOkToPost(true), []);
 
   return (
     <div className="mb-4">
-      <UserDetails client={client} setClient={setClient} />
+      <UserDetails onOk={onOk} />
+      <textarea
+        disabled={!okToPost}
+        className="w-full"
+        rows={5}
+      />
     </div>
   );
 }

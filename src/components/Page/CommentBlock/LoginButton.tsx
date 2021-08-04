@@ -43,14 +43,14 @@ const providers: Provider[] = [
 ];
 
 export default function LoginButton() {
-  const [clicked, setClicked] = useState(true);
+  const [clicked, setClicked] = useState(false);
 
   return (
     <div className="w-full">
       {!clicked ? (
         <button
           className="block w-full p-2 leading-none rounded-md hover:bg-yellow-400 dark:hover:bg-yellow-800"
-          onClick={() => setClicked(false)}
+          onClick={() => setClicked(true)}
         >
           <FontAwesomeIcon icon={faSignInAlt} />
           &nbsp;
