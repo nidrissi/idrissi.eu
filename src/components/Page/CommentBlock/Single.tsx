@@ -14,8 +14,8 @@ export interface Comment {
   timestamp: number;
   content: string;
   deleted: boolean;
-  authorId: string;
-  authorName: string;
+  userId: string;
+  userName: string;
 }
 
 interface SingleProps {
@@ -28,7 +28,7 @@ export default function Single({ comment }: SingleProps) {
   return (
     <div className="flex items-start">
       <div className="mr-2">
-        <Identicon size={36} seed={comment.authorId} />
+        <Identicon size={36} seed={comment.userId} />
       </div>
       <div>
         <div>
@@ -43,7 +43,7 @@ export default function Single({ comment }: SingleProps) {
               </>
             )}
             <strong>
-              {comment.authorName}
+              {comment.userName}
             </strong>
             {", "}
             <em>

@@ -6,8 +6,8 @@ namespace Idrissi.Blogging
         public string pageId { get; set; }
         public long timestamp { get; set; }
         public string content { get; set; }
-        public string authorId { get; set; }
-        public string authorName { get; set; }
+        public string userId { get; set; }
+        public string userName { get; set; }
         public bool deleted { get; set; }
     }
 }
