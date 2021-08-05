@@ -64,13 +64,13 @@ export default function Single({ client, comment }: SingleProps) {
               </>
             )}
             <strong>
+              {comment.userName}
               {client?.userId === comment.userId && (
                 <>
-                  <FontAwesomeIcon icon={faCrown} title="You posted this comment" />
                   &nbsp;
+                  <FontAwesomeIcon icon={faCrown} title="You posted this comment" />
                 </>
               )}
-              {comment.userName}
             </strong>
             {", "}
             <em>
