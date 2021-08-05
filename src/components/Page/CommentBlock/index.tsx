@@ -72,7 +72,7 @@ export default function CommentBlock({ slug }: CommentBlockProps) {
   return (
     <Wrapper num={comments.length}>
       <NewComment client={client} setClient={setClient} pageId={slug} />
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-4">
         {comments?.map(c => (
           <Single key={c.id} comment={c} client={client} />
         ))}

@@ -47,7 +47,7 @@ export default function Single({ client, comment }: SingleProps) {
   };
 
   return (
-    <div className={`flex items-start ${comment.deleted ? "text-opacity-50" : ""}`}>
+    <div className={`flex items-start ${comment.deleted ? "opacity-70" : ""}`}>
       <div className="mr-2">
         {comment.deleted ? (
           <FontAwesomeIcon
@@ -59,8 +59,8 @@ export default function Single({ client, comment }: SingleProps) {
           <Identicon size={36} seed={comment.userId} />
         )}
       </div>
-      <div>
-        <div className="flex items-start leading-none mb-1">
+      <div className="w-full">
+        <div className="w-full flex items-start leading-none">
           <div className="flex-grow pb-1 border-b border-opacity-50 border-dashed">
             <strong>
               {comment.userName}
