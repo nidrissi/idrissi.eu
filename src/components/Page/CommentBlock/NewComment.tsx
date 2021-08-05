@@ -40,7 +40,7 @@ function NewCommentForm({ pageId }: { pageId: string; }) {
   }, [expanded]);
 
   const [sending, setSending] = useState(false);
-  const handleSubmit = async () => {
+  async function handleSubmit() {
     if (sending) {
       return;
     }
@@ -79,7 +79,18 @@ function NewCommentForm({ pageId }: { pageId: string; }) {
     } finally {
       setSending(false);
     }
-  };
+  }
+
+  function handleReset() {
+    const shouldReset =
+      currentInput.trim().length === 0
+      || window.confirm("Are you sure that you want to cancel writing this comment?");
+
+    if (shouldReset) {
+      setExpanded(false);
+      setCurrentInput("");
+    }
+  }
 
   return (
     <div>
@@ -99,17 +110,15 @@ function NewCommentForm({ pageId }: { pageId: string; }) {
           if (e.ctrlKey && e.code === "Enter") {
             handleSubmit();
           }
+          if (e.code === "Escape") {
+            handleReset();
+          }
         }}
         onSubmit={e => {
           e.preventDefault();
           handleSubmit();
         }}
-        onReset={() => {
-          if (window.confirm("Are you sure that you want to cancel writing this comment?")) {
-            setExpanded(false);
-            setCurrentInput("");
-          }
-        }}
+        onReset={handleReset}
       >
         <textarea
           ref={formRef}
