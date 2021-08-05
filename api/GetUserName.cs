@@ -32,7 +32,7 @@ namespace Idrissi.Blogging
                 if (!identity.IsInRole("authenticated"))
                 {
                     log.LogWarning("Got a request from an unauthenticated user");
-                    return new ForbidResult();
+                    return new UnauthorizedResult();
                 }
 
                 var userId = identity.FindFirst(ClaimTypes.NameIdentifier);
@@ -40,7 +40,7 @@ namespace Idrissi.Blogging
                 if (String.IsNullOrWhiteSpace(userId.Value))
                 {
                     log.LogError("Got a request from a user without a userId.");
-                    return new ForbidResult();
+                    return new UnauthorizedResult();
                 }
 
                 log.LogInformation("Getting username of {userId}", userId.Value);
