@@ -67,14 +67,13 @@ export default function UserDetails({ client, setClient, userName, setUserName }
         <UserName client={client} userName={userName} setUserName={setUserName} />
         {" "}
         <button
-          className="hover:bg-red-400 dark:hover:bg-red-900 leading-none p-2 rounded-md"
+          className="hover:bg-red-400 dark:hover:bg-red-900 leading-none p-2 rounded-md text-sm"
           onClick={() => {
             const location = window.location.pathname;
             window.location.assign(`/.auth/logout?post_logout_redirect_uri=${encodeURI(location)}#__comments`);
           }}
         >
-          <FontAwesomeIcon icon={faSignOutAlt} />
-          &nbsp;
+          <FontAwesomeIcon icon={faSignOutAlt} className="mr-1" />
           Logout
         </button>
       </>

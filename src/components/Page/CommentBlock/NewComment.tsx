@@ -50,7 +50,7 @@ function NewCommentForm() {
     </form>
   ) : (
     <button
-      className="block leading-none p-2 rounded-md w-full bg-green-200 dark:bg-green-800 hover:font-bold"
+      className="block leading-none p-2 rounded-md w-full bg-green-200 dark:bg-green-800 hover:bg-green-300 dark:hover:bg-green-700"
       onClick={() => setExpanded(true)}
     >
       <FontAwesomeIcon icon={faEdit} />
