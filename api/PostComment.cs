@@ -94,13 +94,16 @@ namespace Idrissi.Blogging
                     userId = details.id,
                     timestamp = ToJSTime(DateTime.UtcNow)
                 };
-                var commentRequestOptions = new RequestOptions { PartitionKey = new PartitionKey(pageId) };
 
                 var commentCollectionUri = UriFactory.CreateDocumentCollectionUri("Blogging", "Comments");
-                var response = await client.CreateDocumentAsync(commentCollectionUri, comment, commentRequestOptions, cancellationToken: token);
+                var response = await client.CreateDocumentAsync(
+                    commentCollectionUri,
+                    comment,
+                    new RequestOptions { PartitionKey = new PartitionKey(pageId) },
+                    cancellationToken: token);
                 log.LogInformation("Successfully posted comment #{id}", response.Resource.Id);
 
-                return new OkResult();
+                return new CreatedResult(response.Resource.Id, comment);
             }
             catch (JsonException e)
             {

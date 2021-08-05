@@ -50,9 +50,11 @@ namespace Idrissi.Blogging
 
                 log.LogDebug("Setting username of {userId}", userId.Value);
                 var collectionUri = UriFactory.CreateDocumentCollectionUri("Blogging", "Users");
-                var requestOptions = new RequestOptions() { PartitionKey = new PartitionKey(userId.Value) };
-                var response = await client.CreateDocumentAsync(collectionUri, details, requestOptions, cancellationToken: token);
-                return new CreatedResult("user", details);
+                var response = await client.CreateDocumentAsync(collectionUri,
+                    details,
+                    new RequestOptions() { PartitionKey = new PartitionKey(userId.Value) },
+                    cancellationToken: token);
+                return new CreatedResult(details.id, details);
             }
             catch (JsonException ex)
             {
