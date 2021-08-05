@@ -115,8 +115,6 @@ namespace Idrissi.Blogging
                 log.LogError(ex.Message);
                 switch (ex.StatusCode.Value)
                 {
-                    case HttpStatusCode.NotFound:
-                        return new NotFoundResult();
                     case HttpStatusCode.TooManyRequests:
                         return new StatusCodeResult((int)HttpStatusCode.TooManyRequests);
                     default:

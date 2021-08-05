@@ -24,15 +24,15 @@ namespace Idrissi.Blogging
             ILogger log,
             CancellationToken token)
         {
+            ClaimsPrincipal principal;
+            if (!Auth.TryParse(req, log, out principal))
+            {
+                return new UnauthorizedResult();
+            }
+
+            var userId = principal.FindFirst(ClaimTypes.NameIdentifier).Value;
             try
             {
-                ClaimsPrincipal principal;
-                if (!Auth.TryParse(req, log, out principal))
-                {
-                    return new UnauthorizedResult();
-                }
-
-                var userId = principal.FindFirst(ClaimTypes.NameIdentifier).Value;
 
                 log.LogInformation("Getting username of user #{userId}...", userId);
 
@@ -52,14 +52,16 @@ namespace Idrissi.Blogging
             }
             catch (DocumentClientException ex)
             {
-                log.LogError(ex.Message);
                 switch (ex.StatusCode.Value)
                 {
                     case HttpStatusCode.NotFound:
+                        log.LogInformation("No user with id {id}", userId);
                         return new NotFoundResult();
                     case HttpStatusCode.TooManyRequests:
+                        log.LogWarning("User #{id} is making too many requests", userId);
                         return new StatusCodeResult((int)HttpStatusCode.TooManyRequests);
                     default:
+                        log.LogError(ex.Message);
                         throw ex;
                 }
             }
