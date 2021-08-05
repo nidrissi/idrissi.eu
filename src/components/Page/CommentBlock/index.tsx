@@ -9,10 +9,10 @@ import Alert from "./Alert";
 import { ClientPrincipal } from "./ClientPrincipal";
 
 interface CommentBlockProps {
-  slug: string;
+  pageId: string;
 }
 
-export default function CommentBlock({ slug }: CommentBlockProps) {
+export default function CommentBlock({ pageId }: CommentBlockProps) {
   const [client, setClient] = useState<ClientPrincipal>(null);
   const [comments, setComments] = useState<Comment[]>();
   const [loadingComments, setLoadingComments] = useState(true);
@@ -21,7 +21,7 @@ export default function CommentBlock({ slug }: CommentBlockProps) {
   const fetchComments = useCallback(async () => {
     setErrorLoadingComments(false);
     try {
-      const response = await fetch(`/api/comment/${slug}`);
+      const response = await fetch(`/api/comment/${pageId}`);
       if (response.ok) {
         const body = await response.json() as Comment[];
         setComments(body);
@@ -36,11 +36,11 @@ export default function CommentBlock({ slug }: CommentBlockProps) {
     finally {
       setLoadingComments(false);
     }
-  }, [slug]);
+  }, [pageId]);
 
   useEffect(() => {
     fetchComments();
-  }, [slug, fetchComments]);
+  }, [pageId, fetchComments]);
 
   if (loadingComments) {
     return (
@@ -71,7 +71,7 @@ export default function CommentBlock({ slug }: CommentBlockProps) {
 
   return (
     <Wrapper num={comments.length}>
-      <NewComment client={client} setClient={setClient} pageId={slug} />
+      <NewComment client={client} setClient={setClient} pageId={pageId} />
       <div className="flex flex-col gap-4">
         {comments?.map(c => (
           <Single key={c.id} comment={c} client={client} />

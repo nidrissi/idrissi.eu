@@ -99,7 +99,7 @@ export default function PageTemplate({ data }: PageTemplateProps) {
         <Embed url={frontmatter.urls.read.publicURL} alt={`Read the research document: ${parsedTitle}`} />
       )}
 
-      {type === "post" && <CommentBlock slug={slug} />}
+      {type === "post" && <CommentBlock pageId={type + "_" + slug} />}
 
       <NextPrevious next={data.next} previous={data.previous} type={type} />
     </Layout>
