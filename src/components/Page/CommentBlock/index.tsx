@@ -6,33 +6,35 @@ import Single, { Comment } from "./Single";
 import Wrapper from "./Wrapper";
 import NewComment from "./NewComment";
 import Alert from "./Alert";
+import { ClientPrincipal } from "./ClientPrincipal";
 
 interface CommentBlockProps {
   slug: string;
 }
 
 export default function CommentBlock({ slug }: CommentBlockProps) {
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const [client, setClient] = useState<ClientPrincipal>(null);
   const [comments, setComments] = useState<Comment[]>();
+  const [loadingComments, setLoadingComments] = useState(true);
+  const [errorLoadingComments, setErrorLoadingComments] = useState(false);
 
   const fetchComments = useCallback(async () => {
-    setError(false);
+    setErrorLoadingComments(false);
     try {
       const response = await fetch(`/api/comment/${slug}`);
       if (response.ok) {
         const body = await response.json() as Comment[];
         setComments(body);
-        setError(false);
+        setErrorLoadingComments(false);
       } else {
         throw new Error();
       }
     }
     catch {
-      setError(true);
+      setErrorLoadingComments(true);
     }
     finally {
-      setLoading(false);
+      setLoadingComments(false);
     }
   }, [slug]);
 
@@ -40,7 +42,7 @@ export default function CommentBlock({ slug }: CommentBlockProps) {
     fetchComments();
   }, [slug, fetchComments]);
 
-  if (loading) {
+  if (loadingComments) {
     return (
       <Wrapper>
         <FontAwesomeIcon icon={faSpinner} spin />
@@ -48,13 +50,15 @@ export default function CommentBlock({ slug }: CommentBlockProps) {
         Loading comments...
       </Wrapper>
     );
-  } else if (error) {
+  }
+
+  if (errorLoadingComments) {
     return (
       <Wrapper>
         <Alert retry={() => {
-          setError(false);
-          if (!loading) {
-            setLoading(true);
+          setErrorLoadingComments(false);
+          if (!loadingComments) {
+            setLoadingComments(true);
             setTimeout(() => fetchComments(), 500);
           }
         }}>
@@ -63,16 +67,16 @@ export default function CommentBlock({ slug }: CommentBlockProps) {
         </Alert>
       </Wrapper>
     );
-  } else {
-    return (
-      <Wrapper num={comments.length}>
-        <NewComment />
-        <div className="flex flex-col gap-2">
-          {comments?.map(c => (
-            <Single key={c.id} comment={c} />
-          ))}
-        </div>
-      </Wrapper>
-    );
   }
+
+  return (
+    <Wrapper num={comments.length}>
+      <NewComment client={client} setClient={setClient} />
+      <div className="flex flex-col gap-2">
+        {comments?.map(c => (
+          <Single key={c.id} comment={c} client={client} />
+        ))}
+      </div>
+    </Wrapper>
+  );
 }

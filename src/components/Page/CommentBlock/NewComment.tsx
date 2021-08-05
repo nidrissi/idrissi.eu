@@ -2,8 +2,12 @@ import React, { useState } from "react";
 import { ClientPrincipal } from "./ClientPrincipal";
 import UserDetails from "./UserDetails";
 
-export default function NewComment() {
-  const [client, setClient] = useState<ClientPrincipal>(null);
+interface NewCommentProps {
+  client: ClientPrincipal;
+  setClient: React.Dispatch<React.SetStateAction<ClientPrincipal>>;
+}
+
+export default function NewComment({ client, setClient }: NewCommentProps) {
   const [userName, setUserName] = useState<string>(null);
 
   return (

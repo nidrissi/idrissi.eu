@@ -11,7 +11,6 @@ interface CommentListWrapperProps {
 export default function CommentListWrapper({ children, num }: CommentListWrapperProps) {
   return (
     <ErrorBoundary>
-
       <section className="max-w-lg border-t mt-4">
         <h2
           className="text-xl font-semibold mb-2"
@@ -42,7 +41,7 @@ class ErrorBoundary extends React.Component<{}, { hasError: boolean; }> {
     if (this.state.hasError) {
       return (
         <Alert>
-          The comment block encountered a bug and failed.
+          The whole comment section encountered a bug.
         </Alert>
       );
     }
