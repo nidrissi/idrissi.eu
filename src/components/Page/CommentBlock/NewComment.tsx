@@ -1,21 +1,19 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import { ClientPrincipal } from "./ClientPrincipal";
 import UserDetails from "./UserDetails";
 
 export default function NewComment() {
   const [client, setClient] = useState<ClientPrincipal>(null);
-  const [okToPost, setOkToPost] = useState(false);
-
-  const onOk = useCallback(() => setOkToPost(true), []);
+  const [userName, setUserName] = useState<string>(null);
 
   return (
     <div className="mb-4">
       <div className="mb-2">
-        <UserDetails onOk={onOk} client={client} setClient={setClient} />
+        <UserDetails client={client} setClient={setClient} userName={userName} setUserName={setUserName} />
       </div>
-      {okToPost && (
+      {client !== null && userName && (
         <textarea
-          className="w-full"
+          className="w-full text-black"
           rows={5}
         />
       )}

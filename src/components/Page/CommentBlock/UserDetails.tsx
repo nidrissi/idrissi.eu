@@ -10,10 +10,11 @@ import UserName from "./UserName";
 interface UserDetailsProps {
   client: ClientPrincipal;
   setClient: React.Dispatch<React.SetStateAction<ClientPrincipal>>;
-  onOk: () => void;
+  userName: string;
+  setUserName: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export default function UserDetails({ onOk, client, setClient }: UserDetailsProps) {
+export default function UserDetails({ client, setClient, userName, setUserName }: UserDetailsProps) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
@@ -53,17 +54,17 @@ export default function UserDetails({ onOk, client, setClient }: UserDetailsProp
   }
   else if (loading) {
     return (
-      <div>
+      <>
         <FontAwesomeIcon icon={faSpinner} spin />
         &nbsp;
         Loading login details...
-      </div>
+      </>
     );
   }
   else if (client) {
     return (
-      <div>
-        <UserName client={client} onOk={onOk} />
+      <>
+        <UserName client={client} userName={userName} setUserName={setUserName} />
         {" "}
         <button
           className="hover:bg-red-400 dark:hover:bg-red-900 leading-none p-2 rounded-md"
@@ -76,7 +77,7 @@ export default function UserDetails({ onOk, client, setClient }: UserDetailsProp
           &nbsp;
           Logout
         </button>
-      </div>
+      </>
     );
   }
   else {

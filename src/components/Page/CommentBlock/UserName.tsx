@@ -4,12 +4,12 @@ import { ClientPrincipal, formatClient } from "./ClientPrincipal";
 import { UserNameForm } from "./UserNameForm";
 
 interface UserNameProps {
+  userName: string;
+  setUserName: React.Dispatch<React.SetStateAction<string>>;
   client: ClientPrincipal;
-  onOk: () => void;
 }
 
-export default function UserName({ onOk, client }: UserNameProps) {
-  const [userName, setUserName] = useState<string>(null);
+export default function UserName({ client, userName, setUserName }: UserNameProps) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
@@ -33,14 +33,9 @@ export default function UserName({ onOk, client }: UserNameProps) {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [setUserName]);
 
   useEffect(() => { fetchUserName(); }, [fetchUserName]);
-  useEffect(() => {
-    if (userName !== null) {
-      onOk();
-    }
-  }, [userName, onOk]);
 
   if (error) {
     return (
