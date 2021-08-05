@@ -151,7 +151,7 @@ function NewCommentForm({ pageId }: { pageId: string; }) {
           <button
             type="reset"
             disabled={sending}
-            className="block p-1 leading-none bg-gray-300 hover:bg-gray-400 dark:bg-gray-900 dark:hover:bg-black rounded-sm"
+            className="block p-1 leading-none bg-gray-300 hover:bg-red-700 hover:text-white dark:bg-gray-900 dark:hover:bg-red-400 dark:hover:text-black rounded-sm"
           >
             <FontAwesomeIcon icon={faTimes} className="mr-1" />
             Cancel
