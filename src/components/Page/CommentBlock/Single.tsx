@@ -70,7 +70,7 @@ export default function Single({ client, comment }: SingleProps) {
               {date.toLocaleString()}
             </em>
           </div>
-          {comment.userId === client?.userId && (
+          {comment.userId === client?.userId && !comment.deleted && (
             <button
               className="block p-1 hover:bg-red-700 dark:hover:bg-red-400"
               onClick={onClickDelete}
