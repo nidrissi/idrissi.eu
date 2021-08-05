@@ -66,7 +66,7 @@ export default function UserDetails({ onOk }: UserDetailsProps) {
         <UserName client={client} onOk={onOk} />
         {" "}
         <button
-          className="hover:bg-red-400 dark:hover:bg-red-900 leading-none p-1 rounded-md"
+          className="hover:bg-red-400 dark:hover:bg-red-900 leading-none p-2 rounded-md"
           onClick={() => {
             const location = window.location.pathname;
             window.location.assign(`/.auth/logout?post_logout_redirect_uri=${encodeURI(location)}#__comments`);

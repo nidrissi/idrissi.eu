@@ -8,12 +8,15 @@ export default function NewComment() {
 
   return (
     <div className="mb-4">
-      <UserDetails onOk={onOk} />
-      <textarea
-        disabled={!okToPost}
-        className="w-full"
-        rows={5}
-      />
+      <div className="mb-2">
+        <UserDetails onOk={onOk} />
+      </div>
+      {okToPost && (
+        <textarea
+          className="w-full"
+          rows={5}
+        />
+      )}
     </div>
   );
 }

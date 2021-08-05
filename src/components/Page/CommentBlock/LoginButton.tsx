@@ -65,7 +65,8 @@ export default function LoginButton() {
               className="text-sm p-1 leading-none hover:bg-yellow-400 dark:hover:bg-yellow-800 rounded-md"
               onClick={() => {
                 const location = window.location.pathname;
-                window.location.assign(`/.auth/login/${p.url}?post_login_redirect_uri=${encodeURI(location)}#__comments`);
+                const loginUri = `/.auth/login/${p.url}?post_login_redirect_uri=${encodeURI(location)}#__comments`;
+                window.location.assign(loginUri);
               }}
             >
               <FontAwesomeIcon icon={p.icon} />

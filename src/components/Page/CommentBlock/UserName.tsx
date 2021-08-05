@@ -14,10 +14,6 @@ export default function UserName({ onOk, client }: UserNameProps) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  const [currentInput, setCurrentInput] = useState("");
-  const [sending, setSending] = useState(false);
-  const [inputError, setInputError] = useState<string>(null);
-
   const fetchUserName = useCallback(async () => {
     try {
       const response = await fetch(`/api/user`);
@@ -74,42 +70,67 @@ export default function UserName({ onOk, client }: UserNameProps) {
       </>
     );
   } else {
-    return (
-      <form
-        onSubmit={async e => {
-          e.preventDefault();
-          setInputError(null);
-          setSending(true);
-          if (currentInput.length < 3 || currentInput.length > 25) {
-            setInputError("Username must be between 3 and 25 characters.");
-          }
-          const response = await fetch(`/api/user`, {
-            method: "POST",
-            body: JSON.stringify({ userName: currentInput })
-          });
-          if (response.ok) {
-            const body = await response.json();
-            setUserName(body.userName);
-          } else {
-            setInputError("There was an error submitting the form. Try again or contact me.");
-          }
-        }}
-      >
-        You must choose a username before being able to post:
-        {" "}
+    return <UserNameForm setUserName={setUserName} />;
+  }
+}
+
+interface UserNameFormProps {
+  setUserName: React.Dispatch<React.SetStateAction<string>>;
+}
+
+function UserNameForm({ setUserName }: UserNameFormProps) {
+  const [currentInput, setCurrentInput] = useState("");
+  const [sending, setSending] = useState(false);
+  const [inputError, setInputError] = useState<string>(null);
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
+    e.preventDefault();
+    if (sending) {
+      return;
+    }
+    setInputError(null);
+    setSending(true);
+    try {
+      if (currentInput.length < 3 || currentInput.length > 25) {
+        setInputError("Username must be between 3 and 25 characters.");
+      } else {
+        const response = await fetch(`/api/user`, {
+          method: "POST",
+          body: JSON.stringify({ userName: currentInput })
+        });
+        const body = await response.json();
+        setUserName(body.userName);
+      }
+    }
+    catch {
+      setInputError("There was an error submitting the form. Try again or contact me.");
+    }
+    finally {
+      setSending(false);
+    }
+  };
+
+  return (
+    <form
+      onSubmit={e => onSubmit(e)} onReset={() => setCurrentInput("")}
+      className="mb-1"
+    >
+      <p>
+        You must choose a username (3-25 characters) before commenting:
+      </p>
+      <div className="flex w-full">
         <input
           type="text"
           placeholder="Jane Doe"
           value={currentInput}
           onChange={e => setCurrentInput(e.target.value)}
           disabled={sending}
-          className={sending ? "bg-gray-300 dark:bg-gray-900" : inputError ? "border border-red-600" : null}
-        />
+          className={"block flex-grow text-black leading-none p-1 " + (inputError ? "bg-red-200" : sending ? "bg-gray-300" : "")} />
         {" "}
         <button
           disabled={sending}
           type="submit"
-          className="p-1 leading-none bg-blue-800 text-white dark:bg-blue-300 dark:text-black"
+          className="block p-2 leading-none bg-blue-800 text-white dark:bg-blue-300 dark:text-black"
         >
           <FontAwesomeIcon
             icon={sending ? faSpinner : inputError ? faTimes : faArrowRight}
@@ -117,13 +138,14 @@ export default function UserName({ onOk, client }: UserNameProps) {
             title="Submit"
           />
         </button>
-        {inputError && (
-          <>
-            <br />
-            <p>{inputError}</p>
-          </>
-        )}
-      </form>
-    );
-  }
+      </div>
+      {inputError && (
+        <>
+          <p className="text-red-800 dark:text-red-500">
+            {inputError}
+          </p>
+        </>
+      )}
+    </form>
+  );
 }
