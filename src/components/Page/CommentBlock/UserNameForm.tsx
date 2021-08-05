@@ -49,7 +49,7 @@ export function UserNameForm({ id, setUserName }: UserNameFormProps) {
       className="mb-1"
     >
       <p>
-        You must choose a username (3-25 characters) before commenting:
+        You must choose a username (3&ndash;25 characters) before commenting:
       </p>
       <div className="flex w-full">
         <input
