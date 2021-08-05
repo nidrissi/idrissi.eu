@@ -20,11 +20,14 @@ export default function UserName({ onOk, client }: UserNameProps) {
 
   const fetchUserName = useCallback(async () => {
     try {
-      const response = await fetch(`/api/user/${client.userId}`);
+      const response = await fetch(`/api/user`);
       if (response.ok) {
         const body = await response.json();
         setUserName(body.userName);
         setError(false);
+      }
+      else if (response.status === 404) {
+        setUserName(null);
       }
       else {
         throw new Error();
@@ -35,7 +38,7 @@ export default function UserName({ onOk, client }: UserNameProps) {
     } finally {
       setLoading(false);
     }
-  }, [client.userId]);
+  }, []);
 
   useEffect(() => { fetchUserName(); }, [fetchUserName]);
   useEffect(() => {
@@ -80,7 +83,7 @@ export default function UserName({ onOk, client }: UserNameProps) {
           if (currentInput.length < 3 || currentInput.length > 25) {
             setInputError("Username must be between 3 and 25 characters.");
           }
-          const response = await fetch(`/api/user/${client.userId}`, {
+          const response = await fetch(`/api/user`, {
             method: "POST",
             body: JSON.stringify({ userName: currentInput })
           });
