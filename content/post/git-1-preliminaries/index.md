@@ -6,7 +6,9 @@ tags: [code, math]
 urls:
   custom:
     - label: "Part 2: The Theory"
-      url: /post/git-2-theory/
+      url: /post/git-2-theory
+    - label: "Part 3: The Practice"
+      url: /post/git-3-practice
 ---
 
 This post is the first in a series in which I will try to explain how to use Git to write papers, with an audience of professional mathematicians in mind.

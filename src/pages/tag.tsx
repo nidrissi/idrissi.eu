@@ -19,7 +19,7 @@ interface TagListProps {
 export default function TagList({ data: { allMdx: { group } } }: TagListProps) {
   return (
     <Layout title="All Tags" description="The list of all tags used on the website.">
-      <h1 role="banner" className="text-4xl font-extrabold mb-6 text-black dark:text-gray-200">
+      <h1 role="banner" className="text-4xl font-serif font-extrabold mb-6 text-black dark:text-gray-200">
         <FontAwesomeIcon icon={faTags} />&nbsp;
         All Tags
       </h1>

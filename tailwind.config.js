@@ -7,7 +7,9 @@ module.exports = {
       typography: (theme) => ({
         DEFAULT: {
           css: {
-            // color: theme("colors.gray.700"),
+            h1: {
+              "font-family": "ui-serif, Georgia, Cambria, \"Times New Roman\", Times, serif",
+            },
             hr: {
               "margin-top": "12px",
               "margin-bottom": "12px"
@@ -15,6 +17,12 @@ module.exports = {
             a: {
               "text-decoration": "none",
               "&:hover": { "text-decoration": "underline" },
+            },
+            "code::before": {
+              "content": '""',
+            },
+            "code::after": {
+              "content": '""',
             },
           },
         },

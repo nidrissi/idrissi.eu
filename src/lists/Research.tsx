@@ -32,7 +32,7 @@ export default function ResearchList({ data }: ResearchListProps) {
       <Link to="/research-rss.xml" className="block float-right w-min">
         <FontAwesomeIcon icon={faRss} title="RSS feed for talks." size="2x" />
       </Link>
-      <h1 role="banner" className="text-4xl font-extrabold mb-6 text-black dark:text-gray-200">
+      <h1 role="banner" className="text-4xl font-serif font-extrabold mb-6 text-black dark:text-gray-200">
         <FontAwesomeIcon icon={faCogs} size="sm" />
         &nbsp;
         Research

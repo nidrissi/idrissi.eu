@@ -49,7 +49,7 @@ export default function Index({ children }: { children: React.ReactNode; }) {
           placeholder="tracedSVG"
         />
         <div className="prose prose-blue dark:prose-dark mb-3">
-          <h1>
+          <h1 role="banner">
             {siteTitle}
           </h1>
           {children}
