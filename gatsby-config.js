@@ -98,6 +98,20 @@ module.exports = {
           [require("@silvenon/remark-smartypants"), { dashes: "oldschool" }],
         ],
         rehypePlugins: [
+          require("rehype-slug"),
+          [require("rehype-autolink-headings"), { behavior: "wrap" }],
+          [
+            require("rehype-toc"),
+            {
+              headings: ["h2", "h3"],
+              cssClasses: {
+                toc: null,
+                list: null,
+                listItem: null,
+                link: null,
+              },
+            },
+          ],
           require("rehype-katex"),
           require("@mapbox/rehype-prism"),
         ],
