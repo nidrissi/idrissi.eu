@@ -11,7 +11,7 @@ export default function Error404() {
     <Layout title="404 Not Found" description="Not Found">
       <div className="w-full h-48 rounded-xl border border-gray-400 border-dashed flex">
         <div className="my-auto mx-auto text-center">
-          <h1 role="banner" className="text-4xl font-bold mb-4">404 Not Found</h1>
+          <h1 role="banner" className="text-4xl font-serif font-bold mb-4">404 Not Found</h1>
           <p className="text-2xl">
             There is no page at this address.
             {" "}
