@@ -207,9 +207,9 @@ section:
           c: Université de Paris
           d: UFR de Mathématiques
           f: |
-            Affichage des emplois du temps de licence et master dans un format lisible par les humains. Je me suis principalement occupé de la partie visible par les utilisateurs, développée en JavaScript/React. <https://gitlab.math.univ-paris-diderot.fr/molin/ical-ufr>
+            Application web qui affiche les emplois du temps de licence et master dans un format lisible par les humains. Je me suis principalement occupé de la partie visible par les utilisateurs, développée en JavaScript/React. <https://gitlab.math.univ-paris-diderot.fr/molin/ical-ufr>
             !
-            Display of the schedules of Bachelors and Masters in a format readable by humans. I mainly took care of the part visible by users, written in JavaScript/React. <https://gitlab.math.univ-paris-diderot.fr/molin/ical-ufr>
+            Web application that displays the timetables of Bachelors and Masters in a format readable by humans. I mainly took care of the part visible by users, written in JavaScript/React. <https://gitlab.math.univ-paris-diderot.fr/molin/ical-ufr>
       - entry:
           a: en cours ! ongoing
           b: Évaluations d'articles (rapports et/ou opinions) ! Peer reviews (reports and/or opinions)

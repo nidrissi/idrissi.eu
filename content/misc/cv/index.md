@@ -1,7 +1,7 @@
 ---
 # ⚠ Automatically generated file ⚠
 title: Curriculum Vitæ
-lastMod: 2021-07-23
+lastMod: 2021-07-24
 urls:
   custom:
     - label: Version française
@@ -109,7 +109,7 @@ import Bibliography from "../../../src/components/Bibliography"
 
 | | |
 |-|-|
-| June 2021– | **Contribution au développement du projet <code>ical-ufr</code>**, _Université de Paris_, UFR de Mathématiques. <br />Display of the schedules of Bachelors and Masters in a format readable by humans. I mainly took care of the part visible by users, written in JavaScript/React. <a href="https://gitlab.math.univ-paris-diderot.fr/molin/ical-ufr" class="uri">https://gitlab.math.univ-paris-diderot.fr/molin/ical-ufr</a> |
+| June 2021– | **Contribution au développement du projet <code>ical-ufr</code>**, _Université de Paris_, UFR de Mathématiques. <br />Web application that displays the timetables of Bachelors and Masters in a format readable by humans. I mainly took care of the part visible by users, written in JavaScript/React. <a href="https://gitlab.math.univ-paris-diderot.fr/molin/ical-ufr" class="uri">https://gitlab.math.univ-paris-diderot.fr/molin/ical-ufr</a> |
 | ongoing | **Peer reviews (reports and/or opinions)**. <br />Adv. Math. • Alg. Geom. Topol. • Comm. Math. Phys. • Compos. Math. • Geom. Topol. • Homol. Homot. Appl. • J. Algebra • J. Éc. Polytech. Math. • J. Homotopy Relat. Struct. • J. Lond. Math. Soc. • Lett. Math. Phys. • Proc. Roy. Soc. Edinburgh Sect. A • Selecta Math. |
 | ongoing | **Writing of abstracts for <a href="https://zbmath.org/?q=rv%3Anajib.idrissi">Zentralblatt MATH</a>**. |
 
