@@ -40,7 +40,7 @@ export default function Mini({ frontmatter, slug, levelUp, excerpt, type, noLink
   const fullExcerpt = excerpt && (
     <Link
       to={`/post/${slug}`}
-      className="block text-sm hover:underline hover:text-blue-700 dark:hover:text-indigo-300 max-w-xl"
+      className="block text-sm hover:underline hover:text-blue-700 dark:hover:text-blue-300 max-w-xl"
     >
       {excerpt}
       {' '}

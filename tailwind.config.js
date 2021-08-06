@@ -30,9 +30,9 @@ module.exports = {
           css: {
             color: theme("colors.gray.300"),
             a: {
-              color: theme("colors.indigo.300"),
+              color: theme("colors.blue.300"),
               code: {
-                color: theme("colors.indigo.200"),
+                color: theme("colors.blue.200"),
               }
             },
             h1: {

@@ -19,7 +19,7 @@ function ContactLink({ url, children }: ContactLinkProps) {
   return (
     <a
       href={url}
-      className="text-blue-800 dark:text-indigo-300 hover:underline"
+      className="text-blue-800 dark:text-blue-300 hover:underline"
       target="_blank"
       rel="noreferrer noopener"
     >

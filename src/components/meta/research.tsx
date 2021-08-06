@@ -31,7 +31,7 @@ function formatAuthor(author: string): string | JSX.Element {
     return person.url ? (
       <a
         href={person.url}
-        className="text-blue-800 dark:text-indigo-300 hover:underline"
+        className="text-blue-800 dark:text-blue-300 hover:underline"
         target="_blank"
         rel="noopener nofollow noreferrer"
       >

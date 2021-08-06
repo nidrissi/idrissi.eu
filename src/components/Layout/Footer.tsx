@@ -100,7 +100,7 @@ export default function Footer() {
     },
   ].flat();
 
-  const linkStyle = "block flex-auto text-blue-800 dark:text-indigo-300 hover:underline px-1 py-2";
+  const linkStyle = "block flex-auto text-blue-800 dark:text-blue-300 hover:underline px-1 py-2";
 
   return (
     <footer className="border-t dark:border-gray-900 w-full flex flex-wrap divide-x divide-gray-300 dark:divide-gray-600 divide-dotted text-center">

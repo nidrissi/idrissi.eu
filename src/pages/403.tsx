@@ -15,7 +15,7 @@ export default function Error403() {
           <p className="text-2xl">
             You are not authorized to access this page.
             {" "}
-            <Link to="/" className="text-blue-800 dark:text-indigo-300 hover:underline">
+            <Link to="/" className="text-blue-800 dark:text-blue-300 hover:underline">
               <FontAwesomeIcon icon={faUndo} size="sm" />&nbsp;
               Go back to the front page.
             </Link>
