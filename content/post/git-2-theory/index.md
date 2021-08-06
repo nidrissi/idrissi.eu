@@ -5,7 +5,9 @@ tags: [code, math]
 urls:
   custom:
     - label: "Part 1: Preliminaries"
-      url: /post/git-1-preliminaries/
+      url: /post/git-1-preliminaries
+    - label: "Part 3: The Practice"
+      url: /post/git-3-practice
 ---
 
 This post is the second in a series in which I will try to explain how to use Git to write papers, with an audience of professional mathematicians in mind.
