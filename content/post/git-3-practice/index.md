@@ -10,8 +10,11 @@ urls:
       url: /post/git-2-theory
 ---
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTools, faKeyboard, faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
+
 <div class="p-2 text-xl font-bold bg-red-300 dark:bg-red-800 rounded-md">
-This post is still a work-in-progress!
+<FontAwesomeIcon icon={faTools} />&nbsp;This post is still a work-in-progress!
 </div>
 
 After a long hiatus, here is the third part of my series of posts about Git for Mathematicians 🙂.
@@ -24,7 +27,7 @@ If you have not read the previous parts of the series, you can find them there:
 I will mainly use GitHub as a remote, but feel free to use anything you want (Bitbucket, GitLab...).
 
 <div class="p-2 rounded-md bg-yellow-300 dark:bg-yellow-800">
-I will assume some level of familiarity with using a terminal to run commands. If you are not comfortable with that, then I suggest that you wait for the "Bonus" part of the series, where I will mention some alternatives, including GitHub Desktop and Visual Studio Code.
+<FontAwesomeIcon icon={faKeyboard} />&nbsp;I will assume some level of familiarity with using a terminal to run commands. If you are not comfortable with that, then I suggest that you wait for the "Bonus" part of the series, where I will mention some alternatives, including GitHub Desktop and Visual Studio Code.
 </div>
 
 ## Setup
@@ -41,6 +44,7 @@ This will also serve as a test run to see if you are able to run the Git command
 To configure your contact details, run the following commands in a terminal (replace "Your Name" and "your@email.com" by your own name and email, but keep the quotes):
 
 ```shell
+# run the following commands in a terminal
 git config --global user.name "Your Name"
 git config --global user.email "your@email.com"
 ```
@@ -140,7 +144,9 @@ In effect, initializing just creates a `.git` folder with an empty history of co
 You are then free to work on the files and track your changes with Git.
 However, the remote(s) will not be set-up properly yet, so you will need to adjust that before being able to collaborate with other people and/or making backups of your repository.
 
-**Remark.** Initializing will fail if the directory you are in, or a parent directory, is already a Git repository. In that case, [take these steps](https://github.com/git-guides/git-init#git-init-in-the-wrong-directory) to fix the issue.
+<div class="rounded-md bg-yellow-300 dark:bg-yellow-800 p-2">
+<FontAwesomeIcon icon={faExclamationTriangle} />&nbsp;Initializing will fail if the directory you are in, or a parent directory, is already a Git repository. In that case, <a href="https://github.com/git-guides/git-init#git-init-in-the-wrong-directory">take these steps to fix the issue</a>.
+</div>
 
 ---
 
