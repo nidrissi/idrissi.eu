@@ -10,6 +10,10 @@ urls:
       url: /post/git-2-theory
 ---
 
+<div class="p-2 text-xl font-bold bg-red-300 dark:bg-red-800 rounded-md">
+This post is still a work-in-progress!
+</div>
+
 After a long hiatus, here is the third part of my series of posts about Git for Mathematicians 🙂.
 I explain the basics of how one would go about using Git to write a math paper.
 If you have not read the previous parts of the series, you can find them there:
@@ -137,6 +141,12 @@ You are then free to work on the files and track your changes with Git.
 However, the remote(s) will not be set-up properly yet, so you will need to adjust that before being able to collaborate with other people and/or making backups of your repository.
 
 **Remark.** Initializing will fail if the directory you are in, or a parent directory, is already a Git repository. In that case, [take these steps](https://github.com/git-guides/git-init#git-init-in-the-wrong-directory) to fix the issue.
+
+---
+
+_More to come..._
+
+---
 
 ## Further reading
 
