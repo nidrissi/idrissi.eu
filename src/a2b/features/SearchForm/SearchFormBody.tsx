@@ -16,17 +16,20 @@ export default function SearchFormBody() {
         label="ID list"
         name="ids"
         placeholder="ID1 ID2 ..."
-        title="List of IDs, separated by spaces. Version will be stripped, e.g. 1911.12281v1 ⇒ 1911.12281." />
+        title="List of IDs, separated by spaces. Version will be stripped, e.g. 1911.12281v1 ⇒ 1911.12281."
+      />
       <InputField
         name="authors"
         label="Authors"
         placeholder="Henri Poincaré & David Hilbert & ..."
-        title="Author(s) separated by '&'." />
+        title="Author(s) separated by '&'."
+      />
       <InputField
         name="titles"
         label="Title"
         placeholder="operad & configuration space & ..."
-        title="Words/sentences to search in the title separated by '&'." />
+        title="Words/sentences to search in the title separated by '&'."
+      />
       <div className="col-span-full">
         <SubmitAndClearButtons isLoading={isLoading} />
       </div>

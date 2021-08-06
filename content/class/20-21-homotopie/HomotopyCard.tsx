@@ -8,17 +8,21 @@ interface CardProps {
   hours: string;
   video: string;
   children: JSX.Element;
-};
+}
 
-export default function HomotopyCard({ number, date, hours, children, video }: CardProps) {
+export default function HomotopyCard({
+  number,
+  date,
+  hours,
+  children,
+  video,
+}: CardProps) {
   return (
     <section className="flex flex-col border border-gray-400 dark:border-gray-900 rounded-md gap-2">
       <header className="p-1 bg-gray-200 dark:bg-gray-900 rounded-t-md">
         <span className="font-semibold text-lg">Lecture {number}</span>
-        {' · '}
-        {new Date(date).toLocaleDateString()}
-        {' '}
-        {hours}
+        {" · "}
+        {new Date(date).toLocaleDateString()} {hours}
       </header>
       <div className="flex-grow p-1">{children}</div>
       <a
@@ -28,8 +32,7 @@ export default function HomotopyCard({ number, date, hours, children, video }: C
         rel="noreferrer noopener"
       >
         <FontAwesomeIcon icon={faVideo} />
-        &nbsp;
-        Video
+        &nbsp; Video
       </a>
     </section>
   );

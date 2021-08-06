@@ -151,7 +151,7 @@ function buildURLQuery(
 export interface ArxivResult {
   entries: Entry[];
   totalEntriesFound: number;
-};
+}
 
 /** Performs a search on arXiv.
  * @param query The query (ids, titles, authors)

@@ -1,7 +1,7 @@
 import React from "react";
 import { graphql, Link } from "gatsby";
 
-import Layout from '../components/Layout';
+import Layout from "../components/Layout";
 import Mini from "../components/Mini";
 import { Frontmatter } from "../components/meta";
 import Pager from "./Pager";
@@ -13,37 +13,52 @@ interface TalkListProps {
     allMdx: {
       nodes: {
         slug: string;
-        wordCount: { words: number; };
+        wordCount: { words: number };
         frontmatter: Frontmatter;
       }[];
     };
-  },
+  };
   pageContext: {
     limit: number;
     skip: number;
     numPages: number;
     currentPage: number;
   };
-};
+}
 
 export default function TalkList({ data, pageContext }: TalkListProps) {
-  const { allMdx: { nodes } } = data;
+  const {
+    allMdx: { nodes },
+  } = data;
   const { numPages, currentPage } = pageContext;
   const title = `Talks (p. ${currentPage}/${numPages})`;
 
   return (
-    <Layout title={title} description={`The talks I have given and/or will give in the near future (page ${currentPage} out of ${numPages}).`}>
+    <Layout
+      title={title}
+      description={`The talks I have given and/or will give in the near future (page ${currentPage} out of ${numPages}).`}
+    >
       <Link to="/talk-rss.xml" className="block float-right w-min">
         <FontAwesomeIcon icon={faRss} title="RSS feed for talks." size="2x" />
       </Link>
-      <h1 role="banner" className="text-4xl font-serif font-extrabold mb-6 text-black dark:text-gray-200">
+      <h1
+        role="banner"
+        className="text-4xl font-serif font-extrabold mb-6 text-black dark:text-gray-200"
+      >
         <FontAwesomeIcon icon={faComments} size="sm" />
         &nbsp;
         {title}
       </h1>
       <div className="flex flex-col gap-4">
         {nodes.map(({ frontmatter, slug, wordCount: { words } }) => (
-          <Mini key={slug} type="talk" levelUp slug={slug} frontmatter={frontmatter} noLink={words === 0} />
+          <Mini
+            key={slug}
+            type="talk"
+            levelUp
+            slug={slug}
+            frontmatter={frontmatter}
+            noLink={words === 0}
+          />
         ))}
       </div>
       <Pager currentPage={currentPage} numPages={numPages} type="talk" />
@@ -52,30 +67,31 @@ export default function TalkList({ data, pageContext }: TalkListProps) {
 }
 
 export const query = graphql`
-query talkListQuery($skip: Int!, $limit: Int!) {
-  allMdx(
-    filter: {fields: {type: {eq: "talk"}}}
-    sort: {fields: frontmatter___date, order: DESC}
-    limit: $limit
-    skip: $skip
-  ) {
-    nodes {
-      slug
-      wordCount {
-        words
-      }
-      frontmatter {
-        title
-        date
-        lastMod
-        lang
-        TBA
-        online
-        location
-        event
-        tags
-        ...allUrlsFragment
+  query talkListQuery($skip: Int!, $limit: Int!) {
+    allMdx(
+      filter: { fields: { type: { eq: "talk" } } }
+      sort: { fields: frontmatter___date, order: DESC }
+      limit: $limit
+      skip: $skip
+    ) {
+      nodes {
+        slug
+        wordCount {
+          words
+        }
+        frontmatter {
+          title
+          date
+          lastMod
+          lang
+          TBA
+          online
+          location
+          event
+          tags
+          ...allUrlsFragment
+        }
       }
     }
   }
-}`;
+`;

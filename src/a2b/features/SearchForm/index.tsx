@@ -37,7 +37,7 @@ export default function SearchForm() {
         setSubmitting(false);
       }}
       validate={(values) => {
-        const errors: { [index: string]: string; } = {};
+        const errors: { [index: string]: string } = {};
         if (!values.ids && !values.authors && !values.titles) {
           ["ids", "authors", "titles"].forEach(
             (s) => (errors[s] = "At least one value is required.")
@@ -46,6 +46,7 @@ export default function SearchForm() {
         return errors;
       }}
       validateOnChange={false}
-      validateOnBlur={false} />
+      validateOnBlur={false}
+    />
   );
 }

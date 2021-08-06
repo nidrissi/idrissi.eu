@@ -15,7 +15,7 @@ import { faFileAlt } from "@fortawesome/free-regular-svg-icons";
 
 interface LocalFile {
   publicURL: string;
-};
+}
 
 export interface Urls {
   arxiv: string;
@@ -28,41 +28,41 @@ export interface Urls {
   video: string;
   zbmath: string;
   event: string;
-  custom: { label: string; url: string; }[];
-  customFile: { label: string; file: { publicURL: string; }; }[];
-};
+  custom: { label: string; url: string }[];
+  customFile: { label: string; file: { publicURL: string } }[];
+}
 
 export const allUrlsFragment = graphql`
-fragment allUrlsFragment on MdxFrontmatter {
-urls {
-  read {
-    publicURL
-  }
-  slides {
-    publicURL
-  }
-  notes {
-    publicURL
-  }
-  event
-  video
-  source
-  doi
-  arxiv
-  mathrev
-  zbmath
-  custom {
-    label
-    url
-  }
-  customFile {
-    label
-    file {
-      publicURL
+  fragment allUrlsFragment on MdxFrontmatter {
+    urls {
+      read {
+        publicURL
+      }
+      slides {
+        publicURL
+      }
+      notes {
+        publicURL
+      }
+      event
+      video
+      source
+      doi
+      arxiv
+      mathrev
+      zbmath
+      custom {
+        label
+        url
+      }
+      customFile {
+        label
+        file {
+          publicURL
+        }
+      }
     }
   }
-}
-}
 `;
 
 interface LinkDefinition {
@@ -71,7 +71,7 @@ interface LinkDefinition {
   icon?: IconDefinition;
   urlBuilder?: (id: string) => string;
   titleBuilder?: (title: string) => string;
-};
+}
 
 const linkDefinitions: LinkDefinition[] = [
   {
@@ -83,25 +83,25 @@ const linkDefinitions: LinkDefinition[] = [
     link: "read",
     label: "Read",
     icon: faFileAlt,
-    titleBuilder: title => `Read “${title}”.`,
+    titleBuilder: (title) => `Read “${title}”.`,
   },
   {
     link: "slides",
     label: "Slides",
     icon: faDesktop,
-    titleBuilder: title => `Slides for the talk ${title}.`,
+    titleBuilder: (title) => `Slides for the talk ${title}.`,
   },
   {
     link: "video",
     label: "Video",
     icon: faVideo,
-    titleBuilder: title => `Video(s) of ${title}.`,
+    titleBuilder: (title) => `Video(s) of ${title}.`,
   },
   {
     link: "notes",
     label: "Notes",
     icon: faBookOpen,
-    titleBuilder: title => `Notes for ${title}.`,
+    titleBuilder: (title) => `Notes for ${title}.`,
   },
   {
     link: "doi",
@@ -127,7 +127,7 @@ const linkDefinitions: LinkDefinition[] = [
     link: "source",
     label: "Source",
     icon: faCode,
-    titleBuilder: title => `Source files of ${title}.`,
+    titleBuilder: (title) => `Source files of ${title}.`,
   },
 ];
 
@@ -142,10 +142,11 @@ function EntryLink({ url, definition, title }: EntryLinkProps) {
     return null;
   }
 
-  const actualUrl: string = typeof url === 'string' ? url : url.publicURL;
-  const label: string = typeof definition.label === "string"
-    ? definition.label
-    : definition.label(actualUrl);
+  const actualUrl: string = typeof url === "string" ? url : url.publicURL;
+  const label: string =
+    typeof definition.label === "string"
+      ? definition.label
+      : definition.label(actualUrl);
   const href: string = definition.urlBuilder?.(actualUrl) ?? actualUrl;
 
   return (
@@ -181,12 +182,15 @@ export default function Links({ urls, title }: LinksProps) {
     <div className="flex flex-wrap gap-x-2 gap-y-1 content-center">
       {linkDefinitions.map((definition) => {
         const url = urls[definition.link];
-        return url && (
-          <EntryLink
-            key={url.publicURL || url}
-            url={url}
-            title={title}
-            definition={definition} />
+        return (
+          url && (
+            <EntryLink
+              key={url.publicURL || url}
+              url={url}
+              title={title}
+              definition={definition}
+            />
+          )
         );
       })}
 
@@ -195,7 +199,8 @@ export default function Links({ urls, title }: LinksProps) {
           key={`custom-${index}`}
           url={url}
           title={title}
-          definition={{ label, link: "custom", icon: faLink }} />
+          definition={{ label, link: "custom", icon: faLink }}
+        />
       ))}
 
       {urls.customFile?.map(({ label, file: { publicURL: url } }, index) => (
@@ -203,7 +208,8 @@ export default function Links({ urls, title }: LinksProps) {
           key={`customFile-${index}`}
           url={url}
           title={title}
-          definition={{ label, link: "customFile", icon: faFile }} />
+          definition={{ label, link: "customFile", icon: faFile }}
+        />
       ))}
     </div>
   );

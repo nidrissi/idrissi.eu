@@ -13,7 +13,10 @@ module.exports = {
       email: `najib.idrissi-kaitouni@imj-prg.fr`,
       organizations: [
         { name: "Université de Paris", url: "https://u-paris.fr" },
-        { name: "Institut de Mathématiques de Jussieu–Paris Rive Gauche", url: "https://www.imj-prg.fr" },
+        {
+          name: "Institut de Mathématiques de Jussieu–Paris Rive Gauche",
+          url: "https://www.imj-prg.fr",
+        },
       ],
       address: {
         url: `https://goo.gl/maps/2nQKHG6pEdb6w4f5A`,
@@ -22,7 +25,7 @@ module.exports = {
           "8 place Aurélie Nemours",
           "F-75013 Paris",
           "France",
-        ]
+        ],
       },
       office: "(Sophie Germain) SG-7032, 7th floor",
       phone: {
@@ -92,7 +95,7 @@ module.exports = {
         remarkPlugins: [
           require("remark-math-legacy"),
           require("remark-external-links"),
-          [require("@silvenon/remark-smartypants"), { "dashes": "oldschool" }],
+          [require("@silvenon/remark-smartypants"), { dashes: "oldschool" }],
         ],
         rehypePlugins: [
           require("rehype-katex"),
@@ -103,7 +106,7 @@ module.exports = {
             resolve: `gatsby-remark-copy-linked-files`,
             options: {
               destinationDir: `static`,
-            }
+            },
           },
           {
             resolve: `gatsby-remark-images`,
@@ -155,9 +158,9 @@ module.exports = {
           }
         }
 `,
-        feeds: ["post", "research", "talk"].map(type => ({
+        feeds: ["post", "research", "talk"].map((type) => ({
           serialize: ({ query: { site, allMdx } }) => {
-            return allMdx.nodes.map(node => {
+            return allMdx.nodes.map((node) => {
               return Object.assign({}, node.frontmatter, {
                 description: node.excerpt,
                 date: node.frontmatter.date,
@@ -188,7 +191,7 @@ module.exports = {
           output: `/${type}-rss.xml`,
           title: `Najib Idrissi: RSS feed for ${type}`,
           match: `^/${type}`,
-        }))
+        })),
       },
     },
     // needs to be after manifest

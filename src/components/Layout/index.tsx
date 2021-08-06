@@ -8,7 +8,7 @@ import Cookie from "./Cookie";
 interface LayoutProps extends SEOProps {
   children: React.ReactNode;
   lang?: string;
-};
+}
 
 export default function Layout({ children, lang, ...props }: LayoutProps) {
   return (

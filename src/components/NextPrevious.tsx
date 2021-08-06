@@ -12,7 +12,7 @@ export interface NextOrPreviousItem {
     location: string;
     year: string;
   };
-};
+}
 
 interface NextPreviousProps {
   previous: NextOrPreviousItem;
@@ -20,23 +20,25 @@ interface NextPreviousProps {
   type: string;
 }
 
-export default function NextPrevious({ next, previous, type }: NextPreviousProps) {
+export default function NextPrevious({
+  next,
+  previous,
+  type,
+}: NextPreviousProps) {
   if (!next && !previous) {
     return null;
   }
-  if (type === 'misc' || type === 'class') {
+  if (type === "misc" || type === "class") {
     return null;
   }
 
-  const linkStyle = "block p-1 text-sm text-green-700 dark:text-green-400 border border-green-700 dark:border-green-400 rounded-md hover:bg-green-700 dark:hover:bg-green-400 hover:text-white dark:hover:text-black";
+  const linkStyle =
+    "block p-1 text-sm text-green-700 dark:text-green-400 border border-green-700 dark:border-green-400 rounded-md hover:bg-green-700 dark:hover:bg-green-400 hover:text-white dark:hover:text-black";
 
   return (
     <div className="flex w-full mt-6">
       {previous && (
-        <Link
-          to={`/${type}/${previous.slug}`}
-          className={linkStyle}
-        >
+        <Link to={`/${type}/${previous.slug}`} className={linkStyle}>
           <FontAwesomeIcon icon={faArrowLeft} />
           &nbsp;
           {actualTitle(previous.frontmatter, type)}
@@ -44,10 +46,7 @@ export default function NextPrevious({ next, previous, type }: NextPreviousProps
       )}
       <div className="flex-grow"></div>
       {next && (
-        <Link
-          to={`/${type}/${next.slug}`}
-          className={linkStyle}
-        >
+        <Link to={`/${type}/${next.slug}`} className={linkStyle}>
           {actualTitle(next.frontmatter, type)}
           &nbsp;
           <FontAwesomeIcon icon={faArrowRight} />

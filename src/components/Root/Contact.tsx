@@ -49,7 +49,7 @@ interface ContactQuery {
       };
     };
   };
-};
+}
 
 export default function Contact() {
   const {
@@ -84,10 +84,22 @@ export default function Contact() {
   `);
 
   const contactLinks = [
-    { label: email, url: `mailto:${email}`, icon: faAt, extraStyle: "font-mono tracking-tighter" },
-    { icon: faUniversity, items: organizations.map(o => ({ label: o.name, url: o.url })) },
+    {
+      label: email,
+      url: `mailto:${email}`,
+      icon: faAt,
+      extraStyle: "font-mono tracking-tighter",
+    },
+    {
+      icon: faUniversity,
+      items: organizations.map((o) => ({ label: o.name, url: o.url })),
+    },
     { label: phone.pretty, url: `tel:${phone.ugly}`, icon: faPhone },
-    { label: address.location.join(" • "), url: address.url, icon: faMapMarkerAlt },
+    {
+      label: address.location.join(" • "),
+      url: address.url,
+      icon: faMapMarkerAlt,
+    },
     { label: `Office: ${office}`, icon: faDoorOpen },
   ];
 
@@ -97,23 +109,20 @@ export default function Contact() {
       <ul className="text-lg">
         {contactLinks.map((link) => (
           <li key={link.icon.iconName} className={link.extraStyle}>
-            <FontAwesomeIcon icon={link.icon} fixedWidth />&nbsp;
-            {link.items
-              ? link.items.map((item, index) => (
+            <FontAwesomeIcon icon={link.icon} fixedWidth />
+            &nbsp;
+            {link.items ? (
+              link.items.map((item, index) => (
                 <React.Fragment key={item.label}>
-                  {index > 0 && ' & '}
-                  <ContactLink url={item.url}>
-                    {item.label}
-                  </ContactLink>
+                  {index > 0 && " & "}
+                  <ContactLink url={item.url}>{item.label}</ContactLink>
                 </React.Fragment>
               ))
-              : link.url ? (
-                <ContactLink url={link.url}>
-                  {link.label}
-                </ContactLink>
-              ) : (
-                link.label
-              )}
+            ) : link.url ? (
+              <ContactLink url={link.url}>{link.label}</ContactLink>
+            ) : (
+              link.label
+            )}
             .
           </li>
         ))}

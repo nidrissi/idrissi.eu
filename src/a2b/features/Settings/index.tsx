@@ -19,7 +19,8 @@ export default function Settings() {
         initialValues={settings}
         onSubmit={() => {
           return;
-        }} />
+        }}
+      />
       <p className="text-muted">
         Settings are saved in your browser's{" "}
         <a href="https://en.wikipedia.org/wiki/Web_storage">local storage</a>{" "}

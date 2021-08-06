@@ -9,8 +9,11 @@ import {
 interface CopyAndTotalProps {
   totalText: JSX.Element;
   outerRef: React.RefObject<HTMLDivElement>;
-};
-export default function CopyAndTotal({ totalText, outerRef }: CopyAndTotalProps) {
+}
+export default function CopyAndTotal({
+  totalText,
+  outerRef,
+}: CopyAndTotalProps) {
   function getResult(): string {
     if (!outerRef.current) {
       return "";
@@ -42,7 +45,8 @@ export default function CopyAndTotal({ totalText, outerRef }: CopyAndTotalProps)
   return (
     <div className="bg-green-600 text-white p-2 my-2 rounded-lg block sm:flex items-center gap-3">
       <div className="flex-grow">
-        <FontAwesomeIcon icon={faCheck} />&nbsp;
+        <FontAwesomeIcon icon={faCheck} />
+        &nbsp;
         {totalText}
       </div>
       <div>

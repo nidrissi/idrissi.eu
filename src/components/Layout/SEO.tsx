@@ -16,19 +16,26 @@ interface SEOQuery {
       };
     };
   };
-};
+}
 
 export interface SEOProps {
   title: string;
   description: string;
   date?: string;
   lastMod?: string;
-};
+}
 
 export default function SEO({ title, description, date, lastMod }: SEOProps) {
   const {
     site: {
-      siteMetadata: { siteTitle, siteUrl, author: { name, social: { twitter } } },
+      siteMetadata: {
+        siteTitle,
+        siteUrl,
+        author: {
+          name,
+          social: { twitter },
+        },
+      },
     },
   }: SEOQuery = useStaticQuery(
     graphql`
@@ -54,11 +61,7 @@ export default function SEO({ title, description, date, lastMod }: SEOProps) {
   const trueTitle = isRoot ? siteTitle : `${title} · ${siteTitle}`;
 
   return (
-    <Helmet
-      htmlAttributes={{ lang: 'en', }}
-      title={trueTitle}
-      defer={false}
-    >
+    <Helmet htmlAttributes={{ lang: "en" }} title={trueTitle} defer={false}>
       <meta charSet="utf-8" />
       <link rel="canonical" href={`${siteUrl}${pathname}`} />
       <meta name="description" content={description} />
@@ -72,10 +75,20 @@ export default function SEO({ title, description, date, lastMod }: SEOProps) {
       <meta property="og:type" content={isRoot ? "profile" : "article"} />
       <meta property="og:title" content={trueTitle} />
       <meta property="og:description" content={description} />
-      <meta property="og:profile:first_name" content={name.split(' ')[0]} />
-      <meta property="og:profile:last_name" content={name.split(' ')[1]} />
-      {date && <meta property="og:article:published_time" content={new Date(date).toISOString()} />}
-      {lastMod && <meta property="og:article:modified_time" content={new Date(lastMod).toISOString()} />}
+      <meta property="og:profile:first_name" content={name.split(" ")[0]} />
+      <meta property="og:profile:last_name" content={name.split(" ")[1]} />
+      {date && (
+        <meta
+          property="og:article:published_time"
+          content={new Date(date).toISOString()}
+        />
+      )}
+      {lastMod && (
+        <meta
+          property="og:article:modified_time"
+          content={new Date(lastMod).toISOString()}
+        />
+      )}
     </Helmet>
   );
 }

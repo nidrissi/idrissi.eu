@@ -12,7 +12,7 @@ import { Entry, Settings } from "../types";
 interface Pairing {
   abstract?: string | null;
   [index: string]: string | JSX.Element | number | null | undefined;
-};
+}
 
 /** Converts a JS author list and a date into a BibLaTeX author list and a key.
  * @param authors The list of authors.
@@ -28,7 +28,7 @@ function joinAuthorsGetKey({
 }: {
   authors: string[];
   date: string;
-}): { key: string; authorList: string; } {
+}): { key: string; authorList: string } {
   const splitAuthors = authors.map((a) => splitter(a, /\s+/));
   const authorList = splitAuthors
     .map((l) => l[l.length - 1] + ", " + l.slice(0, -1).join(" "))
@@ -113,9 +113,7 @@ function buildPairing({
   // generate a filename and link to the PDF, if any
   const fileName = (settings.filePrefix ? `${key[0]}/` : "") + `${key}.pdf`;
   const fileLink = entry.pdfLink ? (
-    <a href={entry.pdfLink}>
-      {fileName}
-    </a>
+    <a href={entry.pdfLink}>{fileName}</a>
   ) : (
     fileName
   );
@@ -166,11 +164,8 @@ function buildPairing({
       ...pairing,
       eprint: <a href={absURL}>{entry.id}</a>,
       [goodMode ? "eprinttype" : "archiveprefix"]: "arXiv",
-      [goodMode
-        ? "eprintclass"
-        : "primaryclass"]: settings.includePrimaryCategory
-          ? entry.primaryCategory
-          : null,
+      [goodMode ? "eprintclass" : "primaryclass"]:
+        settings.includePrimaryCategory ? entry.primaryCategory : null,
       version: goodMode && settings.includeVersion ? entry.version : null,
       url: goodMode ? null : absURL,
     };

@@ -19,24 +19,23 @@ interface IndexQuery {
   file: {
     publicURL: string;
   };
-};
+}
 
-export default function Index({ children }: { children: React.ReactNode; }) {
+export default function Index({ children }: { children: React.ReactNode }) {
   const {
     site: {
-      siteMetadata: {
-        siteTitle, siteDescription
-      },
+      siteMetadata: { siteTitle, siteDescription },
     },
   }: IndexQuery = useStaticQuery(graphql`
-        query {
-          site {
-            siteMetadata {
-              siteTitle
-              siteDescription
-            }
-          }
-        }`);
+    query {
+      site {
+        siteMetadata {
+          siteTitle
+          siteDescription
+        }
+      }
+    }
+  `);
 
   return (
     <Layout title={siteTitle} description={siteDescription}>
@@ -49,9 +48,7 @@ export default function Index({ children }: { children: React.ReactNode; }) {
           placeholder="tracedSVG"
         />
         <div className="prose prose-blue dark:prose-dark mb-3">
-          <h1 role="banner">
-            {siteTitle}
-          </h1>
+          <h1 role="banner">{siteTitle}</h1>
           {children}
         </div>
         <Contact />

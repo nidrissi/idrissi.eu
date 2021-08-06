@@ -14,13 +14,25 @@ interface MiniProps {
   excerpt?: string;
   noLink?: boolean;
   index?: number;
-};
+}
 
-export default function Mini({ frontmatter, slug, levelUp, excerpt, type, noLink }: MiniProps) {
+export default function Mini({
+  frontmatter,
+  slug,
+  levelUp,
+  excerpt,
+  type,
+  noLink,
+}: MiniProps) {
   const titleLabel = actualTitle(frontmatter, type);
 
-  const linkedTitle = noLink ? titleLabel : (
-    <Link to={`/${type}/${slug}`} className="text-green-800 dark:text-green-500 hover:underline">
+  const linkedTitle = noLink ? (
+    titleLabel
+  ) : (
+    <Link
+      to={`/${type}/${slug}`}
+      className="text-green-800 dark:text-green-500 hover:underline"
+    >
       {titleLabel}
     </Link>
   );
@@ -42,9 +54,7 @@ export default function Mini({ frontmatter, slug, levelUp, excerpt, type, noLink
       to={`/post/${slug}`}
       className="block text-sm hover:underline hover:text-blue-700 dark:hover:text-blue-300 max-w-xl"
     >
-      {excerpt}
-      {' '}
-      <FontAwesomeIcon icon={faCaretSquareRight} />
+      {excerpt} <FontAwesomeIcon icon={faCaretSquareRight} />
     </Link>
   );
 

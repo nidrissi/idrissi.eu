@@ -13,12 +13,13 @@ const links: {
   icon: IconDefinition;
   label: string;
 }[] = [
-    { icon: faSearch, label: "Search" },
-    { icon: faTools, label: "DIY" },
-    { icon: faCog, label: "Settings" },
-  ];
+  { icon: faSearch, label: "Search" },
+  { icon: faTools, label: "DIY" },
+  { icon: faCog, label: "Settings" },
+];
 
-const buttonStyle = "block p-2 text-lg border border-blue-800 hover:bg-blue-800 hover:text-white rounded-md";
+const buttonStyle =
+  "block p-2 text-lg border border-blue-800 hover:bg-blue-800 hover:text-white rounded-md";
 
 interface NavbarProps {
   setCurrentPage: React.Dispatch<React.SetStateAction<string>>;
@@ -37,13 +38,14 @@ export default function Navbar({ setCurrentPage }: NavbarProps) {
           className={buttonStyle}
           onClick={() => setCurrentPage(l.label)}
         >
-          <FontAwesomeIcon icon={l.icon} />&nbsp;
+          <FontAwesomeIcon icon={l.icon} />
+          &nbsp;
           {l.label}
         </button>
       ))}
       <Link to="/misc/a2b/help" className={buttonStyle}>
-        <FontAwesomeIcon icon={faQuestion} />&nbsp;
-        Help
+        <FontAwesomeIcon icon={faQuestion} />
+        &nbsp; Help
       </Link>
     </div>
   );

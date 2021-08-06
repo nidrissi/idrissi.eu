@@ -11,7 +11,7 @@ export interface StandardInputProps {
   placeholder?: string;
   halfSize?: boolean;
   type?: string;
-};
+}
 
 interface TooltipProps {
   help?: string | JSX.Element;
@@ -31,7 +31,9 @@ function Tooltip({ help }: TooltipProps) {
         <FontAwesomeIcon icon={faQuestionCircle} aria-label="Help" />
       </button>
       <div
-        className={`${shown ? "block" : "hidden"} absolute -top-2 left-0 z-10 w-48 bg-black text-gray-300 rounded-md p-2`}
+        className={`${
+          shown ? "block" : "hidden"
+        } absolute -top-2 left-0 z-10 w-48 bg-black text-gray-300 rounded-md p-2`}
       >
         <FontAwesomeIcon icon={faQuestionCircle} />
         &nbsp;
@@ -47,7 +49,12 @@ function Tooltip({ help }: TooltipProps) {
  * @param help The help text, if any.
  * @param ...props The rest of the props, passed to the input.
  */
-export default function StandardInput({ halfSize, label, help, ...props }: StandardInputProps) {
+export default function StandardInput({
+  halfSize,
+  label,
+  help,
+  ...props
+}: StandardInputProps) {
   return (
     <>
       <label className="block col-span-full sm:col-span-2" htmlFor={props.name}>
@@ -55,7 +62,9 @@ export default function StandardInput({ halfSize, label, help, ...props }: Stand
         <Tooltip help={help} />
       </label>
       <div
-        className={`col-span-full ${halfSize ? "sm:col-span-4" : "sm:col-span-10"}`}
+        className={`col-span-full ${
+          halfSize ? "sm:col-span-4" : "sm:col-span-10"
+        }`}
       >
         <Field {...props} id={props.name} className="w-full dark:bg-gray-900" />
       </div>

@@ -13,22 +13,30 @@ interface ClassListProps {
         fieldValue: string;
         nodes: {
           slug: string;
-          wordCount: { words: number; };
+          wordCount: { words: number };
           frontmatter: Frontmatter;
         }[];
       }[];
     };
   };
-};
+}
 
-export default function ClassList({ data: { allMdx: { group } } }: ClassListProps) {
-
+export default function ClassList({
+  data: {
+    allMdx: { group },
+  },
+}: ClassListProps) {
   return (
-    <Layout title="Teaching" description="The classes I have taught and/or am currently teaching.">
-      <h1 role="banner" className="text-4xl font-serif font-extrabold mb-4 text-black dark:text-gray-200">
+    <Layout
+      title="Teaching"
+      description="The classes I have taught and/or am currently teaching."
+    >
+      <h1
+        role="banner"
+        className="text-4xl font-serif font-extrabold mb-4 text-black dark:text-gray-200"
+      >
         <FontAwesomeIcon icon={faChalkboardTeacher} size="sm" />
-        &nbsp;
-        Teaching
+        &nbsp; Teaching
       </h1>
       <div className="flex flex-col gap-6">
         {group
@@ -40,10 +48,15 @@ export default function ClassList({ data: { allMdx: { group } } }: ClassListProp
                 Academic year {year}&ndash;{Number(year) + 1}
               </h2>
               <div className="flex flex-col gap-4">
-                {nodes
-                  .map(({ frontmatter, slug, wordCount: { words } }) => (
-                    <Mini key={slug} type="class" slug={slug} frontmatter={frontmatter} noLink={words === 0} />
-                  ))}
+                {nodes.map(({ frontmatter, slug, wordCount: { words } }) => (
+                  <Mini
+                    key={slug}
+                    type="class"
+                    slug={slug}
+                    frontmatter={frontmatter}
+                    noLink={words === 0}
+                  />
+                ))}
               </div>
             </section>
           ))}
@@ -53,33 +66,33 @@ export default function ClassList({ data: { allMdx: { group } } }: ClassListProp
 }
 
 export const query = graphql`
-{
-  allMdx(
-    filter: {fields: {type: {eq: "class"}}}
-    sort: {fields: frontmatter___date, order: DESC}
-  ) {
-    group(field: frontmatter___year) {
-      nodes {
-        slug
-        wordCount {
-          words
+  {
+    allMdx(
+      filter: { fields: { type: { eq: "class" } } }
+      sort: { fields: frontmatter___date, order: DESC }
+    ) {
+      group(field: frontmatter___year) {
+        nodes {
+          slug
+          wordCount {
+            words
+          }
+          frontmatter {
+            title
+            date
+            lastMod
+            lang
+            institution
+            courseHours
+            courseTypes
+            cursus
+            year
+            tags
+            ...allUrlsFragment
+          }
         }
-        frontmatter {
-          title
-          date
-          lastMod
-          lang
-          institution
-          courseHours
-          courseTypes
-          cursus
-          year
-          tags
-          ...allUrlsFragment
-        }
+        fieldValue
       }
-      fieldValue
     }
   }
-}
 `;

@@ -1,5 +1,5 @@
 module.exports = {
-  mode: 'jit',
+  mode: "jit",
   purge: ["./src/**/*.{js,jsx,ts,tsx,md}", "./content/**/*.{js,jsx,ts,tsx,md}"],
   darkMode: "media",
   theme: {
@@ -8,21 +8,22 @@ module.exports = {
         DEFAULT: {
           css: {
             h1: {
-              "font-family": "ui-serif, Georgia, Cambria, \"Times New Roman\", Times, serif",
+              "font-family":
+                'ui-serif, Georgia, Cambria, "Times New Roman", Times, serif',
             },
             hr: {
               "margin-top": "12px",
-              "margin-bottom": "12px"
+              "margin-bottom": "12px",
             },
             a: {
               "text-decoration": "none",
               "&:hover": { "text-decoration": "underline" },
             },
             "code::before": {
-              "content": '""',
+              content: '""',
             },
             "code::after": {
-              "content": '""',
+              content: '""',
             },
           },
         },
@@ -33,7 +34,7 @@ module.exports = {
               color: theme("colors.blue.300"),
               code: {
                 color: theme("colors.blue.200"),
-              }
+              },
             },
             h1: {
               color: theme("colors.gray.200"),
@@ -66,24 +67,24 @@ module.exports = {
               color: theme("colors.gray.100"),
             },
             blockquote: {
-              color: theme("colors.gray.100")
+              color: theme("colors.gray.100"),
             },
             ol: {
               li: {
-                '&::before': {
-                  color: theme("colors.gray.400")
+                "&::before": {
+                  color: theme("colors.gray.400"),
                 },
               },
             },
             ul: {
               li: {
-                '&::before': {
-                  color: theme("colors.gray.400")
+                "&::before": {
+                  color: theme("colors.gray.400"),
                 },
               },
             },
-          }
-        }
+          },
+        },
       }),
     },
   },
@@ -92,7 +93,7 @@ module.exports = {
   },
   plugins: [
     require("@tailwindcss/typography"),
-    require('@tailwindcss/aspect-ratio'),
-    require('@tailwindcss/forms'),
+    require("@tailwindcss/aspect-ratio"),
+    require("@tailwindcss/forms"),
   ],
 };

@@ -118,7 +118,7 @@ Everything is already set-up so that pushing and pulling works as expected.
 The other option, if you have no existing repository to clone, is to initialize a new one.
 The steps are simple:
 
-1. Choose or create a folder that you want to track with Git.
+1. (Optional) Choose or create a folder that you want to track with Git.
 2. In the terminal, switch to that folder.
 3. Then type `git init` in the terminal.
 
@@ -126,9 +126,9 @@ In a Linux shell, this would typically look like this (feel free to change the n
 
 ```shell
 # skip the first step if the folder already exists:
-mkdir ~/papers/riemann-hypothesis # create a new folder
-cd ~/papers/riemann-hypothesis    # switch to that folder
-git init                          # initialize the repository
+mkdir ~/papers/riemann-hypothesis # 1. create a new folder
+cd ~/papers/riemann-hypothesis    # 2. switch to that folder
+git init                          # 3. initialize the repository
 ```
 
 Afterwards, your files should look like this:
@@ -146,7 +146,7 @@ You are then free to work on the files and track your changes with Git.
 However, the remote(s) will not be set-up properly yet, so you will need to adjust that before being able to collaborate with other people and/or making backups of your repository.
 
 <AlertDiv color="yellow">
-<FontAwesomeIcon icon={faExclamationTriangle} />&nbsp;Initializing will fail if the directory you are in, or a parent directory, is already a Git repository. In that case, <a href="https://github.com/git-guides/git-init#git-init-in-the-wrong-directory">take these steps to fix the issue</a>.
+<FontAwesomeIcon icon={faExclamationTriangle} />&nbsp;Initializing will work incorrectly if the directory you are in, or a parent directory, is already a Git repository. In that case, <a href="https://github.com/git-guides/git-init#git-init-in-the-wrong-directory">take these steps to fix the issue</a>.
 </AlertDiv>
 
 ---

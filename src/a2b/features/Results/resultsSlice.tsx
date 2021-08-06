@@ -16,7 +16,7 @@ export const fetchEntries = createAsyncThunk<
     state: {
       searchForm: Query;
       settings: Settings;
-      results: { isLoading: boolean; currentRequestId: string; };
+      results: { isLoading: boolean; currentRequestId: string };
     };
   }
 >("results/fetchEntries", async (_: void, { getState, requestId }) => {
@@ -38,7 +38,7 @@ interface ResultsExtraState {
   totalEntriesFound?: number;
   currentRequestId?: string;
   error?: string;
-};
+}
 const resultsExtraInitialState: ResultsExtraState = {
   isLoading: false,
 };

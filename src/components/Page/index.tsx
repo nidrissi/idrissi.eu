@@ -2,7 +2,6 @@ import React from "react";
 import { graphql } from "gatsby";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faNetworkWired } from "@fortawesome/free-solid-svg-icons";
 
@@ -27,7 +26,7 @@ interface PageTemplateProps {
     previous: NextOrPreviousItem;
     next: NextOrPreviousItem;
   };
-};
+}
 
 export function actualTitle(
   frontmatter: {
@@ -38,16 +37,19 @@ export function actualTitle(
   },
   type: string
 ): string {
-  return type === 'talk' ? (
-    `${frontmatter.event} @ ${frontmatter.location}`
-  ) : type === 'class' ? (
-    `${frontmatter.title} (${frontmatter.year}–${Number(frontmatter.year) + 1})`
-  ) : (
-    frontmatter.title
-  );
+  return type === "talk"
+    ? `${frontmatter.event} @ ${frontmatter.location}`
+    : type === "class"
+    ? `${frontmatter.title} (${frontmatter.year}–${
+        Number(frontmatter.year) + 1
+      })`
+    : frontmatter.title;
 }
 
-export function heldOnline(type: string, frontmatter: Frontmatter): JSX.Element {
+export function heldOnline(
+  type: string,
+  frontmatter: Frontmatter
+): JSX.Element {
   return type === "talk" && frontmatter.online ? (
     <>
       &nbsp;
@@ -62,7 +64,10 @@ export function heldOnline(type: string, frontmatter: Frontmatter): JSX.Element 
 
 export default function PageTemplate({ data }: PageTemplateProps) {
   const {
-    body, frontmatter, excerpt, fields: { type }
+    body,
+    frontmatter,
+    excerpt,
+    fields: { type },
   } = data.mdx;
 
   const parsedTitle = actualTitle(frontmatter, type);
@@ -76,7 +81,10 @@ export default function PageTemplate({ data }: PageTemplateProps) {
       lang={frontmatter.lang}
     >
       <header className="mb-6 max-w-2xl mx-auto">
-        <h1 role="banner" className="font-serif text-4xl font-extrabold text-gray-900 dark:text-gray-200">
+        <h1
+          role="banner"
+          className="font-serif text-4xl font-extrabold text-gray-900 dark:text-gray-200"
+        >
           {parsedTitle}
           {heldOnline(type, frontmatter)}
         </h1>
@@ -85,23 +93,37 @@ export default function PageTemplate({ data }: PageTemplateProps) {
 
       {/* Large prose if research or talk abstract. */}
       <div
-        className={`mx-auto max-w-2xl prose prose-blue dark:prose-dark ${["research", "talk"].includes(type) ? "prose-lg" : ""}`}
+        className={`mx-auto max-w-2xl prose prose-blue dark:prose-dark ${
+          ["research", "talk"].includes(type) ? "prose-lg" : ""
+        }`}
       >
         <MDXProvider components={{ AlertDiv }}>
-          <MDXRenderer localImages={frontmatter.localImages} urls={frontmatter.urls}>
+          <MDXRenderer
+            localImages={frontmatter.localImages}
+            urls={frontmatter.urls}
+          >
             {body}
           </MDXRenderer>
         </MDXProvider>
       </div>
 
       {type === "talk" && frontmatter.urls?.slides && (
-        <Embed url={frontmatter.urls.slides.publicURL} alt={`Slides for the talk: ${parsedTitle}`} />
+        <Embed
+          url={frontmatter.urls.slides.publicURL}
+          alt={`Slides for the talk: ${parsedTitle}`}
+        />
       )}
       {type === "talk" && frontmatter.urls?.notes && (
-        <Embed url={frontmatter.urls.notes.publicURL} alt={`Notes for the talk: ${parsedTitle}`} />
+        <Embed
+          url={frontmatter.urls.notes.publicURL}
+          alt={`Notes for the talk: ${parsedTitle}`}
+        />
       )}
       {type === "research" && frontmatter.urls?.read && (
-        <Embed url={frontmatter.urls.read.publicURL} alt={`Read the research document: ${parsedTitle}`} />
+        <Embed
+          url={frontmatter.urls.read.publicURL}
+          alt={`Read the research document: ${parsedTitle}`}
+        />
       )}
 
       <NextPrevious next={data.next} previous={data.previous} type={type} />
@@ -110,11 +132,7 @@ export default function PageTemplate({ data }: PageTemplateProps) {
 }
 
 export const query = graphql`
-  query (
-    $id: String,
-    $previousId: String,
-    $nextId: String,
-    ) {
+  query ($id: String, $previousId: String, $nextId: String) {
     mdx(id: { eq: $id }) {
       body
       fields {
@@ -139,7 +157,7 @@ export const query = graphql`
         TBA
         location
         online
-        ... allUrlsFragment
+        ...allUrlsFragment
         localImages {
           childImageSharp {
             gatsbyImageData(placeholder: TRACED_SVG)

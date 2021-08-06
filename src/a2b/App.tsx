@@ -7,7 +7,11 @@ import Settings from "./features/Settings";
 import DIY from "./features/DIY";
 
 // state
-import { initialState, saveSettings, selectSettings } from "./features/Settings/settingsSlice";
+import {
+  initialState,
+  saveSettings,
+  selectSettings,
+} from "./features/Settings/settingsSlice";
 import {
   selectIds,
   selectAuthors,
@@ -31,7 +35,9 @@ export default function App() {
     if (persistentState) {
       // in case I have introduced new settings since the last time the user
       // has used the app, I still want to use defaultInitialState as fallback
-      dispatch(saveSettings({ ...initialState, ...JSON.parse(persistentState) }));
+      dispatch(
+        saveSettings({ ...initialState, ...JSON.parse(persistentState) })
+      );
     }
   }, [dispatch]);
 
@@ -44,9 +50,9 @@ export default function App() {
   // the page we are currently on
   const [currentPage, setCurrentPage] = useState("Search");
   const pageAssociation = {
-    "Search": <Search />,
-    "Settings": <Settings />,
-    "DIY": <DIY />,
+    Search: <Search />,
+    Settings: <Settings />,
+    DIY: <DIY />,
   };
 
   return (

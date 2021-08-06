@@ -29,47 +29,61 @@ export default function SettingsFormBody({ values }: SettingsFormBodyProps) {
         <SettingField
           as="checkbox"
           id="includeFile"
-          label="Include file field in entries" />
+          label="Include file field in entries"
+        />
         <SettingField
           as="checkbox"
           id="filePrefix"
           disabled={!values.includeFile}
-          label={<>
-            Add a prefix to the file field (<code>Doe2020.pdf</code> ⇒{" "}
-            <code>D/Doe2020.pdf</code>)
-          </>} />
+          label={
+            <>
+              Add a prefix to the file field (<code>Doe2020.pdf</code> ⇒{" "}
+              <code>D/Doe2020.pdf</code>)
+            </>
+          }
+        />
         <SettingField
           as="checkbox"
           id="includeWget"
           disabled={!values.includeFile}
-          label={<>Include a download command for the entries.</>} />
+          label={<>Include a download command for the entries.</>}
+        />
         <SettingField
           as="checkbox"
           id="wgetPowershell"
           disabled={!values.includeFile || !values.includeWget}
-          label={<>
-            Running on Powershell on Windows (default is <code>wget</code> on
-            Unix-like platforms).
-          </>} />
+          label={
+            <>
+              Running on Powershell on Windows (default is <code>wget</code> on
+              Unix-like platforms).
+            </>
+          }
+        />
         <SettingField
           as="control"
           id="fileFolder"
           label="The folder for the download command, if any."
-          disabled={!values.includeFile || !values.includeWget} />
+          disabled={!values.includeFile || !values.includeWget}
+        />
         <SettingField
           as="checkbox"
           id="includeAbstract"
-          label="Include the abstract" />
+          label="Include the abstract"
+        />
         <SettingField
           as="checkbox"
           id="includePrimaryCategory"
-          label={<>
-            Include the primary category (e.g.<code>math.AT</code>), if any
-          </>} />
+          label={
+            <>
+              Include the primary category (e.g.<code>math.AT</code>), if any
+            </>
+          }
+        />
         <SettingField
           as="checkbox"
           id="includeVersion"
-          label="Include version information" />
+          label="Include version information"
+        />
       </div>
       <h2 className={h2Style}>Search settings</h2>
       <div className={sectionStyle}>

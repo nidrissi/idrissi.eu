@@ -7,7 +7,10 @@ import App from "../../../a2b/App";
 
 export default function A2B() {
   return (
-    <Layout title="arXiv2BibLaTeX" description="Convert an arXiv entry to a BibLaTeX entry.">
+    <Layout
+      title="arXiv2BibLaTeX"
+      description="Convert an arXiv entry to a BibLaTeX entry."
+    >
       <Provider store={store}>
         <App />
       </Provider>

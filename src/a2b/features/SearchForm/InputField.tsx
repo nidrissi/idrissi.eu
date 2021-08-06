@@ -10,7 +10,7 @@ interface InputFieldProps {
   name: string;
   placeholder?: string;
   title?: string;
-};
+}
 export default function InputField({ label, ...props }: InputFieldProps) {
   const [field, meta] = useField(props);
   return (
@@ -20,11 +20,14 @@ export default function InputField({ label, ...props }: InputFieldProps) {
       </div>
       <div className="col-span-full sm:col-span-5 sm:flex gap-2">
         <input
-          className={`w-full rounded-md focus:shadow-md dark:bg-gray-900 ${meta.error ? "border-red-600" : ""}`}
+          className={`w-full rounded-md focus:shadow-md dark:bg-gray-900 ${
+            meta.error ? "border-red-600" : ""
+          }`}
           type="text"
           id={props.name}
           {...field}
-          {...props} />
+          {...props}
+        />
         {meta.error && (
           <div className="text-sm text-red-600 dark:text-red-400">
             {meta.error}

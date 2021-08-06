@@ -71,15 +71,15 @@ export default function DIY() {
     <>
       <div className="bg-yellow-100 dark:bg-yellow-800 px-3 py-2" role="alert">
         <FontAwesomeIcon icon={faExclamationTriangle} title="Warning!" />
-        &nbsp;
-        Not feature complete yet!
+        &nbsp; Not feature complete yet!
       </div>
       <Formik
         initialValues={initialValues}
         onSubmit={() => {
           return;
         }}
-        component={DIYBody} />
+        component={DIYBody}
+      />
     </>
   );
 }

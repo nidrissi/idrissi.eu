@@ -24,14 +24,14 @@ export interface Entry {
   title?: string;
   version?: number;
   volume?: number;
-};
+}
 
 /** An arXiv query as built by SearchForm */
 export interface Query {
   authors: string[];
   ids: string[];
   titles: string[];
-};
+}
 
 /** The settings */
 export interface Settings {
@@ -47,4 +47,4 @@ export interface Settings {
   mode: "bibtex" | "biblatex";
   sortBy: "submittedDate" | "lastUpdatedDate" | "relevance";
   sortOrder: "ascending" | "descending";
-};
+}

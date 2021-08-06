@@ -15,7 +15,7 @@ export interface LocalImage {
       src: string;
     };
   };
-};
+}
 
 export interface Frontmatter {
   title: string;
@@ -41,7 +41,7 @@ export interface Frontmatter {
   location?: string;
   online?: boolean;
   TBA?: boolean;
-};
+}
 
 interface MetaProps {
   frontmatter: Frontmatter;
@@ -52,11 +52,11 @@ export default function Meta({ frontmatter, type }: MetaProps) {
   return (
     <div>
       <div className="flex flex-wrap gap-2 content-center text-gray-700 dark:text-gray-400 mb-2">
-        {type === 'research' ? (
+        {type === "research" ? (
           <MetaResearch frontmatter={frontmatter} />
-        ) : type === 'class' ? (
+        ) : type === "class" ? (
           <MetaClass frontmatter={frontmatter} />
-        ) : type === 'talk' ? (
+        ) : type === "talk" ? (
           <MetaTalk frontmatter={frontmatter} />
         ) : (
           <MetaData frontmatter={frontmatter} />

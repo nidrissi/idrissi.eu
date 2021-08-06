@@ -20,7 +20,7 @@ export interface FormValues {
   title: string;
   type: string;
   volume: string;
-};
+}
 
 /** Generic fields, to be displayed _before_ type-specific fields. */
 export function GenericPreFields() {
@@ -36,18 +36,22 @@ export function GenericPreFields() {
         type="text"
         name="authors"
         label="Authors"
-        placeholder="Author names separated by &" />
+        placeholder="Author names separated by &"
+      />
       <StandardInput type="text" name="title" label="Title" />
       <StandardInput
         type="text"
         name="date"
         label="Date"
         placeholder="YYYY-MM-DD"
-        help={<>
-          The date in <code>YYYY-MM-DD</code> format. Day and month are
-          optional.Ranges can be specified by with <code>/</code>, e.g.{" "}
-          <code>2019-09/2020-08</code> to get Sept. 2019–Aug. 2020.
-        </>} />
+        help={
+          <>
+            The date in <code>YYYY-MM-DD</code> format. Day and month are
+            optional.Ranges can be specified by with <code>/</code>, e.g.{" "}
+            <code>2019-09/2020-08</code> to get Sept. 2019–Aug. 2020.
+          </>
+        }
+      />
       <StandardInput type="text" name="subTitle" label="Subtitle" />
     </>
   );
@@ -82,30 +86,36 @@ function ArticleFields() {
         type="text"
         name="journal"
         label="Journal"
-        halfSize={true} />
+        halfSize={true}
+      />
       <StandardInput
         type="text"
         name="series"
         label="Series"
         halfSize={true}
-        help={<>
-          The series of the <em>journal</em>, if any. It can be a number (to
-          get e.g. “Ann. of Math. 2nd series”) or one of the keys{" "}
-          <code>newseries</code> or <code>oldseries</code> (to get e.g.
-          “Selecta Math. New Series”).
-        </>} />
+        help={
+          <>
+            The series of the <em>journal</em>, if any. It can be a number (to
+            get e.g. “Ann. of Math. 2nd series”) or one of the keys{" "}
+            <code>newseries</code> or <code>oldseries</code> (to get e.g.
+            “Selecta Math. New Series”).
+          </>
+        }
+      />
       <StandardInput
         name="volume"
         label="Volume"
         type="number"
         help="The volume of the journal in which the article was published."
-        halfSize={true} />
+        halfSize={true}
+      />
       <StandardInput
         name="number"
         label="Number"
         type="number"
         halfSize={true}
-        help="Volumes are sometimes further subdivided in “issues” or something else. This number field refers to this subdivision." />
+        help="Volumes are sometimes further subdivided in “issues” or something else. This number field refers to this subdivision."
+      />
     </>
   );
 }
@@ -119,44 +129,51 @@ function BookFields() {
         name="maintitle"
         label="Main title"
         help="If the book is divided in several volumes that each have a different title, then “Main title” is the title of the whole work, and “Title” is the title of the individual volume. Do not use the subtitle in this situation as it will not render correctly (that would the be subtitle of the individual volume, if any)."
-        halfSize={true} />
+        halfSize={true}
+      />
       <StandardInput
         name="volume"
         label="Volume"
         type="number"
         help="When you want to quote a specific volume of a book."
-        halfSize={true} />
+        halfSize={true}
+      />
 
       <StandardInput
         type="text"
         name="series"
         label="Book series"
         help="The name of the series which contains the book (e.g. “Lecture Notes in Mathematics”)."
-        halfSize={true} />
+        halfSize={true}
+      />
       <StandardInput
         name="number"
         label="Number"
         type="number"
         help="The number of the book in the given series."
-        halfSize={true} />
+        halfSize={true}
+      />
 
       <StandardInput
         type="text"
         name="publisher"
         label="Publisher"
-        halfSize={true} />
+        halfSize={true}
+      />
       <StandardInput
         type="text"
         name="location"
         label="Location (of publisher)"
-        halfSize={true} />
+        halfSize={true}
+      />
 
       <StandardInput type="text" name="ISBN" label="ISBN" halfSize={true} />
       <StandardInput
         name="pageTotal"
         label="Number of pages"
         type="number"
-        halfSize={true} />
+        halfSize={true}
+      />
     </>
   );
 }

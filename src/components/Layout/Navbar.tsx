@@ -18,13 +18,18 @@ interface navbarLink {
   icon: IconDefinition;
   label: string;
   partiallyActive?: boolean;
-};
+}
 const navbarLinks: navbarLink[] = [
   { to: "/", icon: faHome, label: "Home" },
   { to: "/misc/cv", icon: faPortrait, label: "CV" },
   { to: "/research", icon: faCogs, label: "Research", partiallyActive: true },
   { to: "/talk", icon: faComments, label: "Talks", partiallyActive: true },
-  { to: "/class", icon: faChalkboardTeacher, label: "Teaching", partiallyActive: true },
+  {
+    to: "/class",
+    icon: faChalkboardTeacher,
+    label: "Teaching",
+    partiallyActive: true,
+  },
   { to: "/post", icon: faPencilAlt, label: "Blog", partiallyActive: true },
   { to: "/misc", icon: faBoxOpen, label: "Misc" },
 ];

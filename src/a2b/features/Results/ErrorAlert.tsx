@@ -17,9 +17,7 @@ export default function ErrorAlert() {
   }
   return (
     <div className="bg-red-100 text-red-900 dark:bg-red-900 dark:text-red-100 p-2 rounded-lg my-2 flex">
-      <div className="flex-grow">
-        {error}
-      </div>
+      <div className="flex-grow">{error}</div>
       <div>
         <button
           onClick={() => dispatch(clearError())}

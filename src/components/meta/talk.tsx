@@ -11,7 +11,9 @@ export default function MetaTalk({ frontmatter }: MetaTalkProps) {
 
   return (
     <>
-      <DateTime label="On" TBA={TBA}>{date}</DateTime>
+      <DateTime label="On" TBA={TBA}>
+        {date}
+      </DateTime>
       <div>Title: {title}.</div>
     </>
   );

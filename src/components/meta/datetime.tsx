@@ -4,7 +4,7 @@ interface DateTimeProps {
   children: React.ReactNode;
   label: string | JSX.Element;
   TBA?: boolean;
-};
+}
 
 export default function DateTime({ label, children, TBA }: DateTimeProps) {
   if (!children) {
@@ -15,14 +15,15 @@ export default function DateTime({ label, children, TBA }: DateTimeProps) {
 
   return (
     <div>
-      {label}
-      {' '}
+      {label}{" "}
       <time dateTime={date.toISOString()}>
         {TBA ? (
           <abbr title="The precise date is not yet known.">
             {date.toLocaleDateString()}?
           </abbr>
-        ) : date.toLocaleDateString()}
+        ) : (
+          date.toLocaleDateString()
+        )}
       </time>
       .
     </div>

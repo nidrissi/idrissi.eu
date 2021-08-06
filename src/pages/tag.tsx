@@ -14,14 +14,24 @@ interface TagListProps {
       }[];
     };
   };
-};
+}
 
-export default function TagList({ data: { allMdx: { group } } }: TagListProps) {
+export default function TagList({
+  data: {
+    allMdx: { group },
+  },
+}: TagListProps) {
   return (
-    <Layout title="All Tags" description="The list of all tags used on the website.">
-      <h1 role="banner" className="text-4xl font-serif font-extrabold mb-6 text-black dark:text-gray-200">
-        <FontAwesomeIcon icon={faTags} />&nbsp;
-        All Tags
+    <Layout
+      title="All Tags"
+      description="The list of all tags used on the website."
+    >
+      <h1
+        role="banner"
+        className="text-4xl font-serif font-extrabold mb-6 text-black dark:text-gray-200"
+      >
+        <FontAwesomeIcon icon={faTags} />
+        &nbsp; All Tags
       </h1>
       <ul className="flex flex-wrap gap-6">
         {group.map(({ fieldValue, totalCount }) => (
@@ -35,12 +45,12 @@ export default function TagList({ data: { allMdx: { group } } }: TagListProps) {
 }
 
 export const query = graphql`
-query {
-  allMdx {
-    group(field: frontmatter___tags) {
-      fieldValue
-      totalCount
+  query {
+    allMdx {
+      group(field: frontmatter___tags) {
+        fieldValue
+        totalCount
+      }
     }
   }
-}
 `;

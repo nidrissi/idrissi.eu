@@ -1,7 +1,12 @@
 import React from "react";
 import { graphql, Link, useStaticQuery } from "gatsby";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGithub, faStackExchange, faTwitter, IconDefinition } from "@fortawesome/free-brands-svg-icons";
+import {
+  faGithub,
+  faStackExchange,
+  faTwitter,
+  IconDefinition,
+} from "@fortawesome/free-brands-svg-icons";
 import { faAt } from "@fortawesome/free-solid-svg-icons";
 import { faCopyright } from "@fortawesome/free-regular-svg-icons";
 
@@ -24,14 +29,17 @@ interface FooterQuery {
       };
     };
   };
-};
+}
 
 export default function Footer() {
   const {
     site: {
       siteMetadata: {
         author: {
-          name, email, organizations, social: { arXiv, github, mathoverflow, twitter },
+          name,
+          email,
+          organizations,
+          social: { arXiv, github, mathoverflow, twitter },
         },
       },
     },
@@ -65,7 +73,7 @@ export default function Footer() {
     icon?: IconDefinition;
     relMe?: boolean;
     extraStyle?: string;
-  };
+  }
 
   const linkList: FooterLink[] = [
     {
@@ -100,15 +108,17 @@ export default function Footer() {
     },
   ].flat();
 
-  const linkStyle = "block flex-auto text-blue-800 dark:text-blue-300 hover:underline px-1 py-2";
+  const linkStyle =
+    "block flex-auto text-blue-800 dark:text-blue-300 hover:underline px-1 py-2";
 
   return (
     <footer className="border-t dark:border-gray-900 w-full flex flex-wrap divide-x divide-gray-300 dark:divide-gray-600 divide-dotted text-center">
       <Link to="/" className={linkStyle}>
-        <FontAwesomeIcon icon={faCopyright} />&nbsp;
+        <FontAwesomeIcon icon={faCopyright} />
+        &nbsp;
         {name}
       </Link>
-      {linkList.map(link => (
+      {linkList.map((link) => (
         <a
           href={link.url}
           rel={`noreferrer noopener ${link.relMe ? "me" : ""}`}
