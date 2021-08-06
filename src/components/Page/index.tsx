@@ -2,8 +2,12 @@ import React from "react";
 import { graphql } from "gatsby";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faNetworkWired } from "@fortawesome/free-solid-svg-icons";
+
+import { MDXProvider } from "@mdx-js/react";
+import AlertDiv from "./AlertDiv";
 
 import Layout from "../Layout";
 import Meta, { Frontmatter } from "../meta";
@@ -83,9 +87,11 @@ export default function PageTemplate({ data }: PageTemplateProps) {
       <div
         className={`mx-auto max-w-2xl prose prose-blue dark:prose-dark ${["research", "talk"].includes(type) ? "prose-lg" : ""}`}
       >
-        <MDXRenderer localImages={frontmatter.localImages} urls={frontmatter.urls}>
-          {body}
-        </MDXRenderer>
+        <MDXProvider components={{ AlertDiv }}>
+          <MDXRenderer localImages={frontmatter.localImages} urls={frontmatter.urls}>
+            {body}
+          </MDXRenderer>
+        </MDXProvider>
       </div>
 
       {type === "talk" && frontmatter.urls?.slides && (

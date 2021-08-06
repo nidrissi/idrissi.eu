@@ -26,7 +26,7 @@ export default function PeccotCard({ link, number, date, image, children }: Pecc
         <br />
         <span className="text-gray-700 dark:text-gray-300 font-semibold">{date}</span>
       </div>
-      <div className="flex-grow p-2 leading-none py-1">
+      <div className="flex-grow p-2 leading-none">
         {children}
       </div>
       <a className="block p-2 bg-gray-100 dark:bg-gray-900 rounded-b-md text-center" href={link} rel="noreferrer noopener">

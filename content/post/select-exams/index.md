@@ -31,7 +31,7 @@ The gist includes an example CSV file.
 In the example, the exam of student Doe (Moodle participant ID 12345) is from page 1 to 4, and so on.
 This produces a zip file that you can simply send to Moodle, and it will automatically pair students and exams.
 
-<div class="bg-red-200 text-red-900 dark:bg-red-900 dark:text-red-100 p-2 rounded-md">
+<AlertDiv color="red">
   <FontAwesomeIcon icon={faExclamationTriangle} title="Warning" />
   &nbsp;
   The Moodle participant ID is <em>not</em> the student's user ID (that you can see on e.g. <a href={props.localImages[0].childImageSharp.original.src}>this image</a>).
@@ -39,4 +39,4 @@ This produces a zip file that you can simply send to Moodle, and it will automat
   One possibility to find it is to <a href="https://docs.moodle.org/310/en/Assignment_settings#Feedback_types">enable offline grading worksheets</a> for the assignment, then to go on the assignment's page and select the bulk action "Download grading worksheet".
   You will obtain a CSV file whose first column will be the participant IDs, of the form <code>Participant12345678</code>.
   Copy the number (without <code>Participant</code>) in the CSV file that you give to my script.
-</div>
+</AlertDiv>
