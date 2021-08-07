@@ -77,7 +77,9 @@ export default function LoginButton() {
                 const location = window.location.pathname;
                 const loginUri = `/.auth/login/${
                   p.url
-                }?post_login_redirect_uri=${encodeURI(location)}#__comments`;
+                }?post_login_redirect_uri=${encodeURI(
+                  location + "#__comments"
+                )}`;
                 window.location.assign(loginUri);
               }}
             >

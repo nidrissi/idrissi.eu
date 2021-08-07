@@ -80,8 +80,8 @@ export default function UserDetails({
             const location = window.location.pathname;
             window.location.assign(
               `/.auth/logout?post_logout_redirect_uri=${encodeURI(
-                location
-              )}#__comments`
+                location + "#__comments"
+              )}`
             );
           }}
         >
