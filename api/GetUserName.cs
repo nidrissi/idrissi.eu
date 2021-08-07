@@ -38,7 +38,11 @@ namespace Idrissi.Blogging
 
                 var userUri = UriFactory.CreateDocumentUri("Blogging", "Users", userId);
                 var partitionKey = new PartitionKey(userId);
-                var requestOptions = new RequestOptions() { PartitionKey = partitionKey };
+                var requestOptions = new RequestOptions()
+                {
+                    PartitionKey = partitionKey,
+                    ConsistencyLevel = ConsistencyLevel.Strong
+                };
                 UserDetails details = await client.ReadDocumentAsync<UserDetails>(userUri, requestOptions, token);
 
                 log.LogInformation("Found username {name}", details.userName);

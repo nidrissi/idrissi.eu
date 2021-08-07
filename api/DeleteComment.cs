@@ -37,31 +37,43 @@ namespace Idrissi.Blogging
                 log.LogInformation("Request to delete {commentId} from {userId}.", commentId, userId);
 
                 var commentUri = UriFactory.CreateDocumentUri("Blogging", "Comments", commentId);
-                RequestOptions requestOptions = new RequestOptions { PartitionKey = new PartitionKey(pageId) };
 
                 if (principal.IsInRole("admin") && req.Query.ContainsKey("super"))
                 {
+                    RequestOptions requestOptions = new RequestOptions
+                    {
+                        PartitionKey = new PartitionKey(pageId),
+                        ConsistencyLevel = ConsistencyLevel.Eventual
+                    };
                     log.LogWarning("Admin-erasure of comment {commentId}", commentId);
                     await client.DeleteDocumentAsync(commentUri, requestOptions, token);
                     return new OkResult();
                 }
-
-                var response = await client.ReadDocumentAsync<Comment>(commentUri, requestOptions, token);
-                var comment = response.Document;
-                if (comment.userId != userId)
+                else
                 {
-                    return new UnauthorizedResult();
+                    RequestOptions requestOptions = new RequestOptions
+                    {
+                        PartitionKey = new PartitionKey(pageId),
+                        ConsistencyLevel = ConsistencyLevel.Strong
+                    };
+
+                    var response = await client.ReadDocumentAsync<Comment>(commentUri, requestOptions, token);
+                    var comment = response.Document;
+                    if (comment.userId != userId)
+                    {
+                        return new UnauthorizedResult();
+                    }
+
+                    comment.deleted = true;
+
+                    await client.ReplaceDocumentAsync(
+                        commentUri,
+                        comment,
+                        requestOptions,
+                        token);
+
+                    return new OkResult();
                 }
-
-                comment.deleted = true;
-
-                await client.ReplaceDocumentAsync(
-                    commentUri,
-                    comment,
-                    requestOptions,
-                    token);
-
-                return new OkResult();
             }
             catch (JsonException e)
             {
