@@ -10,6 +10,8 @@ import {
 import { faAt } from "@fortawesome/free-solid-svg-icons";
 import { faCopyright } from "@fortawesome/free-regular-svg-icons";
 
+import { siteFooter } from "./Footer.module.css";
+
 interface FooterQuery {
   site: {
     siteMetadata: {
@@ -72,7 +74,6 @@ export default function Footer() {
     label: string;
     icon?: IconDefinition;
     relMe?: boolean;
-    extraStyle?: string;
   }
 
   const linkList: FooterLink[] = [
@@ -80,7 +81,6 @@ export default function Footer() {
       url: `mailto:${email}`,
       label: email,
       icon: faAt,
-      extraStyle: "font-mono tracking-tighter",
     },
     organizations.map((o) => ({ url: o.url, label: o.name })),
     {
@@ -108,12 +108,9 @@ export default function Footer() {
     },
   ].flat();
 
-  const linkStyle =
-    "block flex-auto text-blue-800 dark:text-blue-300 hover:underline px-1 py-2";
-
   return (
-    <footer className="border-t dark:border-gray-900 w-full flex flex-wrap divide-x divide-gray-300 dark:divide-gray-600 divide-dotted text-center">
-      <Link to="/" className={linkStyle}>
+    <footer className={siteFooter}>
+      <Link to="/">
         <FontAwesomeIcon icon={faCopyright} />
         &nbsp;
         {name}
@@ -123,7 +120,6 @@ export default function Footer() {
           href={link.url}
           rel={`noreferrer noopener ${link.relMe ? "me" : ""}`}
           target="_blank"
-          className={linkStyle + " " + (link.extraStyle || "")}
           key={link.label}
         >
           {link.icon && (

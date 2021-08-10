@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
+    "lib": ["es2019", "DOM"],
     "jsx": "preserve",
     "sourceMap": true,
     "strict": true,
