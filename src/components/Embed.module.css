@@ -1,0 +1,8 @@
+.slides {
+  aspect-ratio: 16/9;
+}
+
+.embed {
+  max-width: 100%;
+  margin: 2rem auto;
+}

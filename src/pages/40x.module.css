@@ -1,0 +1,24 @@
+.hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px dashed gray;
+  border-radius: 1rem;
+  min-height: 50vh;
+  text-align: center;
+  font-size: x-large;
+}
+
+.hero a {
+  color: var(--blue-800);
+}
+
+.hero a:hover {
+  text-decoration: underline;
+}
+
+@media (prefers-color-scheme: dark) {
+  .hero a {
+    color: var(--blue-400);
+  }
+}

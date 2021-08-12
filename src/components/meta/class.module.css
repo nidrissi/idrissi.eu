@@ -1,0 +1,25 @@
+.block {
+  display: block;
+  padding: 0 0.25rem;
+  border: 1px dashed transparent;
+  border-radius: 0.25rem;
+}
+
+.btn {
+  --color: var(--green-400);
+}
+
+.btn:hover,
+.btn:focus {
+  border-color: var(--color);
+}
+
+.not-expanded:hover {
+  cursor: pointer;
+}
+
+@media (prefers-color-scheme: dark) {
+  .btn {
+    --color: var(--green-800);
+  }
+}

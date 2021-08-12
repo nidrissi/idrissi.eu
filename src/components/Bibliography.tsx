@@ -1,15 +1,24 @@
 import { graphql, Link, useStaticQuery } from "gatsby";
 import React from "react";
-import Meta from "./meta";
+import Meta, { Frontmatter } from "./meta";
 
 interface BibliographyProps {
   status: string;
 }
 
+interface BibliographyQuery {
+  allMdx: {
+    nodes: {
+      slug: string;
+      frontmatter: Frontmatter;
+    }[];
+  };
+}
+
 export default function Bibliography({ status }: BibliographyProps) {
   const {
     allMdx: { nodes },
-  } = useStaticQuery(graphql`
+  }: BibliographyQuery = useStaticQuery(graphql`
     query BibliographyQuery {
       allMdx(
         filter: { fields: { type: { eq: "research" } } }

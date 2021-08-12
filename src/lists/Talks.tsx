@@ -8,6 +8,8 @@ import Pager from "./Pager";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faComments, faRss } from "@fortawesome/free-solid-svg-icons";
 
+import * as styles from "./lists.module.css";
+
 interface TalkListProps {
   data: {
     allMdx: {
@@ -38,18 +40,15 @@ export default function TalkList({ data, pageContext }: TalkListProps) {
       title={title}
       description={`The talks I have given and/or will give in the near future (page ${currentPage} out of ${numPages}).`}
     >
-      <Link to="/talk-rss.xml" className="block float-right w-min">
+      <Link to="/talk-rss.xml" className={styles.rss}>
         <FontAwesomeIcon icon={faRss} title="RSS feed for talks." size="2x" />
       </Link>
-      <h1
-        role="banner"
-        className="text-4xl font-serif font-extrabold mb-6 text-black dark:text-gray-200"
-      >
+      <h1 role="banner">
         <FontAwesomeIcon icon={faComments} size="sm" />
         &nbsp;
         {title}
       </h1>
-      <div className="flex flex-col gap-4">
+      <div className={styles.list}>
         {nodes.map(({ frontmatter, slug, wordCount: { words } }) => (
           <Mini
             key={slug}

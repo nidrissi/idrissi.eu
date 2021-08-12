@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { actualTitle } from "./Page";
 
+import * as styles from "./NextPrevious.module.css";
+
 export interface NextOrPreviousItem {
   slug: string;
   frontmatter: {
@@ -32,13 +34,10 @@ export default function NextPrevious({
     return null;
   }
 
-  const linkStyle =
-    "block p-1 text-sm text-green-700 dark:text-green-400 border border-green-700 dark:border-green-400 rounded-md hover:bg-green-700 dark:hover:bg-green-400 hover:text-white dark:hover:text-black";
-
   return (
-    <div className="flex w-full mt-6">
+    <div className={styles.outer}>
       {previous && (
-        <Link to={`/${type}/${previous.slug}`} className={linkStyle}>
+        <Link to={`/${type}/${previous.slug}`}>
           <FontAwesomeIcon icon={faArrowLeft} />
           &nbsp;
           {actualTitle(previous.frontmatter, type)}
@@ -46,7 +45,7 @@ export default function NextPrevious({
       )}
       <div className="flex-grow"></div>
       {next && (
-        <Link to={`/${type}/${next.slug}`} className={linkStyle}>
+        <Link to={`/${type}/${next.slug}`}>
           {actualTitle(next.frontmatter, type)}
           &nbsp;
           <FontAwesomeIcon icon={faArrowRight} />

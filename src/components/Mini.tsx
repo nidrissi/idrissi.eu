@@ -6,6 +6,8 @@ import { faCaretSquareRight } from "@fortawesome/free-solid-svg-icons";
 import Meta, { Frontmatter } from "./meta";
 import { actualTitle, heldOnline } from "./Page";
 
+import * as styles from "./Mini.module.css";
+
 interface MiniProps {
   frontmatter: Frontmatter;
   type: string;
@@ -29,44 +31,33 @@ export default function Mini({
   const linkedTitle = noLink ? (
     titleLabel
   ) : (
-    <Link
-      to={`/${type}/${slug}`}
-      className="text-green-800 dark:text-green-500 hover:underline"
-    >
+    <Link to={`/${type}/${slug}`} className={styles.title}>
       {titleLabel}
     </Link>
   );
 
   const header = levelUp ? (
-    <h2 className="text-2xl font-bold mb-2">
+    <h2>
       {linkedTitle}
       {heldOnline(type, frontmatter)}
     </h2>
   ) : (
-    <h3 className="text-xl font-semibold mb-1">
+    <h3>
       {linkedTitle}
       {heldOnline(type, frontmatter)}
     </h3>
   );
 
   const fullExcerpt = excerpt && (
-    <Link
-      to={`/post/${slug}`}
-      className="block text-sm hover:underline hover:text-blue-700 dark:hover:text-blue-300 max-w-xl"
-    >
+    <Link to={`/post/${slug}`} className={styles.excerpt}>
       {excerpt} <FontAwesomeIcon icon={faCaretSquareRight} />
     </Link>
   );
 
   return (
-    <article
-      lang={frontmatter?.lang}
-      className="border border-gray-400 border-opacity-20 rounded-md px-3 py-2"
-    >
+    <article lang={frontmatter?.lang} className={styles.mini}>
       {header}
-      <div className="mb-2">
-        <Meta frontmatter={frontmatter} type={type} />
-      </div>
+      <Meta frontmatter={frontmatter} type={type} />
       {fullExcerpt}
     </article>
   );

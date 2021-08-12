@@ -6,6 +6,8 @@ import { Frontmatter } from "../components/meta";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChalkboardTeacher } from "@fortawesome/free-solid-svg-icons";
 
+import * as styles from "./lists.module.css";
+
 interface ClassListProps {
   data: {
     allMdx: {
@@ -31,23 +33,20 @@ export default function ClassList({
       title="Teaching"
       description="The classes I have taught and/or am currently teaching."
     >
-      <h1
-        role="banner"
-        className="text-4xl font-serif font-extrabold mb-4 text-black dark:text-gray-200"
-      >
+      <h1 role="banner">
         <FontAwesomeIcon icon={faChalkboardTeacher} size="sm" />
         &nbsp; Teaching
       </h1>
-      <div className="flex flex-col gap-6">
+      <div className={styles.list}>
         {group
           // Sort in reverse year order
           .sort((g1, g2) => g2.fieldValue.localeCompare(g1.fieldValue))
           .map(({ fieldValue: year, nodes }) => (
             <section key={year}>
-              <h2 className="text-2xl font-bold mb-4">
+              <h2>
                 Academic year {year}&ndash;{Number(year) + 1}
               </h2>
-              <div className="flex flex-col gap-4">
+              <div className={styles.list}>
                 {nodes.map(({ frontmatter, slug, wordCount: { words } }) => (
                   <Mini
                     key={slug}

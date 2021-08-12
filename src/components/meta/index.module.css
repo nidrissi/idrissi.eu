@@ -1,0 +1,14 @@
+.meta {
+  margin-bottom: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-content: center;
+  color: var(--gray-700);
+}
+
+@media (prefers-color-scheme: dark) {
+  .meta {
+    color: var(--gray-400);
+  }
+}

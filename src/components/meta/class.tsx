@@ -4,7 +4,9 @@ import React from "react";
 import { useState } from "react";
 import { Frontmatter } from ".";
 
-function format(value: string): JSX.Element {
+import * as styles from "./class.module.css";
+
+function format(value?: string): React.ReactNode {
   return value && <div>{value}.</div>;
 }
 
@@ -49,16 +51,19 @@ interface CourseTypeBlockProps {
 function CourseTypeBlock({ type }: CourseTypeBlockProps) {
   const [expanded, setExpanded] = useState(false);
 
-  const { label, title } = courseTypeAssociation[type];
+  const association = courseTypeAssociation[type];
+
+  if (association === undefined) {
+    throw new Error(`Unknown course type: ${type}`);
+  }
+
+  const { label, title } = association;
   return (
     <div
       // If there is a title, put a green border when the div is either hovered or focused
       // and the cursor becomes a pointer when the div is hovered and not already expanded
-      className={`block px-1 border border-transparent border-dashed rounded-md ${
-        title
-          ? "hover:border-green-400 focus:border-green-400 dark:hover:border-green-800 dark:focus:border-green-800" +
-            (expanded ? "" : " hover:cursor-pointer")
-          : ""
+      className={`${styles.block} ${
+        title ? styles.btn + (expanded ? "" : " " + styles.notExpanded) : ""
       }`}
       onFocus={() => title && setExpanded(true)}
       onBlur={() => setExpanded(false)}
@@ -79,7 +84,7 @@ function CourseTypeBlock({ type }: CourseTypeBlockProps) {
   );
 }
 
-function formatCourseType(courseTypes?: string[]): JSX.Element[] {
+function formatCourseType(courseTypes?: string[]): JSX.Element[] | undefined {
   return courseTypes?.map((type) => <CourseTypeBlock key={type} type={type} />);
 }
 
@@ -96,7 +101,7 @@ export default function MetaClass({ frontmatter }: MetaClassProps) {
       {format(cursus)}
       {formatCourseType(courseTypes)}
       {/* \xa0 = non-breaking space */}
-      {format(courseHours ? `${courseHours}\xa0h` : null)}
+      {format(courseHours ? `${courseHours}\xa0h` : undefined)}
     </>
   );
 }

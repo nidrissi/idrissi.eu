@@ -8,6 +8,8 @@ import {
   faAngleRight,
 } from "@fortawesome/free-solid-svg-icons";
 
+import * as styles from "./Pager.module.css";
+
 interface PagerProps {
   numPages: number;
   currentPage: number;
@@ -18,21 +20,17 @@ export default function Pager({ numPages, currentPage, type }: PagerProps) {
     return null;
   }
 
-  const buttonStyle =
-    "block border text-purple-700 border-purple-700 hover:bg-purple-700 hover:text-white dark:text-purple-400 dark:border-purple-400 dark:hover:bg-purple-400 dark:hover:text-black p-2 leading-none rounded-md";
-  const disabledStyle = "text-gray-600 border-gray-600 pointer-events-none";
-
   function indexToLink(i: number): string {
     return `/${type}${i > 1 ? `/${i}` : ""}`;
   }
 
   return (
-    <nav className="mt-8 flex flex-wrap gap-2 justify-around">
+    <nav className={styles.pager}>
       <Link
         to={indexToLink(1)}
         title="First page"
-        className={buttonStyle}
-        activeClassName={disabledStyle}
+        className={styles.button}
+        activeClassName={styles.disabled}
       >
         <FontAwesomeIcon icon={faAngleDoubleLeft} />
       </Link>
@@ -40,8 +38,8 @@ export default function Pager({ numPages, currentPage, type }: PagerProps) {
         <Link
           to={indexToLink(currentPage - 1)}
           title="Previous page"
-          className={buttonStyle}
-          activeClassName={disabledStyle}
+          className={styles.button}
+          activeClassName={styles.disabled}
         >
           <FontAwesomeIcon icon={faAngleLeft} />
         </Link>
@@ -51,8 +49,8 @@ export default function Pager({ numPages, currentPage, type }: PagerProps) {
           key={i}
           to={indexToLink(i + 1)}
           title={`Page ${i + 1}`}
-          className={buttonStyle}
-          activeClassName="font-bold border-2 pointer-events-none"
+          className={styles.button}
+          activeClassName={styles.disabled}
         >
           {i + 1}
         </Link>
@@ -61,8 +59,8 @@ export default function Pager({ numPages, currentPage, type }: PagerProps) {
         <Link
           to={indexToLink(currentPage + 1)}
           title="Next page"
-          className={buttonStyle}
-          activeClassName={disabledStyle}
+          className={styles.button}
+          activeClassName={styles.disabled}
         >
           <FontAwesomeIcon icon={faAngleRight} />
         </Link>
@@ -70,8 +68,8 @@ export default function Pager({ numPages, currentPage, type }: PagerProps) {
       <Link
         to={indexToLink(numPages)}
         title="Last page"
-        className={buttonStyle}
-        activeClassName={disabledStyle}
+        className={styles.button}
+        activeClassName={styles.disabled}
       >
         <FontAwesomeIcon icon={faAngleDoubleRight} />
       </Link>

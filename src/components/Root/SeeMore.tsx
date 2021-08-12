@@ -12,11 +12,9 @@ interface SeeMoreProps {
 
 export default function SeeMore({ to, children }: SeeMoreProps) {
   return (
-    <div className={styles.seemore}>
-      <Link to={to}>
-        See more {children}&nbsp;
-        <FontAwesomeIcon icon={faChevronRight} size="sm" />
-      </Link>
-    </div>
+    <Link to={to} className={styles.seemore}>
+      See more {children}&nbsp;
+      <FontAwesomeIcon icon={faChevronRight} size="sm" />
+    </Link>
   );
 }

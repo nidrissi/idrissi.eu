@@ -1,0 +1,33 @@
+.alert-div {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: var(--gray-300);
+}
+
+.alert-div[data-color="red"] {
+  background-color: var(--red-300);
+}
+.alert-div[data-color="green"] {
+  background-color: var(--green-300);
+}
+.alert-div[data-color="blue"] {
+  background-color: var(--blue-300);
+}
+.alert-div[data-color="yellow"] {
+  background-color: var(--yellow-300);
+}
+
+@media (prefers-color-scheme: dark) {
+  .alert-div {
+    background-color: var(--gray-900);
+  }
+  .alert-div[data-color="red"] {
+    background-color: var(--red-800);
+  }
+  .alert-div[data-color="green"] {
+    background-color: var(--green-800);
+  }
+  .alert-div[data-color="yellow"] {
+    background-color: var(--yellow-900);
+  }
+}

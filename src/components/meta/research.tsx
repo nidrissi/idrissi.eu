@@ -52,6 +52,10 @@ interface MetaResearchProps {
 export default function MetaResearch({
   frontmatter: { date, lastMod, accepted, publication, authors },
 }: MetaResearchProps) {
+  if (!authors) {
+    return null;
+  }
+
   return (
     <>
       {authors.length > 1 && (
@@ -65,7 +69,7 @@ export default function MetaResearch({
           .
         </div>
       )}
-      <div dangerouslySetInnerHTML={{ __html: publication }} />
+      <div dangerouslySetInnerHTML={{ __html: publication ?? "" }} />
       <DateTime label="Online on">{date}</DateTime>
       <DateTime label="Updated on">{lastMod}</DateTime>
       <DateTime

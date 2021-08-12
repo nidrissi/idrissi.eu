@@ -19,7 +19,7 @@ Commands like `git push` or `git pull` are actually a bit complex and it is usef
 
 <AlertDiv color="red">
 Of course, I will not be able to explain <em>everything</em> about Git's inner workings!
-That is what the <a href="https://git-scm.com/docs" className="!text-red-800 dark:!text-red-200">reference documentation</a> is for.
+That is what the <a href="https://git-scm.com/docs">reference documentation</a> is for.
 </AlertDiv>
 
 ## Commits

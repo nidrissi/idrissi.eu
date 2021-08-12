@@ -1,0 +1,30 @@
+/* flex flex-wrap gap-x-2 gap-y-1 content-center */
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-content: center;
+}
+
+.link {
+  display: block;
+  padding: 0.25rem;
+  font-size: small;
+  color: var(--gray-900);
+  border: 1px solid var(--gray-200);
+  border-radius: 0.5rem;
+}
+
+.link:hover {
+  color: white;
+  background-color: var(--blue-800);
+  border-color: transparent;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
+}
+
+@media (prefers-color-scheme: dark) {
+  .link {
+    color: var(--gray-300);
+    border-color: var(--gray-700);
+  }
+}

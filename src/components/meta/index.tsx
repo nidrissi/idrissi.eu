@@ -8,6 +8,8 @@ import Links, { Urls } from "./links";
 import MetaResearch from "./research";
 import MetaTalk from "./talk";
 
+import * as styles from "./index.module.css";
+
 export interface LocalImage {
   childImageSharp: {
     gatsbyImageData: ImageDataLike;
@@ -51,7 +53,7 @@ interface MetaProps {
 export default function Meta({ frontmatter, type }: MetaProps) {
   return (
     <div>
-      <div className="flex flex-wrap gap-2 content-center text-gray-700 dark:text-gray-400 mb-2">
+      <div className={styles.meta}>
         {type === "research" ? (
           <MetaResearch frontmatter={frontmatter} />
         ) : type === "class" ? (
@@ -62,7 +64,9 @@ export default function Meta({ frontmatter, type }: MetaProps) {
           <MetaData frontmatter={frontmatter} />
         )}
       </div>
-      <Links urls={frontmatter.urls} title={actualTitle(frontmatter, type)} />
+      {frontmatter.urls && (
+        <Links urls={frontmatter.urls} title={actualTitle(frontmatter, type)} />
+      )}
     </div>
   );
 }

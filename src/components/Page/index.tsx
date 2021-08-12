@@ -14,6 +14,8 @@ import Meta, { Frontmatter } from "../meta";
 import NextPrevious, { NextOrPreviousItem } from "../NextPrevious";
 import Embed from "../Embed";
 
+import { page } from "./index.module.css";
+
 interface PageTemplateProps {
   data: {
     mdx: {
@@ -51,7 +53,7 @@ export function actualTitle(
 export function heldOnline(
   type: string,
   frontmatter: Frontmatter
-): JSX.Element {
+): JSX.Element | null {
   return type === "talk" && frontmatter.online ? (
     <>
       &nbsp;
@@ -83,21 +85,17 @@ export default function PageTemplate({ data }: PageTemplateProps) {
       lastMod={frontmatter.lastMod}
       lang={frontmatter.lang}
     >
-      <header className="mb-6 max-w-2xl mx-auto">
-        <h1
-          role="banner"
-          className="font-serif text-4xl font-extrabold text-gray-900 dark:text-gray-200"
-        >
-          {parsedTitle}
-          {heldOnline(type, frontmatter)}
-        </h1>
-        <Meta frontmatter={frontmatter} type={type} />
-      </header>
+      <div className={page}>
+        <header>
+          <h1 role="banner">
+            {parsedTitle}
+            {heldOnline(type, frontmatter)}
+          </h1>
+          <Meta frontmatter={frontmatter} type={type} />
+        </header>
 
-      {/* Large prose if research or talk abstract. */}
-      <div className="mx-auto max-w-2xl">
         <div
-          className={`prose prose-blue dark:prose-dark ${
+          className={`prose ${
             ["research", "talk"].includes(type) ? "prose-lg" : ""
           }`}
         >
@@ -111,28 +109,28 @@ export default function PageTemplate({ data }: PageTemplateProps) {
         </div>
 
         {type === "post" && <CommentBlock pageId={`${type}__${slug}`} />}
+
+        {type === "talk" && frontmatter.urls?.slides && (
+          <Embed
+            url={frontmatter.urls.slides.publicURL}
+            alt={`Slides for the talk: ${parsedTitle}`}
+          />
+        )}
+        {type === "talk" && frontmatter.urls?.notes && (
+          <Embed
+            url={frontmatter.urls.notes.publicURL}
+            alt={`Notes for the talk: ${parsedTitle}`}
+          />
+        )}
+        {type === "research" && frontmatter.urls?.read && (
+          <Embed
+            url={frontmatter.urls.read.publicURL}
+            alt={`Read the research document: ${parsedTitle}`}
+          />
+        )}
+
+        <NextPrevious next={data.next} previous={data.previous} type={type} />
       </div>
-
-      {type === "talk" && frontmatter.urls?.slides && (
-        <Embed
-          url={frontmatter.urls.slides.publicURL}
-          alt={`Slides for the talk: ${parsedTitle}`}
-        />
-      )}
-      {type === "talk" && frontmatter.urls?.notes && (
-        <Embed
-          url={frontmatter.urls.notes.publicURL}
-          alt={`Notes for the talk: ${parsedTitle}`}
-        />
-      )}
-      {type === "research" && frontmatter.urls?.read && (
-        <Embed
-          url={frontmatter.urls.read.publicURL}
-          alt={`Read the research document: ${parsedTitle}`}
-        />
-      )}
-
-      <NextPrevious next={data.next} previous={data.previous} type={type} />
     </Layout>
   );
 }

@@ -13,6 +13,8 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileAlt } from "@fortawesome/free-regular-svg-icons";
 
+import * as styles from "./links.module.css";
+
 interface LocalFile {
   publicURL: string;
 }
@@ -29,7 +31,7 @@ export interface Urls {
   zbmath: string;
   event: string;
   custom: { label: string; url: string }[];
-  customFile: { label: string; file: { publicURL: string } }[];
+  customFile: { label: string; file: LocalFile }[];
 }
 
 export const allUrlsFragment = graphql`
@@ -66,7 +68,7 @@ export const allUrlsFragment = graphql`
 `;
 
 interface LinkDefinition {
-  link: string;
+  link: keyof Urls;
   label: string | ((id: string) => string);
   icon?: IconDefinition;
   urlBuilder?: (id: string) => string;
@@ -153,10 +155,12 @@ function EntryLink({ url, definition, title }: EntryLinkProps) {
     // eslint-disable-next-line react/jsx-no-target-blank
     <a
       href={href}
-      className="block border border-gray-200 text-gray-900 hover:bg-blue-800 hover:border-transparent hover:text-white hover:shadow-md dark:text-gray-300 dark:border-gray-700 rounded-md p-2 leading-none py-1 text-sm"
-      target={href.startsWith("http") ? "_blank" : null}
-      rel={href.startsWith("http") ? "noopener noreferrer" : null}
-      title={definition.titleBuilder ? definition.titleBuilder(title) : null}
+      className={styles.link}
+      target={href.startsWith("http") ? "_blank" : undefined}
+      rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+      title={
+        definition.titleBuilder ? definition.titleBuilder(title) : undefined
+      }
     >
       {definition.icon && (
         <>
@@ -179,13 +183,17 @@ export default function Links({ urls, title }: LinksProps) {
     return null;
   }
   return (
-    <div className="flex flex-wrap gap-x-2 gap-y-1 content-center">
+    <div className={styles.wrapper}>
       {linkDefinitions.map((definition) => {
+        if (definition.link === "custom" || definition.link === "customFile") {
+          throw new Error("Custom links are not allowed here.");
+        }
+
         const url = urls[definition.link];
         return (
           url && (
             <EntryLink
-              key={url.publicURL || url}
+              key={typeof url === "string" ? url : url.publicURL}
               url={url}
               title={title}
               definition={definition}

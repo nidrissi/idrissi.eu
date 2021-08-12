@@ -1,0 +1,32 @@
+/* block text-indigo-800 border border-indigo-200 dark:border-purple-900 hover:border-transparent hover:text-white hover:bg-indigo */
+
+.tag-link {
+  display: block;
+  color: var(--indigo-800);
+  border: 1px solid var(--indigo-800);
+}
+
+.tag-link:hover {
+  border-color: transparent;
+  color: white;
+  background-color: var(--indigo-800);
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
+}
+
+@media (prefers-color-scheme: dark) {
+  .tag-link {
+    color: var(--indigo-200);
+    border-color: var(--indigo-200);
+  }
+}
+
+.small {
+  font-size: small;
+  padding: 0.25rem;
+}
+
+.big {
+  font-size: xx-large;
+  font-weight: bold;
+  padding: 1rem;
+}

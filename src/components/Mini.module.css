@@ -1,0 +1,41 @@
+.mini {
+  border: 1px solid hsla(220, 10%, 65%, 20%);
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  max-width: 24rem;
+}
+
+.mini > h2,
+.mini > h3 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.title {
+  color: var(--green-800);
+}
+
+.title:hover {
+  text-decoration: underline;
+}
+
+.excerpt {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: small;
+  max-width: 70ch;
+}
+
+.excerpt:hover {
+  color: var(--blue-700);
+}
+
+@media (prefers-color-scheme: dark) {
+  .title {
+    color: var(--green-500);
+  }
+
+  .excerpt:hover {
+    color: var(--blue-300);
+  }
+}

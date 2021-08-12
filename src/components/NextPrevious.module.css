@@ -1,0 +1,31 @@
+.outer {
+  display: flex;
+  width: 100%;
+  margin-top: 1.5rem;
+}
+
+.outer > a {
+  --link-color: var(--green-700);
+  display: block;
+  padding: 0.25rem;
+  font-size: small;
+  color: var(--link-color);
+  border-color: var(--link-color);
+  border-width: 1px;
+  border-style: solid;
+}
+
+.outer > a:hover {
+  background-color: var(--link-color);
+  color: white;
+}
+
+@media (prefers-color-scheme: dark) {
+  .outer > a {
+    --link-color: var(--green-400);
+  }
+
+  .outer > a:hover {
+    color: black;
+  }
+}

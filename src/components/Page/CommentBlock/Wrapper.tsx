@@ -1,7 +1,9 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faComments } from "@fortawesome/free-solid-svg-icons";
+
 import Alert from "./Alert";
+import * as styles from "./Wrapper.module.css";
 
 interface CommentListWrapperProps {
   children: React.ReactNode;
@@ -14,8 +16,8 @@ export default function CommentListWrapper({
 }: CommentListWrapperProps) {
   return (
     <ErrorBoundary>
-      <section className="border-t mt-4">
-        <h2 className="text-xl font-semibold mb-2" id="__comments">
+      <section id={styles.wrapper}>
+        <h2 id="__comments">
           <FontAwesomeIcon icon={faComments} />
           &nbsp; Comments
           {num !== undefined && ` [${num}]`}
@@ -26,8 +28,8 @@ export default function CommentListWrapper({
   );
 }
 
-class ErrorBoundary extends React.Component<{}, { hasError: boolean }> {
-  constructor(props) {
+class ErrorBoundary extends React.Component<{}, { hasError: boolean }, {}> {
+  constructor(props: {}) {
     super(props);
     this.state = { hasError: false };
   }
@@ -36,7 +38,7 @@ class ErrorBoundary extends React.Component<{}, { hasError: boolean }> {
     return { hasError: true };
   }
 
-  render() {
+  override render() {
     if (this.state.hasError) {
       return <Alert>The whole comment section encountered a bug.</Alert>;
     }

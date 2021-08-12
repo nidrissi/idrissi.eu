@@ -8,6 +8,8 @@ import Pager from "./Pager";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faRss } from "@fortawesome/free-solid-svg-icons";
 
+import * as styles from "./lists.module.css";
+
 interface PostListProps {
   data: {
     allMdx: {
@@ -38,18 +40,15 @@ export default function PostList({ data, pageContext }: PostListProps) {
       title={title}
       description={`The blog posts I have written (page ${currentPage} out of ${numPages}).`}
     >
-      <Link to="/post-rss.xml" className="block float-right w-min">
+      <Link to="/post-rss.xml" className={styles.rss}>
         <FontAwesomeIcon icon={faRss} title="RSS feed for posts." size="2x" />
       </Link>
-      <h1
-        role="banner"
-        className="text-4xl font-serif font-extrabold mb-6 text-black dark:text-gray-200"
-      >
+      <h1 role="banner">
         <FontAwesomeIcon icon={faPen} size="sm" />
         &nbsp;
         {title}
       </h1>
-      <div className="flex flex-col gap-4">
+      <div className={styles.list}>
         {nodes.map(({ frontmatter, slug, excerpt }) => (
           <Mini
             key={slug}
