@@ -4,8 +4,8 @@ import { ClientPrincipal, formatClient } from "./ClientPrincipal";
 import { UserNameForm } from "./UserNameForm";
 
 interface UserNameProps {
-  userName: string;
-  setUserName: React.Dispatch<React.SetStateAction<string>>;
+  userName?: string;
+  setUserName: React.Dispatch<React.SetStateAction<string | undefined>>;
   client: ClientPrincipal;
 }
 
@@ -25,12 +25,12 @@ export default function UserName({
         setUserName(body.userName);
         setError(false);
       } else if (response.status === 404) {
-        setUserName(null);
+        setUserName(undefined);
       } else {
         throw new Error();
       }
     } catch {
-      setUserName(null);
+      setUserName(undefined);
       setError(true);
     } finally {
       setLoading(false);

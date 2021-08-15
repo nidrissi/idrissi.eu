@@ -8,12 +8,14 @@ import NewComment from "./NewComment";
 import Alert from "./Alert";
 import { ClientPrincipal } from "./ClientPrincipal";
 
+import * as styles from "./index.module.css";
+
 interface CommentBlockProps {
   pageId: string;
 }
 
 export default function CommentBlock({ pageId }: CommentBlockProps) {
-  const [client, setClient] = useState<ClientPrincipal>(null);
+  const [client, setClient] = useState<ClientPrincipal>();
   const [comments, setComments] = useState<Comment[]>();
   const [loadingComments, setLoadingComments] = useState(true);
   const [errorLoadingComments, setErrorLoadingComments] = useState(false);
@@ -68,9 +70,9 @@ export default function CommentBlock({ pageId }: CommentBlockProps) {
   }
 
   return (
-    <Wrapper num={comments.length}>
+    <Wrapper num={comments?.length}>
       <NewComment client={client} setClient={setClient} pageId={pageId} />
-      <div className="flex flex-col gap-4">
+      <div className={styles.root}>
         {comments?.map((c) => (
           <Single key={c.id} comment={c} client={client} />
         ))}

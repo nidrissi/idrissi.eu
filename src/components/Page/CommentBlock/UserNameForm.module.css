@@ -1,0 +1,41 @@
+.chooser {
+  display: flex;
+  width: 100%;
+}
+
+.chooser > input {
+  display: block;
+  flex-grow: 1;
+  color: black;
+  padding: 0.25rem;
+}
+
+.chooser > input.error {
+  background-color: var(--red-200);
+}
+
+.chooser > input.sending {
+  background-color: var(--gray-300);
+}
+
+.chooser > button {
+  display: block;
+  padding: 0.5rem;
+  color: white;
+  background-color: var(--blue-800);
+}
+
+.chooser > p {
+  color: var(--red-800);
+}
+
+@media (prefers-color-scheme: dark) {
+  .chooser > button {
+    color: black;
+    background-color: var(--blue-300);
+  }
+
+  .chooser > p {
+    color: var(--red-300);
+  }
+}

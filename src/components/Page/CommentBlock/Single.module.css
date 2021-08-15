@@ -1,0 +1,49 @@
+.comment {
+  display: grid;
+  grid-template-columns: min-content 1fr;
+  grid-template-rows: min-content 1fr;
+  grid-template-areas:
+    "avatar header"
+    "avatar body";
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.comment[data-deleted="true"] {
+  opacity: 0.7;
+}
+
+.comment > .prose {
+  grid-area: body;
+  margin-top: -1em;
+  margin-bottom: -1em;
+}
+
+.comment > aside {
+  grid-area: avatar;
+}
+
+.comment > header {
+  grid-area: header;
+  display: flex;
+}
+
+.comment > header div {
+  flex-grow: 1;
+  border-bottom: 1px dotted currentColor;
+}
+
+.comment > header button {
+  display: block;
+  padding: 0.25rem;
+}
+
+.comment > header button:hover {
+  background-color: var(--red-400);
+}
+
+@media (prefers-color-scheme: dark) {
+  .comment header button:hover {
+    background-color: var(--red-800);
+  }
+}

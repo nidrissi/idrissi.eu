@@ -2,6 +2,8 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBomb } from "@fortawesome/free-solid-svg-icons";
 
+import * as styles from "./Alert.module.css";
+
 interface AlertProps {
   children: React.ReactNode;
   retry?: () => void;
@@ -9,14 +11,14 @@ interface AlertProps {
 
 export default function Alert({ children, retry }: AlertProps) {
   return (
-    <div className="p-2 leading-none py-1 bg-red-300 dark:bg-red-800 text-black dark:text-white text-lg rounded-md">
+    <div className={styles.alert}>
       <FontAwesomeIcon icon={faBomb} />
       &nbsp;
       {children}
       {retry && (
         <>
           {" "}
-          <button onClick={retry} className="font-semibold hover:font-bold">
+          <button onClick={retry} className={styles.retry}>
             Retry?
           </button>
         </>

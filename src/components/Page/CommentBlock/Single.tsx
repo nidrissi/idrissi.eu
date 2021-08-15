@@ -9,6 +9,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBan, faEraser, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { ClientPrincipal } from "./ClientPrincipal";
 
+import * as styles from "./Single.module.css";
+
 export interface Comment {
   id: string;
   pageId: string;
@@ -20,7 +22,7 @@ export interface Comment {
 }
 
 interface SingleProps {
-  client: ClientPrincipal;
+  client?: ClientPrincipal;
   comment: Comment;
 }
 
@@ -54,8 +56,8 @@ export default function Single({ client, comment }: SingleProps) {
   };
 
   return (
-    <div className={`flex items-start ${comment.deleted ? "opacity-70" : ""}`}>
-      <div className="mr-2">
+    <article className={styles.comment} data-deleted={comment.deleted}>
+      <aside>
         {comment.deleted ? (
           <FontAwesomeIcon
             size="2x"
@@ -65,40 +67,34 @@ export default function Single({ client, comment }: SingleProps) {
         ) : (
           <Identicon size={36} seed={comment.userId} />
         )}
-      </div>
-      <div className="w-full">
-        <div className="w-full flex items-start leading-none">
-          <div className="flex-grow pb-1 border-b border-opacity-50 border-dashed">
-            <strong>{comment.userName}</strong>
-            {", "}
-            <em>{date.toLocaleString()}</em>
-          </div>
-          {comment.userId === client?.userId && !comment.deleted && (
-            <button
-              className="block p-1 hover:bg-red-700 dark:hover:bg-red-400"
-              onClick={() => onClickDelete()}
-            >
-              <FontAwesomeIcon icon={faTrash} title="Delete this comment" />
-            </button>
-          )}
-          {client?.userRoles.includes("administrator") && (
-            <button
-              className="block p-1 hover:bg-yellow-700 dark:hover:bg-yellow-400"
-              onClick={() => onClickDelete(true)}
-            >
-              <FontAwesomeIcon
-                icon={faEraser}
-                title="Delete this comment, for real."
-              />
-            </button>
-          )}
+      </aside>
+      <header>
+        <div>
+          <strong>{comment.userName}</strong>
+          {", "}
+          <em>{date.toLocaleString()}</em>
         </div>
+        {comment.userId === client?.userId && !comment.deleted && (
+          <button onClick={() => onClickDelete()}>
+            <FontAwesomeIcon icon={faTrash} title="Delete this comment" />
+          </button>
+        )}
+        {client?.userRoles.includes("administrator") && (
+          <button onClick={() => onClickDelete(true)}>
+            <FontAwesomeIcon
+              icon={faEraser}
+              title="Delete this comment, for real."
+            />
+          </button>
+        )}
+      </header>
+      <div className="prose">
         <ReactMarkdown
           remarkPlugins={[remarkMath, remarkExternalLinks]}
           rehypePlugins={[rehypeKatex]}
           children={comment.content ?? "*[deleted]*"}
         />
       </div>
-    </div>
+    </article>
   );
 }

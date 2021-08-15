@@ -87,9 +87,7 @@ In the meantime, here are some links:
 
 And here's a little teaser of what you will hopefully be able to do by the end of all this!
 
-<div class="ratio ratio-16x9">
 <video controls loop autoplay>
 <source src="teaser.webm" type="video/webm"/>
 This is supposed to be a video showcasing the use of Git in Visual Studio Code, but apparently your browser does not support showing <a href="https://en.wikipedia.org/wiki/WebM" target="_blank" rel="noopener noreferrer">HTML5/WebM</a> videos.
 </video>
-</div>

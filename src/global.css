@@ -86,6 +86,16 @@ a {
   text-decoration: none;
 }
 
+button {
+  color: inherit;
+  background-color: inherit;
+  border-width: 0;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
 hr {
   margin-top: 12px;
   margin-bottom: 12px;
@@ -122,8 +132,7 @@ blockquote {
     color: var(--gray-300);
   }
 
-  .prose a,
-  .prose a:visited {
+  .prose a {
     color: var(--blue-400);
   }
 

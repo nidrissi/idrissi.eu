@@ -2,6 +2,8 @@ import React from "react";
 import { faVideo } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import * as styles from "./HomotopyCard.module.css";
+
 interface CardProps {
   number: number;
   date: string;
@@ -18,22 +20,17 @@ export default function HomotopyCard({
   video,
 }: CardProps) {
   return (
-    <section className="flex flex-col border border-gray-400 dark:border-gray-900 rounded-md gap-2">
-      <header className="p-1 bg-gray-200 dark:bg-gray-900 rounded-t-md">
-        <span className="font-semibold text-lg">Lecture {number}</span>
+    <article className={styles.card}>
+      <header>
+        <strong>Lecture {number}</strong>
         {" · "}
         {new Date(date).toLocaleDateString()} {hours}
       </header>
-      <div className="flex-grow p-1">{children}</div>
-      <a
-        href={video}
-        className="block text-center bg-gray-200 dark:bg-gray-900 rounded-b-md p-1"
-        target="_blank"
-        rel="noreferrer noopener"
-      >
+      <div>{children}</div>
+      <a href={video} target="_blank" rel="noreferrer noopener">
         <FontAwesomeIcon icon={faVideo} />
         &nbsp; Video
       </a>
-    </section>
+    </article>
   );
 }

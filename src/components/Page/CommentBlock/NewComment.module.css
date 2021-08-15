@@ -1,0 +1,94 @@
+.new-comment button {
+  display: block;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.write {
+  background-color: var(--green-200);
+  width: 100%;
+}
+
+.write:hover {
+  background-color: var(--green-300);
+}
+
+.new-comment textarea {
+  width: 100%;
+  color: black;
+}
+
+.new-comment textarea.error:focus {
+  border: 1px solid red;
+}
+
+.footer {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.footer a {
+  display: block;
+  font-size: x-small;
+  color: var(--blue-800);
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.footer > div {
+  flex-grow: 1;
+}
+
+.footer > button {
+  display: block;
+  padding: 0.25rem;
+}
+
+.footer > button[type="submit"] {
+  background-color: var(--green-300);
+}
+
+.footer > button[type="submit"]:hover {
+  background-color: var(--green-400);
+}
+
+.footer > button[type="reset"] {
+  background-color: var(--gray-300);
+}
+
+.footer > button[type="reset"]:hover {
+  background-color: var(--red-400);
+}
+
+@media (prefers-color-scheme: dark) {
+  .write {
+    background-color: var(--green-800);
+  }
+
+  .write:hover {
+    background-color: var(--green-700);
+  }
+
+  .footer a {
+    color: var(--blue-400);
+  }
+
+  .footer > button[type="submit"] {
+    background-color: var(--green-800);
+  }
+  .footer > button[type="submit"]:hover {
+    background-color: var(--green-900);
+  }
+
+  .footer > button[type="reset"] {
+    background-color: black;
+  }
+  .footer > button[type="reset"]:hover {
+    background-color: var(--red-900);
+  }
+}

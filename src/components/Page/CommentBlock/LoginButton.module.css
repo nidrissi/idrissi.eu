@@ -1,0 +1,32 @@
+.outer {
+  width: 100%;
+}
+
+.outer button {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.outer button:hover {
+  background-color: var(--blue-400);
+}
+
+@media (prefers-color-scheme: dark) {
+  .outer button:hover {
+    background-color: var(--blue-800);
+  }
+}
+
+/* only top-level button */
+.outer > button {
+  display: block;
+  width: 100%;
+}
+
+/* around the little buttons */
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  justify-content: space-evenly;
+}

@@ -29,6 +29,7 @@ tags: [peccot]
 ---
 
 import PeccotCard from "./PeccotCard";
+import * as styles from "./PeccotCard.module.css";
 
 This is the webpage for the Peccot lecture that I gave at the Collège de France in March and May 2020.
 
@@ -53,7 +54,7 @@ Due to the COVID-19 pandemic, the last two lessons were postponed respectively t
 
 ## Lessons
 
-<div class="flex flex-col gap-2 sm:grid sm:grid-cols-2">
+<div class={styles.wrapper}>
 <PeccotCard number={1} image={props.localImages[0]} link="https://www.college-de-france.fr/site/cours-peccot/guestlecturer-2020-03-04-11h00.htm" date="March 4th 2020, 11:00-13:00">
 Chapter 1: Configuration spaces of manifolds
 

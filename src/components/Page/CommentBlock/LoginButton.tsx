@@ -10,6 +10,8 @@ import {
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
 
+import * as styles from "./LoginButton.module.css";
+
 interface Provider {
   url: string;
   label: string;
@@ -53,26 +55,18 @@ export default function LoginButton() {
   const [clicked, setClicked] = useState(false);
 
   return (
-    <div className="w-full">
+    <div className={styles.outer}>
       {!clicked ? (
-        <button
-          className="block w-full p-2 leading-none rounded-md hover:bg-yellow-400 dark:hover:bg-yellow-800"
-          onClick={() => setClicked(true)}
-        >
+        <button onClick={() => setClicked(true)}>
           <FontAwesomeIcon icon={faSignInAlt} />
           &nbsp; Login to comment
         </button>
       ) : (
-        <div
-          className={
-            clicked ? "w-full flex flex-wrap gap-1 justify-evenly" : "hidden"
-          }
-        >
+        <div className={styles.wrapper}>
           {providers.map((p) => (
             <button
               key={p.url}
               title={`Login with ${p.label}`}
-              className="text-sm p-1 leading-none hover:bg-yellow-400 dark:hover:bg-yellow-800 rounded-md"
               onClick={() => {
                 const location = window.location.pathname;
                 const loginUri = `/.auth/login/${

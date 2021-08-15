@@ -1,29 +1,31 @@
+import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowRight,
   faSpinner,
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState } from "react";
+
+import * as styles from "./UserNameForm.module.css";
 
 interface UserNameFormProps {
   id: string;
-  setUserName: React.Dispatch<React.SetStateAction<string>>;
+  setUserName: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
 export function UserNameForm({ id, setUserName }: UserNameFormProps) {
   const [currentInput, setCurrentInput] = useState("");
   const [sending, setSending] = useState(false);
-  const [inputError, setInputError] = useState<string>(null);
+  const [inputError, setInputError] = useState<string>();
 
-  const onSubmit = async (
+  const handleSubmit = async (
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
     e.preventDefault();
     if (sending) {
       return;
     }
-    setInputError(null);
+    setInputError(undefined);
     setSending(true);
     try {
       if (currentInput.length < 3 || currentInput.length > 25) {
@@ -51,15 +53,11 @@ export function UserNameForm({ id, setUserName }: UserNameFormProps) {
   };
 
   return (
-    <form
-      onSubmit={(e) => onSubmit(e)}
-      onReset={() => setCurrentInput("")}
-      className="mb-1"
-    >
+    <form onSubmit={handleSubmit} onReset={() => setCurrentInput("")}>
       <p>
         You must choose a username (3&ndash;25 characters) before commenting:
       </p>
-      <div className="flex w-full">
+      <div className={styles.chooser}>
         <input
           type="text"
           placeholder="Jane Doe"
@@ -67,27 +65,18 @@ export function UserNameForm({ id, setUserName }: UserNameFormProps) {
           onChange={(e) => setCurrentInput(e.target.value)}
           disabled={sending}
           className={
-            "block flex-grow text-black leading-none p-1 " +
-            (inputError ? "bg-red-200" : sending ? "bg-gray-300" : "")
+            inputError ? styles.error : sending ? styles.sending : undefined
           }
-        />{" "}
-        <button
-          disabled={sending}
-          type="submit"
-          className="block p-2 leading-none bg-blue-800 text-white dark:bg-blue-300 dark:text-black"
-        >
+        />
+        <button disabled={sending} type="submit">
           <FontAwesomeIcon
             icon={sending ? faSpinner : inputError ? faTimes : faArrowRight}
             spin={sending}
             title="Submit"
           />
         </button>
+        {inputError && <p>{inputError}</p>}
       </div>
-      {inputError && (
-        <>
-          <p className="text-red-800 dark:text-red-500">{inputError}</p>
-        </>
-      )}
     </form>
   );
 }

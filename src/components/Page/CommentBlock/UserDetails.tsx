@@ -7,11 +7,13 @@ import LoginButton from "./LoginButton";
 import { ClientPrincipal } from "./ClientPrincipal";
 import UserName from "./UserName";
 
+import * as styles from "./UserDetails.module.css";
+
 interface UserDetailsProps {
-  client: ClientPrincipal;
-  setClient: React.Dispatch<React.SetStateAction<ClientPrincipal>>;
-  userName: string;
-  setUserName: React.Dispatch<React.SetStateAction<string>>;
+  client?: ClientPrincipal;
+  setClient: React.Dispatch<React.SetStateAction<ClientPrincipal | undefined>>;
+  userName?: string;
+  setUserName: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
 export default function UserDetails({
@@ -34,7 +36,7 @@ export default function UserDetails({
         throw new Error();
       }
     } catch {
-      setClient(null);
+      setClient(undefined);
       setError(true);
     } finally {
       setLoading(false);
@@ -75,7 +77,7 @@ export default function UserDetails({
           setUserName={setUserName}
         />{" "}
         <button
-          className="hover:bg-red-400 dark:hover:bg-red-900 leading-none p-2 rounded-md text-sm"
+          className={styles.logout}
           onClick={() => {
             const location = window.location.pathname;
             window.location.assign(
@@ -85,8 +87,8 @@ export default function UserDetails({
             );
           }}
         >
-          <FontAwesomeIcon icon={faSignOutAlt} className="mr-1" />
-          Logout
+          <FontAwesomeIcon icon={faSignOutAlt} />
+          &nbsp;Logout
         </button>
       </>
     );

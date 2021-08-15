@@ -18,14 +18,17 @@ function extractBytes(index: number): Uint8Array {
  * Returns a random color in (Hue, Saturation, Luminance) format.
  * @param index A 32-bit number.
  */
-function getColor(index: number): string {
+function getColor(index?: number): string {
+  if (index === undefined) {
+    return "#000000";
+  }
   const bytes = extractBytes(index);
   // between 0 and 360, in increments of 5
-  const hue = (bytes[0] * 5) % 360;
+  const hue = ((bytes[0] ?? 0) * 5) % 360;
   // between 40% and 60%
-  const saturation = Math.floor(bytes[1] * (20 / 255) + 40);
+  const saturation = Math.floor((bytes[1] ?? 0) * (20 / 255) + 40);
   // between 40% and 80%
-  const value = Math.floor(bytes[2] * (40 / 255) + 40);
+  const value = Math.floor((bytes[2] ?? 0) * (40 / 255) + 40);
   return `hsl(${hue},${saturation}%,${value}%)`;
 }
 

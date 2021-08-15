@@ -20,7 +20,7 @@ export default function TagLink({ tag, big, count }: TagLinkProps) {
       <FontAwesomeIcon icon={faTag} size="sm" />
       &nbsp;
       {tag}
-      {count && <span className="text-lg"> [{count}]</span>}
+      {count && <span className={styles.large}> [{count}]</span>}
     </Link>
   );
 }
