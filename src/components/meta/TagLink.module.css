@@ -1,20 +1,20 @@
 .tag-link {
   display: block;
   color: var(--indigo-800);
-  border: 1px solid var(--indigo-800);
 }
 
 .tag-link:hover {
-  border-color: transparent;
   color: white;
   background-color: var(--indigo-800);
-  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
 }
 
 @media (prefers-color-scheme: dark) {
   .tag-link {
     color: var(--indigo-200);
-    border-color: var(--indigo-200);
+  }
+  .tag-link:hover {
+    color: black;
+    background-color: var(--indigo-200);
   }
 }
 

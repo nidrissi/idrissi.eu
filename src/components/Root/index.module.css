@@ -9,10 +9,10 @@
 }
 
 .description {
-  max-width: 80ch;
+  max-width: min(80ch, 100%);
 }
 
-.root {
+.root-lists {
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -21,12 +21,14 @@
 
 .section > h2 {
   font-size: xx-large;
+  margin-bottom: 0.5rem;
 }
 
 .section > div {
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
+  grid-auto-rows: 1fr;
 }
 
 .contact-list > li {

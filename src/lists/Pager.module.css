@@ -1,5 +1,6 @@
 .button {
   display: block;
+  box-sizing: border-box;
   padding: 0.5rem;
   --button-color: var(--purple-700);
   border: 1px solid var(--button-color);
@@ -20,8 +21,9 @@
 }
 
 .button.disabled {
-  color: var(--gray-600);
-  border-color: var(--gray-600);
+  font-weight: bolder;
+  border-width: 2px;
+  opacity: 0.5;
   pointer-events: none;
 }
 

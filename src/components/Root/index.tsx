@@ -56,7 +56,7 @@ export default function Index({ children }: { children: React.ReactNode }) {
         </div>
         <Contact />
       </article>
-      <div className={styles.root}>
+      <div className={styles.rootLists}>
         <Research />
         <Class />
         <Talk />
