@@ -40,10 +40,10 @@
       "statusCode": 302
     },
     "404": {
-      "rewrite": "/404.html"
+      "rewrite": "/404/index.html"
     },
     "403": {
-      "rewrite": "/403.html"
+      "rewrite": "/403/index.html"
     }
   },
   "globalHeaders": {
