@@ -47,10 +47,6 @@ export default function CommentBlock({ pageId }: CommentBlockProps) {
     }
   }, [fetchComments, loading]);
 
-  const pushComment = useCallback((comment: Comment) => {
-    setComments((l) => [comment].concat(l));
-  }, []);
-
   useEffect(() => {
     fetchComments();
   }, [pageId, fetchComments]);
@@ -77,12 +73,17 @@ export default function CommentBlock({ pageId }: CommentBlockProps) {
       <NewComment
         client={client}
         setClient={setClient}
-        pushComment={pushComment}
+        setComments={setComments}
         pageId={pageId}
       />
       <div className={styles.root}>
         {comments.map((c) => (
-          <Single key={c.id} comment={c} client={client} />
+          <Single
+            key={c.id}
+            comment={c}
+            client={client}
+            setComments={setComments}
+          />
         ))}
       </div>
     </Wrapper>

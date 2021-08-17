@@ -24,9 +24,10 @@ export interface Comment {
 interface SingleProps {
   client?: ClientPrincipal;
   comment: Comment;
+  setComments: React.Dispatch<React.SetStateAction<Comment[]>>;
 }
 
-export default function Single({ client, comment }: SingleProps) {
+export default function Single({ client, comment, setComments }: SingleProps) {
   const date = new Date(comment.timestamp);
 
   const onClickDelete = async (superDelete?: boolean) => {
@@ -44,11 +45,21 @@ export default function Single({ client, comment }: SingleProps) {
           }`,
           { method: "DELETE" }
         );
-        if (!response.ok) {
+        if (response.ok) {
+          if (superDelete) {
+            setComments((list) =>
+              list.filter((curr) => curr.id !== comment.id)
+            );
+          } else {
+            setComments((list) =>
+              list.map((c) =>
+                c.id === comment.id ? { ...c, deleted: true } : c
+              )
+            );
+          }
+        } else {
           throw new Error();
         }
-        // TODO do better than a full page reload
-        document.location.reload();
       } catch {
         alert("Error deleting comment!");
       }

@@ -19,14 +19,14 @@ interface NewCommentProps {
   pageId: string;
   client?: ClientPrincipal;
   setClient: React.Dispatch<React.SetStateAction<ClientPrincipal | undefined>>;
-  pushComment: (comment: Comment) => void;
+  setComments: React.Dispatch<React.SetStateAction<Comment[]>>;
 }
 
 export default function NewComment({
+  pageId,
   client,
   setClient,
-  pageId,
-  pushComment,
+  setComments,
 }: NewCommentProps) {
   const [userName, setUserName] = useState<string>();
 
@@ -41,7 +41,7 @@ export default function NewComment({
         />
       </div>
       {client !== null && userName && (
-        <NewCommentForm pageId={pageId} pushComment={pushComment} />
+        <NewCommentForm pageId={pageId} setComments={setComments} />
       )}
     </>
   );
@@ -49,10 +49,10 @@ export default function NewComment({
 
 interface NewCommentFormProps {
   pageId: string;
-  pushComment: (comment: Comment) => void;
+  setComments: React.Dispatch<React.SetStateAction<Comment[]>>;
 }
 
-function NewCommentForm({ pageId, pushComment }: NewCommentFormProps) {
+function NewCommentForm({ pageId, setComments }: NewCommentFormProps) {
   const [expanded, setExpanded] = useState(false);
   const [currentInput, setCurrentInput] = useState<string>("");
   const [error, setError] = useState<string>();
@@ -88,7 +88,7 @@ function NewCommentForm({ pageId, pushComment }: NewCommentFormProps) {
         if (response.ok) {
           const comment = await response.json();
           console.log(comment);
-          pushComment(comment);
+          setComments((l) => [comment].concat(l));
           setCurrentInput("");
           setSending(false);
         } else {
