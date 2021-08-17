@@ -6,12 +6,37 @@
   background-color: var(--gray-200);
   text-align: center;
   align-content: center;
-  font-size: 1.125rem;
+}
+
+.cookie p {
+  margin: 0;
+}
+
+.cookie a {
+  color: var(--blue-800);
+}
+
+.cookie a:hover {
+  text-decoration: underline;
+}
+
+.cookie button {
+  margin-left: 2rem;
+  padding: 0.5rem;
+}
+
+.cookie button:hover {
+  background-color: var(--red-800);
+  color: white;
 }
 
 @media (prefers-color-scheme: dark) {
   .cookie {
     color: var(--gray-300);
     background-color: var(--gray-900);
+  }
+
+  .cookie a {
+    color: var(--blue-300);
   }
 }

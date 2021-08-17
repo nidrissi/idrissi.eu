@@ -8,6 +8,7 @@ import {
   faMapMarkerAlt,
   faPhone,
   faUniversity,
+  IconDefinition,
 } from "@fortawesome/free-solid-svg-icons";
 
 import * as styles from "./Root.module.css";
@@ -15,11 +16,12 @@ import * as styles from "./Root.module.css";
 interface ContactLinkProps {
   url: string;
   children: React.ReactNode;
+  mono?: boolean;
 }
 
-function ContactLink({ url, children }: ContactLinkProps) {
+function ContactLink({ url, children, mono }: ContactLinkProps) {
   return (
-    <a href={url} target="_blank" rel="noreferrer noopener">
+    <a href={url} target="_blank" rel="noreferrer noopener" data-mono={mono}>
       {children}
     </a>
   );
@@ -80,11 +82,20 @@ export default function Contact() {
     }
   `);
 
-  const contactLinks = [
+  type ContactLink = {
+    icon: IconDefinition;
+    mono?: boolean;
+  } & (
+    | { label: string; url?: string }
+    | { items: { label: string; url: string }[] }
+  );
+
+  const contactLinks: ContactLink[] = [
     {
       label: email,
       url: `mailto:${email}`,
       icon: faAt,
+      mono: true,
     },
     {
       icon: faUniversity,
@@ -107,7 +118,7 @@ export default function Contact() {
           <li key={link.icon.iconName}>
             <FontAwesomeIcon icon={link.icon} listItem />
             &nbsp;
-            {link.items ? (
+            {"items" in link ? (
               link.items.map((item, index) => (
                 <React.Fragment key={item.label}>
                   {index > 0 && " & "}
@@ -115,7 +126,9 @@ export default function Contact() {
                 </React.Fragment>
               ))
             ) : link.url ? (
-              <ContactLink url={link.url}>{link.label}</ContactLink>
+              <ContactLink url={link.url} mono={link.mono}>
+                {link.label}
+              </ContactLink>
             ) : (
               link.label
             )}

@@ -3,7 +3,6 @@
   flex-wrap: wrap;
   text-align: center;
   align-content: center;
-  margin-top: 1rem;
   border-top: 1px solid black;
   width: 100%;
 }
@@ -17,11 +16,31 @@
   display: block;
   flex: 1 1 auto;
   padding: 0.5rem;
+  --link-color: var(--blue-800);
+  color: var(--link-color);
+}
+
+.footer a:hover {
+  background-color: var(--link-color);
+  color: white;
+}
+
+.footer a[data-mono] {
+  font-family: var(--ff-mono);
+  letter-spacing: -0.03rem;
 }
 
 @media (prefers-color-scheme: dark) {
   .footer {
     border-color: var(--gray-900);
+  }
+
+  .footer a {
+    --link-color: var(--blue-400);
+  }
+
+  .footer a:hover {
+    color: black;
   }
 
   .footer > * + * {

@@ -10,7 +10,7 @@ import {
 import { faAt } from "@fortawesome/free-solid-svg-icons";
 import { faCopyright } from "@fortawesome/free-regular-svg-icons";
 
-import { footer } from "./Footer.module.css";
+import * as styles from "./Footer.module.css";
 
 interface FooterQuery {
   site: {
@@ -74,6 +74,7 @@ export default function Footer() {
     label: string;
     icon?: IconDefinition;
     relMe?: boolean;
+    mono?: boolean;
   }
 
   const linkList: FooterLink[] = [
@@ -81,6 +82,7 @@ export default function Footer() {
       url: `mailto:${email}`,
       label: email,
       icon: faAt,
+      mono: true,
     },
     organizations.map((o) => ({ url: o.url, label: o.name })),
     {
@@ -109,7 +111,7 @@ export default function Footer() {
   ].flat();
 
   return (
-    <footer className={footer}>
+    <footer className={styles.footer}>
       <Link to="/">
         <FontAwesomeIcon icon={faCopyright} />
         &nbsp;
@@ -121,6 +123,7 @@ export default function Footer() {
           rel={`noreferrer noopener ${link.relMe ? "me" : ""}`}
           target="_blank"
           key={link.label}
+          data-mono={link.mono}
         >
           {link.icon && (
             <>

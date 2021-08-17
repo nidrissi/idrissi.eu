@@ -40,6 +40,11 @@
   color: var(--blue-800);
 }
 
+.contact-list a[data-mono] {
+  font-family: var(--ff-mono);
+  letter-spacing: -0.03rem;
+}
+
 .contact-list > li > a:hover {
   text-decoration: underline;
 }

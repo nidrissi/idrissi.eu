@@ -1,20 +1,24 @@
 .hero {
-  display: flex;
+  display: grid;
   justify-content: center;
   align-items: center;
+  text-align: center;
+  font-size: x-large;
   border: 1px dashed gray;
   border-radius: 1rem;
   min-height: 50vh;
-  text-align: center;
-  font-size: x-large;
+  min-width: 50vw;
 }
 
 .hero a {
   color: var(--blue-800);
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
 }
 
 .hero a:hover {
-  text-decoration: underline;
+  background-color: var(--blue-800);
+  color: white;
 }
 
 @media (prefers-color-scheme: dark) {

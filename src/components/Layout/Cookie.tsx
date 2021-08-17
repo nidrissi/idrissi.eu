@@ -1,3 +1,5 @@
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { cookie } from "./Cookie.module.css";
 
@@ -10,13 +12,7 @@ export default function Cookie() {
         .split("; ")
         .find((row) => row.startsWith("cookieToastShown="))
     ) {
-      const date = new Date();
-      date.setFullYear(date.getFullYear() + 1);
       setShow(true);
-      setInterval(() => {
-        setShow(false);
-      }, 5000);
-      document.cookie = `cookieToastShown=true; expires=${date.toUTCString()}; Secure; SameOrigin=strict`;
     }
   }, []);
 
@@ -28,6 +24,17 @@ export default function Cookie() {
         <p>
           I use cookies to analyze traffic.{" "}
           <a href="/misc/cookie">The cookie policy can be found here.</a>
+          <button
+            title="Dismiss"
+            onClick={() => {
+              const date = new Date();
+              date.setFullYear(date.getFullYear() + 1);
+              setShow(false);
+              document.cookie = `cookieToastShown=true; expires=${date.toUTCString()}; Secure; SameOrigin=strict`;
+            }}
+          >
+            <FontAwesomeIcon icon={faTimes} fixedWidth />
+          </button>
         </p>
       </aside>
     );

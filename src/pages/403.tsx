@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "gatsby";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUndo } from "@fortawesome/free-solid-svg-icons";
+import { faLock, faUndo } from "@fortawesome/free-solid-svg-icons";
 
 import Layout from "../components/Layout";
 import { hero } from "./40x.module.css";
@@ -14,7 +14,10 @@ export default function Error403() {
     >
       <div className={hero}>
         <div>
-          <h1 role="banner">403 Forbidden</h1>
+          <h1 role="banner">
+            <FontAwesomeIcon icon={faLock} />
+            &nbsp;Forbidden
+          </h1>
           <p>You are not authorized to access this page.</p>
           <p>
             <Link to="/">
