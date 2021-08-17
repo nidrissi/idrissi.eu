@@ -12,6 +12,7 @@ import { ClientPrincipal } from "./ClientPrincipal";
 import UserDetails from "./UserDetails";
 
 import * as styles from "./NewComment.module.css";
+import { faMarkdown } from "@fortawesome/free-brands-svg-icons";
 
 interface NewCommentProps {
   pageId: string;
@@ -113,7 +114,7 @@ function NewCommentForm({ pageId }: { pageId: string }) {
       {!expanded ? (
         <button className={styles.write} onClick={() => setExpanded(true)}>
           <FontAwesomeIcon icon={faEdit} />
-          &nbsp; Write comment
+          &nbsp;Write comment
         </button>
       ) : (
         <form
@@ -128,11 +129,16 @@ function NewCommentForm({ pageId }: { pageId: string }) {
             className={error ? styles.error : ""}
             rows={5}
             value={currentInput}
-            onChange={(e) => setCurrentInput(e.target.value)}
+            onChange={(e) => {
+              setError(undefined);
+              setCurrentInput(e.target.value);
+            }}
             onKeyDown={(e) => {
               console.log(e);
               if (e.ctrlKey && e.key === "Enter") {
-                handleSubmit();
+                if (window.confirm("Do you want to post this comment?")) {
+                  handleSubmit();
+                }
               } else if (e.key === "Escape") {
                 handleReset();
               }
@@ -147,9 +153,9 @@ function NewCommentForm({ pageId }: { pageId: string }) {
               target="_blank"
               rel="noreferrer noopener"
             >
-              (markdown reference)
+              <FontAwesomeIcon icon={faMarkdown} />
+              &nbsp;Markdown reference
             </a>
-            <div />
             <button type="submit" disabled={sending}>
               <FontAwesomeIcon
                 icon={sending ? faSpinner : faCheck}

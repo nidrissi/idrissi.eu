@@ -1,9 +1,7 @@
 .new-comment button {
   display: block;
-  padding: 0.25rem;
+  padding: 0.333rem;
   border-radius: 0.25rem;
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
 }
 
 .write {
@@ -16,37 +14,32 @@
 }
 
 .new-comment textarea {
+  box-sizing: border-box;
+  margin: 0.25rem 0;
+  resize: vertical;
   width: 100%;
   color: black;
 }
 
-.new-comment textarea.error:focus {
-  border: 1px solid red;
+.new-comment textarea.error {
+  background-color: var(--red-100);
 }
 
 .footer {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
   gap: 0.5rem;
   margin-bottom: 0.25rem;
 }
 
 .footer a {
   display: block;
-  font-size: x-small;
   color: var(--blue-800);
 }
 
 .footer a:hover {
   text-decoration: underline;
-}
-
-.footer > div {
-  flex-grow: 1;
-}
-
-.footer > button {
-  display: block;
-  padding: 0.25rem;
 }
 
 .footer > button[type="submit"] {

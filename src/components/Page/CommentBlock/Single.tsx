@@ -75,16 +75,16 @@ export default function Single({ client, comment }: SingleProps) {
           <em>{date.toLocaleString()}</em>
         </div>
         {comment.userId === client?.userId && !comment.deleted && (
-          <button onClick={() => onClickDelete()}>
-            <FontAwesomeIcon icon={faTrash} title="Delete this comment" />
+          <button onClick={() => onClickDelete()} title="Delete this comment">
+            <FontAwesomeIcon icon={faTrash} />
           </button>
         )}
         {client?.userRoles.includes("administrator") && (
-          <button onClick={() => onClickDelete(true)}>
-            <FontAwesomeIcon
-              icon={faEraser}
-              title="Delete this comment, for real."
-            />
+          <button
+            onClick={() => onClickDelete(true)}
+            title="Delete this comment **for real**."
+          >
+            <FontAwesomeIcon icon={faEraser} />
           </button>
         )}
       </header>

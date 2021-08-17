@@ -155,18 +155,11 @@ ol ol {
 }
 
 nav.toc {
-  margin-top: 1.5rem;
-}
-
-nav.toc::before {
-  content: "Table of contents";
-  font-weight: bold;
-  font-size: large;
+  margin: 1.5rem 0;
 }
 
 nav.toc > ol {
   margin-top: 0.25rem;
-  padding-left: 1.5rem;
   border-left: 4px solid hsla(0, 0%, 50%, 50%);
 }
 
