@@ -8,50 +8,50 @@ using System.Linq;
 
 namespace Idrissi.Blogging
 {
-    public static class GetComments
-    {
-        [FunctionName("GetComments")]
-        public static IActionResult Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "comment/{pageId}")]
+  public static class GetComments
+  {
+    [FunctionName("GetComments")]
+    public static IActionResult Run(
+        [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "comment/{pageId}")]
             HttpRequest req,
-            string pageId,
-            [CosmosDB(ConnectionStringSetting = "CosmosDbConnectionString")]
+        string pageId,
+        [CosmosDB(ConnectionStringSetting = "CosmosDbConnectionString")]
             DocumentClient client,
-            ILogger log)
+        ILogger log)
+    {
+      if (string.IsNullOrWhiteSpace(pageId))
+      {
+        log.LogWarning("Empty request, aborting.");
+        return new BadRequestResult();
+      }
+
+      log.LogInformation("Fetching comments for {pageId}...", pageId);
+
+      var commentsCollectionUri = UriFactory.CreateDocumentCollectionUri("Blogging", "Comments");
+
+      var query =
+          from c in client.CreateDocumentQuery<Comment>(commentsCollectionUri)
+          where c.pageId == pageId
+          orderby c.timestamp descending
+          select c;
+
+      var comments = query.ToArray();
+      log.LogInformation("Found {num} comments", comments.Length);
+
+      Auth.TryParse(req, log, out var principal);
+
+      if (!principal.IsInRole("administrator"))
+      {
+        log.LogDebug("Removing deleted comments' contents.");
+        foreach (var c in comments)
         {
-            if (string.IsNullOrWhiteSpace(pageId))
-            {
-                log.LogWarning("Empty request, aborting.");
-                return new BadRequestResult();
-            }
-
-            log.LogInformation("Fetching comments for {pageId}...", pageId);
-
-            var commentsCollectionUri = UriFactory.CreateDocumentCollectionUri("Blogging", "Comments");
-
-            var query =
-                from c in client.CreateDocumentQuery<Comment>(commentsCollectionUri)
-                where c.pageId == pageId
-                orderby c.timestamp descending
-                select c;
-
-            var comments = query.ToArray();
-            log.LogInformation("Found {num} comments", comments.Length);
-
-            Auth.TryParse(req, log, out var principal);
-
-            if (!principal.IsInRole("administrator"))
-            {
-                log.LogDebug("Removing deleted comments' contents.");
-                foreach (var c in comments)
-                {
-                    if (c.deleted)
-                    {
-                        c.content = null;
-                    }
-                }
-            }
-            return new OkObjectResult(comments);
+          if (c.deleted)
+          {
+            c.content = null;
+          }
         }
+      }
+      return new OkObjectResult(comments);
     }
+  }
 }
