@@ -46,14 +46,14 @@ export default function ResearchList({ data }: ResearchListProps) {
             <FontAwesomeIcon icon={faRss} title="RSS feed for talks." />
           </Link>
         </header>
-        <section>
-          {sections.map(({ key, title }) => {
-            const filteredNodes = nodes.filter(
-              ({ frontmatter: { status } }) => status === key
-            );
-            return (
-              <section key={key}>
-                <h2>{`${title} [${filteredNodes.length}]`}</h2>
+        {sections.map(({ key, title }) => {
+          const filteredNodes = nodes.filter(
+            ({ frontmatter: { status } }) => status === key
+          );
+          return (
+            <React.Fragment key={key}>
+              <h2>{`${title} [${filteredNodes.length}]`}</h2>
+              <section>
                 {filteredNodes.map(({ frontmatter, slug }) => (
                   <Mini
                     key={slug}
@@ -63,9 +63,9 @@ export default function ResearchList({ data }: ResearchListProps) {
                   />
                 ))}
               </section>
-            );
-          })}
-        </section>
+            </React.Fragment>
+          );
+        })}
       </div>
     </Layout>
   );

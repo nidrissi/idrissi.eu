@@ -87,6 +87,10 @@ body {
   background-color: var(--gray-100);
 }
 
+nav {
+  font-family: var(--ff-sans);
+}
+
 h1,
 h2,
 h3,

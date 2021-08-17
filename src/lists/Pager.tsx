@@ -29,7 +29,6 @@ export default function Pager({ numPages, currentPage, type }: PagerProps) {
       <Link
         to={indexToLink(1)}
         title="First page"
-        className={styles.button}
         activeClassName={styles.disabled}
       >
         <FontAwesomeIcon icon={faAngleDoubleLeft} />
@@ -38,7 +37,6 @@ export default function Pager({ numPages, currentPage, type }: PagerProps) {
         <Link
           to={indexToLink(currentPage - 1)}
           title="Previous page"
-          className={styles.button}
           activeClassName={styles.disabled}
         >
           <FontAwesomeIcon icon={faAngleLeft} />
@@ -49,7 +47,6 @@ export default function Pager({ numPages, currentPage, type }: PagerProps) {
           key={i}
           to={indexToLink(i + 1)}
           title={`Page ${i + 1}`}
-          className={styles.button}
           activeClassName={styles.disabled}
         >
           {i + 1}
@@ -59,7 +56,6 @@ export default function Pager({ numPages, currentPage, type }: PagerProps) {
         <Link
           to={indexToLink(currentPage + 1)}
           title="Next page"
-          className={styles.button}
           activeClassName={styles.disabled}
         >
           <FontAwesomeIcon icon={faAngleRight} />
@@ -68,7 +64,6 @@ export default function Pager({ numPages, currentPage, type }: PagerProps) {
       <Link
         to={indexToLink(numPages)}
         title="Last page"
-        className={styles.button}
         activeClassName={styles.disabled}
       >
         <FontAwesomeIcon icon={faAngleDoubleRight} />

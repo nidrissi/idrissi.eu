@@ -40,15 +40,15 @@ export default function ClassList({
             &nbsp; Teaching
           </h1>
         </header>
-        <section>
-          {group
-            // Sort in reverse year order
-            .sort((g1, g2) => g2.fieldValue.localeCompare(g1.fieldValue))
-            .map(({ fieldValue: year, nodes }) => (
-              <section key={year}>
-                <h2>
-                  Academic year {year}&ndash;{Number(year) + 1}
-                </h2>
+        {group
+          // Sort in reverse year order
+          .sort((g1, g2) => g2.fieldValue.localeCompare(g1.fieldValue))
+          .map(({ fieldValue: year, nodes }) => (
+            <React.Fragment key={year}>
+              <h2>
+                Academic year {year}&ndash;{Number(year) + 1}
+              </h2>
+              <section>
                 {nodes.map(({ frontmatter, slug, wordCount: { words } }) => (
                   <Mini
                     key={slug}
@@ -59,8 +59,8 @@ export default function ClassList({
                   />
                 ))}
               </section>
-            ))}
-        </section>
+            </React.Fragment>
+          ))}
       </div>
     </Layout>
   );

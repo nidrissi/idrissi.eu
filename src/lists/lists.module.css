@@ -1,16 +1,13 @@
-.list {
-  width: 100%;
-}
-
 .list > header {
   display: grid;
-  grid-template-columns: 1fr max-content;
+  grid-template-columns: 1fr auto;
   align-items: center;
   margin-bottom: 1rem;
 }
 
 .list > header > a {
   display: block;
+  border-radius: 0.25rem;
   padding: 0.5rem;
   font-size: x-large;
 }
@@ -20,8 +17,14 @@
   color: white;
 }
 
+.list h2,
+.list h3 {
+  margin-bottom: 1rem;
+}
+
 .list section {
-  display: flex;
-  flex-direction: column;
+  display: grid;
   gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(24rem, 1fr));
+  grid-auto-rows: 1fr;
 }
