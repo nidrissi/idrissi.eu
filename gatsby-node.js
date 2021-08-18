@@ -21,11 +21,11 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const listAssociation = {
     post: {
       component: "./src/lists/Posts.tsx",
-      perPage: 10,
+      perPage: 12,
     },
     talk: {
       component: "./src/lists/Talks.tsx",
-      perPage: 10,
+      perPage: 12,
     },
     class: {
       component: "./src/lists/Classes.tsx",
