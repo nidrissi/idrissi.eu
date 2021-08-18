@@ -1,9 +1,20 @@
 .embed {
   width: 100%;
-  max-width: 100%;
   margin: 2rem auto;
+}
+
+.embed img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  overflow: auto;
 }
 
 .embed object {
   aspect-ratio: 16/9;
+}
+
+.embed object[data-portrait] {
+  /* A4 format */
+  aspect-ratio: 21/29;
 }

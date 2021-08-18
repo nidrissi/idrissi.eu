@@ -6,11 +6,18 @@ import * as styles from "./Embed.module.css";
 interface EmbedProps {
   url: string;
   alt: string;
+  portrait?: boolean;
 }
 
-export default function Embed({ url, alt }: EmbedProps) {
+export default function Embed({ url, alt, portrait }: EmbedProps) {
   const content = url.endsWith(".pdf") ? (
-    <object type="application/pdf" width="100%" data={url} title={alt}>
+    <object
+      type="application/pdf"
+      width="100%"
+      data={url}
+      title={alt}
+      data-portrait={portrait}
+    >
       {alt}
     </object>
   ) : (

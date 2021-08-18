@@ -126,6 +126,7 @@ export default function PageTemplate({ data }: PageTemplateProps) {
           <Embed
             url={frontmatter.urls.read.publicURL}
             alt={`Read the research document: ${parsedTitle}`}
+            portrait
           />
         )}
 
