@@ -1,7 +1,7 @@
 module.exports = {
   flags: {
     // FAST_DEV: true,
-    DEV_WEBPACK_CACHE: true,
+    // DEV_WEBPACK_CACHE: true,
     PARALLEL_QUERY_RUNNING: true,
     PARALLEL_SOURCING: true,
     PRESERVE_FILE_DOWNLOAD_CACHE: true,

@@ -30,8 +30,8 @@ export default function Cookie() {
             onClick={() => {
               const date = new Date();
               date.setFullYear(date.getFullYear() + 1);
-              setShow(false);
               document.cookie = `cookieToastShown=true; expires=${date.toUTCString()}; Secure; SameOrigin=strict`;
+              setShow(false);
             }}
           >
             <FontAwesomeIcon icon={faTimes} fixedWidth />
