@@ -12,20 +12,19 @@ export default function DateTime({ label, children, TBA }: DateTimeProps) {
   }
 
   const date = new Date(children.toString());
+  const localeDate = date.toLocaleDateString();
 
   return (
-    <div>
+    <>
       {label}{" "}
       <time dateTime={date.toISOString()}>
         {TBA ? (
-          <abbr title="The precise date is not yet known.">
-            {date.toLocaleDateString()}?
-          </abbr>
+          <abbr title="The precise date is not yet known.">{localeDate}?</abbr>
         ) : (
-          date.toLocaleDateString()
+          localeDate
         )}
+        {"."}
       </time>
-      .
-    </div>
+    </>
   );
 }

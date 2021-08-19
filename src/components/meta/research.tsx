@@ -75,26 +75,28 @@ export default function MetaResearch({
   }
 
   return (
-    <>
+    <p className={styles.publication}>
       {authors.length > 1 && (
-        <div className={styles.authors}>
+        <>
           {authors.map((a, i) => (
             <React.Fragment key={a}>
               {i > 0 && ", "}
               {formatAuthor(a)}
             </React.Fragment>
           ))}
-          .
-        </div>
+          {". "}
+        </>
       )}
       {publication && (
-        <div className={styles.publication}>
-          <ReactMarkdown children={publication} />
-        </div>
+        <>
+          <ReactMarkdown children={publication} />{" "}
+        </>
       )}
       <DateTime label="Online on">{date}</DateTime>
+      {date && lastMod && " "}
       <DateTime label="Updated on">{lastMod}</DateTime>
+      {lastMod && accepted && " "}
       <DateTime label={"Accepted on"}>{accepted}</DateTime>
-    </>
+    </p>
   );
 }

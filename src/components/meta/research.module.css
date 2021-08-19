@@ -1,17 +1,21 @@
-.authors a {
-  color: var(--blue-800);
+.publication {
+  margin: 0;
 }
 
-.authors a:hover {
-  text-decoration: underline;
-}
-
-.publication > p {
+.publication p {
   display: inline;
 }
 
+.publication a {
+  color: var(--blue-800);
+}
+
+.publication a:hover {
+  text-decoration: underline;
+}
+
 @media (prefers-color-scheme: dark) {
-  .authors a {
+  .publication a {
     color: var(--blue-400);
   }
 }
