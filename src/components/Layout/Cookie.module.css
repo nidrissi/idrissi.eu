@@ -8,10 +8,6 @@
   align-content: center;
 }
 
-.cookie p {
-  margin: 0;
-}
-
 .cookie a {
   color: var(--blue-800);
 }
