@@ -37,6 +37,9 @@ export function UserNameForm({ id, setUserName }: UserNameFormProps) {
         };
         const response = await fetch(`/api/user`, {
           method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
           body: JSON.stringify(requestBody),
         });
         const body = await response.json();

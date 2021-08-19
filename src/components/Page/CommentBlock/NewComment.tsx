@@ -83,6 +83,9 @@ function NewCommentForm({ pageId, setComments }: NewCommentFormProps) {
       } else {
         const response = await fetch(`/api/comment/${pageId}`, {
           method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
           body: JSON.stringify({ content: trueInput }),
         });
         if (response.ok) {
