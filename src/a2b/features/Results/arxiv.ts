@@ -104,16 +104,12 @@ export function parseEntry(xmlEntry: Element): Entry | null {
   return entry;
 }
 
-function buildSearchQueryPart(
-  list: string[],
-  label: string,
-  or?: boolean
-): string {
+function buildSearchQueryPart(list: string[], label: string): string {
   return list
     .map(removeAccents)
     .map(encodeURIComponent)
     .map((a) => `${label}:"${a}"`)
-    .join(or ? "+OR+" : "+AND+");
+    .join("+AND+");
 }
 
 export function buildURLQuery(
