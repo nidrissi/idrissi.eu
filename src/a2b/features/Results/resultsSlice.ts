@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-import { buildURLQuery, parseEntry } from "../../arxiv";
+import { buildURLQuery, parseEntry } from "./arxiv";
 import { Entry, Query, SearchSettings } from "../../types";
 
 interface SearchArguments {
