@@ -90,7 +90,6 @@ function NewCommentForm({ pageId, setComments }: NewCommentFormProps) {
         });
         if (response.ok) {
           const comment = await response.json();
-          console.log(comment);
           setComments((l) => [comment].concat(l));
           setCurrentInput("");
           setSending(false);

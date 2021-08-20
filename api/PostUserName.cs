@@ -34,7 +34,12 @@ namespace Idrissi.Blogging
         var userId = principal.FindFirst(ClaimTypes.NameIdentifier);
 
         log.LogDebug("Parsing body of the request");
-        UserDetails details = await JsonSerializer.DeserializeAsync<UserDetails>(req.Body);
+        UserDetails details = await JsonSerializer.DeserializeAsync<UserDetails>(
+          req.Body,
+          new JsonSerializerOptions
+          {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+          });
         if (details.Id != userId.Value)
         {
           log.LogError("Wrong user id.");

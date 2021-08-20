@@ -2,7 +2,6 @@ namespace Idrissi.Blogging
 {
   using System.Net;
   using System.Security.Claims;
-  using System.Text.Json;
   using System.Threading;
   using System.Threading.Tasks;
   using Microsoft.AspNetCore.Http;
@@ -78,11 +77,6 @@ namespace Idrissi.Blogging
 
           return new OkResult();
         }
-      }
-      catch (JsonException e)
-      {
-        log.LogError("JSON error: {msg}", e.Message);
-        return new BadRequestObjectResult(e.Message);
       }
       catch (DocumentClientException ex)
       {

@@ -1,6 +1,7 @@
 namespace Idrissi.Blogging
 {
   using System.Linq;
+  using System.Security.Claims;
   using Microsoft.AspNetCore.Http;
   using Microsoft.AspNetCore.Mvc;
   using Microsoft.Azure.Documents.Client;
@@ -28,15 +29,15 @@ namespace Idrissi.Blogging
       var commentsCollectionUri = UriFactory.CreateDocumentCollectionUri("Blogging", "Comments");
 
       var query =
-          from c in client.CreateDocumentQuery<Comment>(commentsCollectionUri)
-          where c.PageId == pageId
-          orderby c.TimeStamp descending
-          select c;
+          from comment in client.CreateDocumentQuery<Comment>(commentsCollectionUri)
+          where comment.PageId == pageId
+          orderby comment.TimeStamp descending
+          select comment;
 
       var comments = query.ToArray();
-      log.LogInformation("Found {num} comments", comments.Length);
+      log.LogInformation("Found {num} comments", comments.Count());
 
-      Auth.TryParse(req, log, out var principal);
+      ClaimsPrincipal principal = Auth.Parse(req);
 
       if (!principal.IsInRole("administrator"))
       {

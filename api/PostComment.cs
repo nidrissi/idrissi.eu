@@ -71,7 +71,13 @@ namespace Idrissi.Blogging
           return new StatusCodeResult((int)HttpStatusCode.TooManyRequests);
         }
 
-        var body = await JsonSerializer.DeserializeAsync<PostCommentBody>(req.Body, null, token);
+        var body = await JsonSerializer.DeserializeAsync<PostCommentBody>(
+          req.Body,
+           new JsonSerializerOptions
+           {
+             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+           },
+           token);
         string content = body.Content;
 
         if (string.IsNullOrWhiteSpace(content))

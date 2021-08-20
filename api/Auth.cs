@@ -20,7 +20,12 @@ namespace Idrissi.Blogging
         var data = header[0];
         var decoded = Convert.FromBase64String(data);
         var json = Encoding.ASCII.GetString(decoded);
-        principal = JsonSerializer.Deserialize<ClientPrincipal>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+        principal = JsonSerializer.Deserialize<ClientPrincipal>(
+          json,
+          new JsonSerializerOptions
+          {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+          });
       }
 
       principal.UserRoles = principal.UserRoles?.Except(new string[] { "anonymous" }, StringComparer.CurrentCultureIgnoreCase);
