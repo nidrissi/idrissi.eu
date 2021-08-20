@@ -45,8 +45,6 @@ export default function SearchForm() {
         }
         return errors;
       }}
-      validateOnChange={false}
-      validateOnBlur={false}
     />
   );
 }
