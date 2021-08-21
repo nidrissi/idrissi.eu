@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../../store";
 import { Query } from "../../types";
 
 const initialState: Query = {
@@ -19,5 +18,6 @@ export const searchFormSlice = createSlice({
 });
 
 export const { setQuery } = searchFormSlice.actions;
-export const selectQuery = (state: RootState) => state[searchFormSlice.name];
+export const selectQuery = (state: { [searchFormSlice.name]: Query }) =>
+  state[searchFormSlice.name];
 export default searchFormSlice.reducer;
