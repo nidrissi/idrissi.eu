@@ -108,7 +108,9 @@ export default function PageTemplate({ data }: PageTemplateProps) {
           </MDXProvider>
         </div>
 
-        {type === "post" && <CommentBlock pageId={`${type}__${slug}`} />}
+        {type === "post" && (
+          <CommentBlock pageId={`${type}__${slug.replace("/", "")}`} />
+        )}
 
         {type === "talk" && frontmatter.urls?.slides && (
           <Embed
