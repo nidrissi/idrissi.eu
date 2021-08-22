@@ -2,7 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faComments, faSync } from "@fortawesome/free-solid-svg-icons";
 
-import Alert from "./Alert";
+import Error from "./Error";
 import * as styles from "./Wrapper.module.css";
 
 interface WrapperProps {
@@ -54,7 +54,7 @@ class ErrorBoundary extends React.Component<{}, { hasError: boolean }, {}> {
 
   override render() {
     if (this.state.hasError) {
-      return <Alert>The whole comment section encountered a bug.</Alert>;
+      return <Error>The whole comment section encountered a bug.</Error>;
     }
 
     return this.props.children;

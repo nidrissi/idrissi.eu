@@ -2,16 +2,17 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBomb } from "@fortawesome/free-solid-svg-icons";
 
-import * as styles from "./Alert.module.css";
+import * as styles from "./Error.module.css";
+import AlertDiv from "../AlertDiv";
 
 interface AlertProps {
   children: React.ReactNode;
   retry?: () => void;
 }
 
-export default function Alert({ children, retry }: AlertProps) {
+export default function Error({ children, retry }: AlertProps) {
   return (
-    <div className={styles.alert}>
+    <AlertDiv color="red">
       <FontAwesomeIcon icon={faBomb} />
       &nbsp;
       {children}
@@ -23,6 +24,6 @@ export default function Alert({ children, retry }: AlertProps) {
           </button>
         </>
       )}
-    </div>
+    </AlertDiv>
   );
 }

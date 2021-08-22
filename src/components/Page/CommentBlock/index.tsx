@@ -5,10 +5,11 @@ import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import Single from "./Single";
 import Wrapper from "./Wrapper";
 import NewComment from "./NewComment";
-import Alert from "./Alert";
+import Error from "./Error";
 
 import * as styles from "./CommentBlock.module.css";
 import { useGetCommentsQuery } from "./CommentApi";
+import AlertDiv from "../AlertDiv";
 
 interface CommentBlockProps {
   pageId: string;
@@ -26,14 +27,12 @@ export default function CommentBlock({ pageId }: CommentBlockProps) {
     <Wrapper num={comments?.length} retry={refetch}>
       <NewComment pageId={pageId} />
       {isFetching ? (
-        <>
+        <AlertDiv color="blue">
           <FontAwesomeIcon icon={faSpinner} spin />
-          &nbsp; Loading comments...
-        </>
+          &nbsp;Loading comments...
+        </AlertDiv>
       ) : isError ? (
-        <Alert retry={refetch}>
-          &nbsp; An error occurred fetching comments.
-        </Alert>
+        <Error retry={refetch}>An error occurred fetching comments.</Error>
       ) : (
         <div className={styles.root}>
           {comments?.map((c) => (

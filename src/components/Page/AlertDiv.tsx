@@ -3,8 +3,8 @@ import React from "react";
 import * as styles from "./AlertDiv.module.css";
 
 interface AlertDivProps {
-  color?: string;
-  children: JSX.Element;
+  color?: "red" | "green" | "blue" | "yellow";
+  children: React.ReactNode;
 }
 
 export default function AlertDiv({ color, children }: AlertDivProps) {

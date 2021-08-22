@@ -1,7 +1,7 @@
 import React from "react";
 import { skipToken } from "@reduxjs/toolkit/query";
 
-import Alert from "./Alert";
+import Error from "./Error";
 import { formatClient } from "./ClientPrincipal";
 import { useGetClientQuery, useGetUserNameQuery } from "./CommentApi";
 import { UserNameForm } from "./UserNameForm";
@@ -32,9 +32,9 @@ export default function UserName() {
     );
   } else {
     return (
-      <Alert retry={() => refetch()}>
+      <Error retry={() => refetch()}>
         There was an error fetching your username.
-      </Alert>
+      </Error>
     );
   }
 }

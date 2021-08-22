@@ -2,9 +2,10 @@ import React from "react";
 import { faSignOutAlt, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import Alert from "./Alert";
+import Error from "./Error";
 import LoginButton from "./LoginButton";
 import UserName from "./UserName";
+import AlertDiv from "../AlertDiv";
 
 import * as styles from "./UserDetails.module.css";
 import { useGetClientQuery } from "./CommentApi";
@@ -14,16 +15,16 @@ export default function UserDetails() {
 
   if (isError) {
     return (
-      <Alert retry={() => refetch()}>
+      <Error retry={() => refetch()}>
         There was an error fetching your login details.
-      </Alert>
+      </Error>
     );
   } else if (isFetching) {
     return (
-      <>
+      <AlertDiv color="blue">
         <FontAwesomeIcon icon={faSpinner} spin />
-        &nbsp; Loading login details...
-      </>
+        &nbsp;Loading login details...
+      </AlertDiv>
     );
   } else if (client) {
     return (

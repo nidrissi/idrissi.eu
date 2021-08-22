@@ -15,7 +15,7 @@ import {
   usePostCommentMutation,
 } from "./CommentApi";
 import UserDetails from "./UserDetails";
-import Alert from "./Alert";
+import Error from "./Error";
 
 import * as styles from "./NewComment.module.css";
 
@@ -117,9 +117,9 @@ function NewCommentForm({ pageId }: NewCommentFormProps) {
             disabled={isLoading}
             placeholder="Type a comment (up to 512 characters) here..."
           />
-          {inputError && <Alert>{inputError}</Alert>}
+          {inputError && <Error>{inputError}</Error>}
           {isError && (
-            <Alert>There was an unspecified error posting your comment.</Alert>
+            <Error>There was an unspecified error posting your comment.</Error>
           )}
           <div className={styles.footer}>
             <div>

@@ -1,0 +1,8 @@
+.retry {
+  font-weight: 600;
+}
+
+.retry:hover {
+  background-color: var(--blue-800);
+  color: white;
+}
