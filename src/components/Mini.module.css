@@ -1,7 +1,6 @@
 .mini {
   box-sizing: border-box;
   border: 1px solid hsla(220, 10%, 65%, 20%);
-  border-radius: 0.5rem;
   padding: 0.75rem;
   max-width: min(100%, 75ch);
 }

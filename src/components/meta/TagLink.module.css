@@ -1,7 +1,6 @@
 .tag-link {
   display: block;
   color: var(--indigo-800);
-  border-radius: 0.5rem;
 }
 
 .tag-link:hover {

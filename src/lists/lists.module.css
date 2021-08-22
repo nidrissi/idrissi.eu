@@ -7,7 +7,6 @@
 
 .list > header > a {
   display: block;
-  border-radius: 0.25rem;
   padding: 0.5rem;
   font-size: x-large;
 }

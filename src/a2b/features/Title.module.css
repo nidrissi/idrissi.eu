@@ -12,7 +12,6 @@
   padding: 0.5rem;
   color: var(--gray-900);
   border: 1px solid var(--gray-200);
-  border-radius: 0.5rem;
 }
 
 .button-wrapper > a:hover,

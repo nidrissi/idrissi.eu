@@ -6,7 +6,6 @@
   border-style: solid;
   border-width: thin;
   border-color: var(--green-800);
-  border-radius: 0.25rem;
   line-height: 1;
   padding: 0.5rem;
 }
