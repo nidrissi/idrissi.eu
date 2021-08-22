@@ -1,6 +1,7 @@
 namespace BlogApi
 {
   using System;
+  using System.Collections.Generic;
   using System.Linq;
   using System.Security.Claims;
   using System.Text;
@@ -11,6 +12,17 @@ namespace BlogApi
   // https://docs.microsoft.com/en-us/azure/static-web-apps/user-information?tabs=csharp
   public static class Auth
   {
+    public class ClientPrincipal
+    {
+      public string IdentityProvider { get; set; }
+
+      public string UserId { get; set; }
+
+      public string UserDetails { get; set; }
+
+      public IEnumerable<string> UserRoles { get; set; }
+    }
+
     public static ClaimsPrincipal Parse(HttpRequest req)
     {
       var principal = new ClientPrincipal();
@@ -38,12 +50,12 @@ namespace BlogApi
       var identity = new ClaimsIdentity(principal.IdentityProvider);
       identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, principal.UserId));
       identity.AddClaim(new Claim(ClaimTypes.Name, principal.UserDetails));
-      identity.AddClaims(principal.UserRoles.Select(r => new Claim(ClaimTypes.Role, r)));
+      identity.AddClaims(from r in principal.UserRoles select new Claim(ClaimTypes.Role, r));
 
       return new ClaimsPrincipal(identity);
     }
 
-    public static bool TryParse(HttpRequest req, ILogger log, out ClaimsPrincipal identity)
+    public static bool ParseAndCheck(HttpRequest req, ILogger log, out ClaimsPrincipal identity)
     {
       log.LogInformation("Parsing identity...");
       identity = Parse(req);

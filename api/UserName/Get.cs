@@ -21,8 +21,8 @@ namespace BlogApi
         ILogger log,
         CancellationToken token)
     {
-      ClaimsPrincipal principal;
-      if (!Auth.TryParse(req, log, out principal))
+      bool ok = Auth.ParseAndCheck(req, log, out var principal);
+      if (!ok)
       {
         return new UnauthorizedResult();
       }
@@ -30,7 +30,7 @@ namespace BlogApi
       var userId = principal.FindFirst(ClaimTypes.NameIdentifier).Value;
       try
       {
-        log.LogInformation("Getting username of user {userId}...", userId);
+        log.LogInformation("Getting username of user={userId}.", userId);
 
         var userUri = UriFactory.CreateDocumentUri("Blogging", "Users", userId);
         var partitionKey = new PartitionKey(userId);
@@ -40,10 +40,10 @@ namespace BlogApi
         };
         UserDetails details = await client.ReadDocumentAsync<UserDetails>(userUri, requestOptions, token);
 
-        log.LogInformation("Found username {name}", details.UserName);
+        log.LogInformation("Found name={UserName}.", details.UserName);
         if (details.Banned)
         {
-          log.LogWarning("Rejecting request from banned user {id}.", details.Id);
+          log.LogWarning("Rejecting request from banned user{userId}.", details.Id);
           return new UnauthorizedResult();
         }
 

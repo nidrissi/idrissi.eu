@@ -33,42 +33,8 @@ namespace BlogApi
       {
         if (!Pages.AllowedPageIds.TryGetValue(pageId, out var allowed) || !allowed)
         {
-          log.LogWarning("Received a request to post on an unauthorized page: {pageId}.", pageId);
+          log.LogError("Received a request to post on an unauthorized page: {pageId}.", pageId);
           return new UnauthorizedResult();
-        }
-
-        ClaimsPrincipal principal;
-        if (!Auth.TryParse(req, log, out principal))
-        {
-          return new UnauthorizedResult();
-        }
-
-        var userId = principal.FindFirst(ClaimTypes.NameIdentifier).Value;
-
-        log.LogInformation("Getting details of user {userId}...", userId);
-
-        var userUri = UriFactory.CreateDocumentUri("Blogging", "Users", userId);
-        var userRequestOptions = new RequestOptions() { PartitionKey = new PartitionKey(userId) };
-        UserDetails details = await client.ReadDocumentAsync<UserDetails>(userUri, userRequestOptions, token);
-
-        if (details.Banned)
-        {
-          log.LogWarning("Rejecting request from banned user {id}.", details.Id);
-          return new UnauthorizedResult();
-        }
-
-        var lastTime = DateTimeOffset.FromUnixTimeMilliseconds(details.LastAttemptToPost).UtcDateTime;
-
-        // convert to JS time
-        details.LastAttemptToPost = ToJSTime(DateTime.UtcNow);
-
-        log.LogInformation("Updating last attempt time for user {id}.", details.Id);
-        await client.ReplaceDocumentAsync(userUri, details, userRequestOptions, token);
-
-        if (lastTime.AddSeconds(10) > DateTime.UtcNow)
-        {
-          log.LogWarning("User {id} posting too much!", details.Id);
-          return new StatusCodeResult((int)HttpStatusCode.TooManyRequests);
         }
 
         var body = await JsonSerializer.DeserializeAsync<PostCommentBody>(
@@ -79,23 +45,55 @@ namespace BlogApi
            },
            token);
         string content = body.Content;
+        string trimmedContent = content.Trim();
 
-        if (string.IsNullOrWhiteSpace(content))
+        if (string.IsNullOrWhiteSpace(trimmedContent))
         {
-          log.LogError("Empty post!");
-          return new BadRequestObjectResult("Empty post!");
+          log.LogError("Empty post.");
+          return new BadRequestObjectResult("Empty post.");
+        }
+        else if (trimmedContent.Length < 10 || trimmedContent.Length > 512)
+        {
+          log.LogError("Incorrect post length: {l}.", trimmedContent.Length);
+          return new BadRequestObjectResult("Post must be between 10 and 512 characters.");
         }
 
-        if (content.Length < 10 || content.Length > 512)
+        bool ok = Auth.ParseAndCheck(req, log, out var principal);
+        if (!ok)
         {
-          log.LogError("Incorrect post length: {l}.", content.Length);
-          return new BadRequestObjectResult("Post must be between 10 and 512 characters.");
+          return new UnauthorizedResult();
+        }
+
+        var userId = principal.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+        log.LogInformation("Getting details of user={userId}.", userId);
+
+        var userUri = UriFactory.CreateDocumentUri("Blogging", "Users", userId);
+        var userRequestOptions = new RequestOptions() { PartitionKey = new PartitionKey(userId) };
+        UserDetails details = await client.ReadDocumentAsync<UserDetails>(userUri, userRequestOptions, token);
+
+        if (details.Banned)
+        {
+          log.LogError("Rejecting request from banned user={userId}.", details.Id);
+          return new UnauthorizedResult();
+        }
+
+        var lastTime = DateTimeOffset.FromUnixTimeMilliseconds(details.LastAttemptToPost).UtcDateTime;
+        details.LastAttemptToPost = ToJSTime(DateTime.UtcNow);
+
+        log.LogInformation("Updating lastAttemptToPost for user={userId}.", details.Id);
+        await client.ReplaceDocumentAsync(userUri, details, userRequestOptions, token);
+
+        if (lastTime.AddSeconds(10) > DateTime.UtcNow)
+        {
+          log.LogWarning("User={userId} posting too much!", details.Id);
+          return new StatusCodeResult((int)HttpStatusCode.TooManyRequests);
         }
 
         var comment = new Comment()
         {
           PageId = pageId,
-          Content = content,
+          Content = trimmedContent,
           UserName = details.UserName,
           UserId = details.Id,
           TimeStamp = ToJSTime(DateTime.UtcNow),
@@ -111,10 +109,10 @@ namespace BlogApi
 
         return new CreatedResult(response.Resource.Id, response.Resource);
       }
-      catch (JsonException e)
+      catch (JsonException ex)
       {
-        log.LogError("JSON error: {msg}", e.Message);
-        return new BadRequestObjectResult(e.Message);
+        log.LogError("JSON error: {msg}", ex.Message);
+        return new BadRequestObjectResult(ex.Message);
       }
       catch (DocumentClientException ex)
       {

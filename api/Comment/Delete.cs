@@ -26,8 +26,8 @@ namespace BlogApi
     {
       try
       {
-        ClaimsPrincipal principal;
-        if (!Auth.TryParse(req, log, out principal))
+        bool ok = Auth.ParseAndCheck(req, log, out var principal);
+        if (!ok)
         {
           return new UnauthorizedResult();
         }

@@ -25,13 +25,13 @@ namespace BlogApi
     {
       try
       {
-        ClaimsPrincipal principal;
-        if (!Auth.TryParse(req, log, out principal))
+        bool ok = Auth.ParseAndCheck(req, log, out var principal);
+        if (!ok)
         {
           return new UnauthorizedResult();
         }
 
-        var userId = principal.FindFirst(ClaimTypes.NameIdentifier);
+        string userId = principal.FindFirst(ClaimTypes.NameIdentifier).Value;
 
         log.LogDebug("Parsing body of the request");
         UserDetails details = await JsonSerializer.DeserializeAsync<UserDetails>(
@@ -40,31 +40,31 @@ namespace BlogApi
           {
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
           });
-        if (details.Id != userId.Value)
+        if (details.Id != userId)
         {
-          log.LogError("Wrong user id.");
-          return new BadRequestObjectResult("Trying to set the username of the wrong user.");
+          log.LogError("Wrong user id: request={userId1}, parsed={userId2}.", details.Id, userId);
+          return new UnauthorizedResult();
         }
 
         if (details.UserName.Length > 25 || details.UserName.Length < 3)
         {
           log.LogError("Wrong length: {username}", details.UserName);
-          return new BadRequestObjectResult("Username must be between 3 and 25 characters.");
+          return new BadRequestResult();
         }
 
-        log.LogDebug("Setting username of {userId}", userId.Value);
+        log.LogDebug("Setting username of {userId}", userId);
         var collectionUri = UriFactory.CreateDocumentCollectionUri("Blogging", "Users");
         var response = await client.CreateDocumentAsync(
           collectionUri,
           details,
-          new RequestOptions() { PartitionKey = new PartitionKey(userId.Value) },
+          new RequestOptions() { PartitionKey = new PartitionKey(userId) },
           cancellationToken: token);
         return new CreatedResult(details.Id, details);
       }
       catch (JsonException ex)
       {
         log.LogError("JSON error: {msg}", ex.Message);
-        return new BadRequestObjectResult(ex.Message);
+        return new BadRequestResult();
       }
       catch (DocumentClientException ex)
       {
