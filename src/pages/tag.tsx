@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTags } from "@fortawesome/free-solid-svg-icons";
 import TagLink from "../components/meta/TagLink";
 
+import * as styles from "./tag.module.css";
+
 interface TagListProps {
   data: {
     allMdx: {
@@ -30,7 +32,8 @@ export default function TagList({
         <FontAwesomeIcon icon={faTags} />
         &nbsp;All Tags
       </h1>
-      <ul>
+      {/* tag-list */}
+      <ul className={styles.tagList}>
         {group.map(({ fieldValue, totalCount }) => (
           <li key={fieldValue}>
             <TagLink tag={fieldValue} big count={totalCount} />
