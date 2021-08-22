@@ -1,4 +1,4 @@
-namespace Idrissi.Blogging
+namespace BlogApi
 {
   using System.Linq;
   using System.Security.Claims;

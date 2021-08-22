@@ -1,4 +1,4 @@
-namespace Idrissi.Blogging
+namespace BlogApi
 {
   using Newtonsoft.Json;
 
