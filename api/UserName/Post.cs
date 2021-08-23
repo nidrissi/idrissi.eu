@@ -26,8 +26,9 @@ namespace BlogApi
       try
       {
         ClaimsPrincipal principal = Auth.Parse(req);
-        if (!Auth.Check(principal, log))
+        if (!Auth.Check(principal, out var msg))
         {
+          log.LogWarning(msg);
           return new UnauthorizedResult();
         }
 
@@ -40,6 +41,7 @@ namespace BlogApi
           {
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
           });
+
         if (details.Id != userId)
         {
           log.LogError("Wrong user id: request={userId1}, parsed={userId2}.", details.Id, userId);
@@ -59,6 +61,7 @@ namespace BlogApi
           details,
           new RequestOptions() { PartitionKey = new PartitionKey(userId) },
           cancellationToken: token);
+
         return new CreatedResult(details.Id, details);
       }
       catch (JsonException ex)

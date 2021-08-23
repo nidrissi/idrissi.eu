@@ -59,8 +59,9 @@ namespace BlogApi
         }
 
         ClaimsPrincipal principal = Auth.Parse(req);
-        if (!Auth.Check(principal, log))
+        if (!Auth.Check(principal, out var msg))
         {
+          log.LogWarning(msg);
           return new UnauthorizedResult();
         }
 

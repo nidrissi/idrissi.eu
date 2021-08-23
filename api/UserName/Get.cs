@@ -22,8 +22,9 @@ namespace BlogApi
         CancellationToken token)
     {
       ClaimsPrincipal principal = Auth.Parse(req);
-      if (!Auth.Check(principal, log))
+      if (!Auth.Check(principal, out var msg))
       {
+        log.LogWarning(msg);
         return new UnauthorizedResult();
       }
 
@@ -39,14 +40,7 @@ namespace BlogApi
           PartitionKey = partitionKey,
         };
         UserDetails details = await client.ReadDocumentAsync<UserDetails>(userUri, requestOptions, token);
-
         log.LogInformation("Found name={Username}.", details.Username);
-        if (details.Banned)
-        {
-          log.LogWarning("Rejecting request from banned user{userId}.", details.Id);
-          return new UnauthorizedResult();
-        }
-
         return new OkObjectResult(new { userId = details.Id, username = details.Username });
       }
       catch (DocumentClientException ex)

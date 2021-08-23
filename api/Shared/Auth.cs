@@ -55,23 +55,25 @@ namespace BlogApi
       return new ClaimsPrincipal(identity);
     }
 
-    public static bool Check(ClaimsPrincipal identity, ILogger log)
+    public static bool Check(ClaimsPrincipal identity, out string message)
     {
-      if (!identity.IsInRole("authenticated"))
-      {
-        log.LogWarning("Got a request from an unauthenticated user.");
-        return false;
-      }
-
       var userId = identity.FindFirst(ClaimTypes.NameIdentifier);
 
-      if (string.IsNullOrWhiteSpace(userId.Value))
+      if (!identity.IsInRole("authenticated"))
       {
-        log.LogError("Got a request from a user without a userId.");
+        message = "Got a request from an unauthenticated user.";
         return false;
       }
-
-      return true;
+      else if (string.IsNullOrWhiteSpace(userId.Value))
+      {
+        message = "Got a request from a user without a userId.";
+        return false;
+      }
+      else
+      {
+        message = null;
+        return true;
+      }
     }
 
     public static ClaimsIdentity Parse(UserDetails details)
