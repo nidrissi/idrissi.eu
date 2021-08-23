@@ -11,7 +11,6 @@ import CommentBlock from "./CommentBlock";
 
 import Layout from "../Layout";
 import Meta, { Frontmatter } from "../meta";
-import NextPrevious, { NextOrPreviousItem } from "../NextPrevious";
 import Embed from "../Embed";
 
 import * as styles from "./Page.module.css";
@@ -27,8 +26,6 @@ interface PageTemplateProps {
       excerpt: string;
       frontmatter: Frontmatter;
     };
-    previous: NextOrPreviousItem;
-    next: NextOrPreviousItem;
   };
 }
 
@@ -131,15 +128,13 @@ export default function PageTemplate({ data }: PageTemplateProps) {
             portrait
           />
         )}
-
-        <NextPrevious next={data.next} previous={data.previous} type={type} />
       </div>
     </Layout>
   );
 }
 
 export const query = graphql`
-  query ($id: String, $previousId: String, $nextId: String) {
+  query ($id: String) {
     mdx(id: { eq: $id }) {
       slug
       body
@@ -174,26 +169,6 @@ export const query = graphql`
             }
           }
         }
-      }
-    }
-    previous: mdx(id: { eq: $previousId }) {
-      slug
-      frontmatter {
-        title
-        event
-        location
-        online
-        year
-      }
-    }
-    next: mdx(id: { eq: $nextId }) {
-      slug
-      frontmatter {
-        title
-        event
-        location
-        online
-        year
       }
     }
   }

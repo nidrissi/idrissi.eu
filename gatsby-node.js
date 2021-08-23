@@ -41,17 +41,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         group(field: fields___type) {
           fieldValue
           totalCount
-          edges {
-            node {
-              id
-              slug
-            }
-            next {
-              id
-            }
-            previous {
-              id
-            }
+          nodes {
+            id
+            slug
           }
         }
       }
@@ -60,7 +52,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   if (pageResult.errors) {
     reporter.panicOnBuild('ERROR: Loading "createPages" query');
   }
-  for (const { fieldValue: type, totalCount, edges } of pageResult.data.allMdx
+  for (const { fieldValue: type, totalCount, nodes } of pageResult.data.allMdx
     .group) {
     if (listAssociation[type]) {
       const { component, perPage } = listAssociation[type];
@@ -87,15 +79,11 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     }
 
     // Create all the pages
-    edges.forEach(({ node: { id, slug }, previous, next }) => {
+    nodes.forEach(({ id, slug }) => {
       createPage({
         path: `${type}/${slug}`,
         component: path.resolve(`./src/components/Page/index.tsx`),
-        context: {
-          id,
-          previousId: previous?.id,
-          nextId: next?.id,
-        },
+        context: { id },
       });
     });
   }
