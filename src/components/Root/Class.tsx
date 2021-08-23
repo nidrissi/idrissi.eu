@@ -4,8 +4,6 @@ import Mini from "../Mini";
 import SeeMore from "./SeeMore";
 import { Frontmatter } from "../meta";
 
-import * as styles from "./Root.module.css";
-
 export default function Class() {
   const {
     allMdx: { nodes },
@@ -50,7 +48,7 @@ export default function Class() {
   `);
 
   return (
-    <section className={styles.section}>
+    <section>
       <h2>Teaching (2021&ndash;2022)</h2>
       <div>
         {nodes.map(({ frontmatter, slug, wordCount: { words } }) => (

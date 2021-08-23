@@ -41,22 +41,22 @@ export default function Index({ children }: { children: React.ReactNode }) {
 
   return (
     <Layout title={siteTitle} description={siteDescription}>
-      <article>
-        <div className={styles.photo}>
+      <article className={styles.root}>
+        <aside>
           <StaticImage
             src="photo.jpg"
             alt="Photo of myself."
             loading="eager"
             placeholder="tracedSVG"
           />
-        </div>
-        <div className={"prose " + styles.description}>
+        </aside>
+        <div className="prose">
           <h1 role="banner">{siteTitle}</h1>
           {children}
         </div>
         <Contact />
       </article>
-      <div className={styles.rootLists}>
+      <div className={styles.lists}>
         <Research />
         <Class />
         <Talk />

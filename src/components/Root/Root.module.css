@@ -1,29 +1,22 @@
-.photo {
+.root > aside {
   float: right;
-  max-width: max(20vw, 120px);
-  margin: 0.5rem;
+  padding: 1rem;
+  min-width: 150px;
+  max-width: 20vw;
 }
 
-.photo img {
-}
-
-.description {
-  max-width: min(80ch, 100%);
-}
-
-.root-lists {
+.lists {
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  margin-top: 2rem;
 }
 
-.section > h2 {
+.lists > section > h2 {
   font-size: xx-large;
   margin-bottom: 1.5rem;
 }
 
-.section > div {
+.lists > section > div {
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));

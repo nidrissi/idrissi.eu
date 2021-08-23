@@ -111,7 +111,7 @@ export default function Contact() {
   ];
 
   return (
-    <>
+    <div>
       <h2>Contact</h2>
       <ul className={"fa-ul " + styles.contactList}>
         {contactLinks.map((link) => (
@@ -135,6 +135,6 @@ export default function Contact() {
           </li>
         ))}
       </ul>
-    </>
+    </div>
   );
 }

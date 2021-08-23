@@ -4,8 +4,6 @@ import Mini from "../Mini";
 import SeeMore from "./SeeMore";
 import { Frontmatter } from "../meta";
 
-import * as styles from "./Root.module.css";
-
 interface RootResearchQuery {
   allMdx: {
     nodes: {
@@ -47,7 +45,7 @@ export default function Research() {
   `);
 
   return (
-    <section className={styles.section}>
+    <section>
       <h2>Research</h2>
       <div>
         {nodes.map(({ frontmatter, slug }) => {
