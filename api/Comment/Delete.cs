@@ -1,4 +1,4 @@
-namespace BlogApi
+namespace BlogApi.Comment
 {
   using System.Linq;
   using System.Net;
@@ -13,7 +13,7 @@ namespace BlogApi
   using Microsoft.Azure.WebJobs.Extensions.Http;
   using Microsoft.Extensions.Logging;
 
-  public static class DeleteComment
+  public static class Delete
   {
     [FunctionName("Comment_DELETE")]
     public static async Task<IActionResult> Run(

@@ -1,4 +1,4 @@
-namespace BlogApi
+namespace BlogApi.Username
 {
   using System;
   using System.Net;
@@ -14,7 +14,7 @@ namespace BlogApi
   using Microsoft.Azure.Documents;
   using Microsoft.Azure.Documents.Client;
 
-  public static class PostUsername
+  public static class Post
   {
     [FunctionName("Username_POST")]
     public static async Task<IActionResult> Run(

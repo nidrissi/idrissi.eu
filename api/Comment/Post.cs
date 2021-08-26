@@ -1,4 +1,4 @@
-namespace BlogApi
+namespace BlogApi.Comment
 {
   using System;
   using System.Net;
@@ -14,7 +14,7 @@ namespace BlogApi
   using Microsoft.Azure.WebJobs.Extensions.Http;
   using Microsoft.Extensions.Logging;
 
-  public static class PostComment
+  public static class Post
   {
     [FunctionName("Comment_POST")]
     public static async Task<IActionResult> Run(

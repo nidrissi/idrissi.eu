@@ -1,4 +1,4 @@
-namespace BlogApi
+namespace BlogApi.Username
 {
   using System.Net;
   using System.Security.Claims;
@@ -12,7 +12,7 @@ namespace BlogApi
   using Microsoft.Azure.WebJobs.Extensions.Http;
   using Microsoft.Extensions.Logging;
 
-  public static class GetUsername
+  public static class Get
   {
     [FunctionName("Username_GET")]
     public static async Task<IActionResult> Run(

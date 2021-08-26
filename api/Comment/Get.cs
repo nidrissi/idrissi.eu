@@ -1,4 +1,4 @@
-namespace BlogApi
+namespace BlogApi.Comment
 {
   using System.Linq;
   using System.Security.Claims;
@@ -9,7 +9,7 @@ namespace BlogApi
   using Microsoft.Azure.WebJobs.Extensions.Http;
   using Microsoft.Extensions.Logging;
 
-  public static class GetComments
+  public static class Get
   {
     [FunctionName("Comments_GET")]
     public static IActionResult Run(

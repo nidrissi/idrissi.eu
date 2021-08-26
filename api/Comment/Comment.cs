@@ -1,4 +1,4 @@
-namespace BlogApi
+namespace BlogApi.Comment
 {
   using Newtonsoft.Json;
 
