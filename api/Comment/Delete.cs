@@ -15,7 +15,7 @@ namespace BlogApi
 
   public static class DeleteComment
   {
-    [FunctionName("DeleteComment")]
+    [FunctionName("Comment_DELETE")]
     public static async Task<IActionResult> Run(
         [HttpTrigger(AuthorizationLevel.Function, "delete", Route = "comment/{pageId}/{commentId}")] HttpRequest req,
         string pageId,

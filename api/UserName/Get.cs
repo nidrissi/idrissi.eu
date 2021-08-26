@@ -14,7 +14,7 @@ namespace BlogApi
 
   public static class GetUsername
   {
-    [FunctionName("GetUsername")]
+    [FunctionName("Username_GET")]
     public static async Task<IActionResult> Run(
         [HttpTrigger(AuthorizationLevel.Function, "get", Route = "user")] HttpRequest req,
         [CosmosDB(ConnectionStringSetting = "CosmosDbConnectionString")] DocumentClient client,

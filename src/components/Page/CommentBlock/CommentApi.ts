@@ -30,6 +30,7 @@ export const commentApi = createApi({
       providesTags: (_result, _error, pageId) => [
         { type: "comment", id: pageId },
       ],
+      transformResponse: ({ comments }: { comments: Comment[] }) => comments,
     }),
     postComment: builder.mutation<{}, { pageId: string; content: string }>({
       query: ({ pageId, content }) => ({

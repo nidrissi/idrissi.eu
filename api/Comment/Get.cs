@@ -11,7 +11,7 @@ namespace BlogApi
 
   public static class GetComments
   {
-    [FunctionName("GetComments")]
+    [FunctionName("Comments_GET")]
     public static IActionResult Run(
         [HttpTrigger(AuthorizationLevel.Function, "get", Route = "comment/{pageId}")] HttpRequest req,
         string pageId,
@@ -57,7 +57,7 @@ namespace BlogApi
         }
       }
 
-      return new OkObjectResult(comments);
+      return new OkObjectResult(new { comments });
     }
   }
 }

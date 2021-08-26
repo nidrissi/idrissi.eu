@@ -16,7 +16,7 @@ namespace BlogApi
 
   public static class PostComment
   {
-    [FunctionName("PostComment")]
+    [FunctionName("Comment_POST")]
     public static async Task<IActionResult> Run(
         [HttpTrigger(AuthorizationLevel.Function, "post", Route = "comment/{pageId}")] HttpRequest req,
         string pageId,
