@@ -43,7 +43,7 @@ export const commentApi = createApi({
       invalidatesTags: (_result, error, { pageId }) =>
         error ? [] : [{ type: "comment", id: pageId }],
     }),
-    editComment: builder.mutation<
+    patchComment: builder.mutation<
       {},
       { pageId: string; id: string; content: string }
     >({
@@ -79,5 +79,6 @@ export const {
   useGetCommentsQuery,
   usePostUsernameMutation,
   usePostCommentMutation,
+  usePatchCommentMutation,
   useDeleteCommentMutation,
 } = commentApi;

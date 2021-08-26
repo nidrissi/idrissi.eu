@@ -64,8 +64,8 @@ namespace BlogApi.Comment
         log.LogInformation("Getting details of user={userId}.", userId);
 
         var userUri = UriFactory.CreateDocumentUri("Blogging", "Users", userId);
-        var requestOptions = new RequestOptions() { PartitionKey = new PartitionKey(userId) };
-        UserDetails details = await client.ReadDocumentAsync<UserDetails>(userUri, requestOptions, token);
+        var userRequestOptions = new RequestOptions() { PartitionKey = new PartitionKey(userId) };
+        UserDetails details = await client.ReadDocumentAsync<UserDetails>(userUri, userRequestOptions, token);
         principal.AddIdentity(Auth.Parse(details));
 
         if (principal.HasClaim("banned", "true"))
@@ -79,7 +79,7 @@ namespace BlogApi.Comment
         long jsNow = Util.ToJSTime(DateTime.UtcNow);
         details.LastAttemptToPost = jsNow;
         log.LogInformation("Updating lastAttemptToPost for user={userId}.", details.Id);
-        await client.ReplaceDocumentAsync(userUri, details, requestOptions, token);
+        await client.ReplaceDocumentAsync(userUri, details, userRequestOptions, token);
 
         if (DateTime.Now - lastTime < TimeSpan.FromSeconds(10))
         {
@@ -87,8 +87,10 @@ namespace BlogApi.Comment
           return new StatusCodeResult((int)HttpStatusCode.TooManyRequests);
         }
 
-        var commentUri = UriFactory.CreateDocumentUri("Blogging", "Comment", commentId);
-        Comment comment = await client.ReadDocumentAsync<Comment>(commentUri, requestOptions, token);
+        var commentUri = UriFactory.CreateDocumentUri("Blogging", "Comments", commentId);
+        var commentRequestOptions = new RequestOptions() { PartitionKey = new PartitionKey(pageId) };
+        Comment comment = await client.ReadDocumentAsync<Comment>(commentUri, commentRequestOptions, token);
+        log.LogInformation("Found comment={commentId}", comment.Id);
 
         if (DateTime.Now - Util.FromJSTime(comment.LastEditTimestamp ?? 0) < TimeSpan.FromSeconds(10))
         {
@@ -104,18 +106,18 @@ namespace BlogApi.Comment
         comment.Content = content;
         comment.LastEditTimestamp = jsNow;
 
-        var response = await client.ReplaceDocumentAsync(commentUri, comment, requestOptions, token);
+        var response = await client.ReplaceDocumentAsync(commentUri, comment, commentRequestOptions, token);
 
         return new OkResult();
       }
       catch (JsonException ex)
       {
-        log.LogError("JSON error: {msg}", ex.Message);
+        log.LogError("JSON error:\n{msg}", ex.Message);
         return new BadRequestObjectResult(ex.Message);
       }
       catch (DocumentClientException ex)
       {
-        log.LogError("Cosmos error: {msg}", ex.Message);
+        log.LogError("Cosmos error:\n{msg}", ex.Message);
         switch (ex.StatusCode.Value)
         {
           case HttpStatusCode.NotFound:

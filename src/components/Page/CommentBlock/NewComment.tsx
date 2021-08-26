@@ -12,6 +12,7 @@ import { faMarkdown } from "@fortawesome/free-brands-svg-icons";
 import {
   useGetClientQuery,
   useGetUsernameQuery,
+  usePatchCommentMutation,
   usePostCommentMutation,
 } from "./CommentApi";
 import UserDetails from "./UserDetails";
@@ -33,16 +34,35 @@ export default function NewComment({ pageId }: { pageId: string }) {
   );
 }
 
-interface NewCommentFormProps {
-  pageId: string;
-}
+type NewCommentFormProps =
+  | {
+      pageId: string;
+      initialValue?: never;
+      id?: never;
+      closeCallback?: never;
+    }
+  | {
+      pageId: string;
+      initialValue: string;
+      id: string;
+      closeCallback: () => void;
+    };
 
-function NewCommentForm({ pageId }: NewCommentFormProps) {
-  const [expanded, setExpanded] = useState(false);
-  const [currentInput, setCurrentInput] = useState<string>("");
+export function NewCommentForm({
+  pageId,
+  initialValue,
+  id,
+  closeCallback,
+}: NewCommentFormProps) {
+  const [expanded, setExpanded] = useState(id !== undefined);
+  const [currentInput, setCurrentInput] = useState<string>(initialValue ?? "");
   const [error, setError] = useState("");
 
-  const [triggerPostComment, { isLoading }] = usePostCommentMutation();
+  const [triggerPostComment, { isLoading: isPostLoading }] =
+    usePostCommentMutation();
+  const [triggerPatchComment, { isLoading: isPatchLoading }] =
+    usePatchCommentMutation();
+  const isLoading = isPostLoading || isPatchLoading;
 
   async function handleSubmit() {
     if (isLoading) {
@@ -58,7 +78,12 @@ function NewCommentForm({ pageId }: NewCommentFormProps) {
       setError("Comments must be at most 512 characters long.");
     } else {
       try {
-        await triggerPostComment({ pageId, content: trueInput }).unwrap();
+        if (id !== undefined) {
+          await triggerPatchComment({ pageId, id, content: trueInput });
+          closeCallback?.();
+        } else {
+          await triggerPostComment({ pageId, content: trueInput }).unwrap();
+        }
         setCurrentInput("");
         setError("");
       } catch (err) {
@@ -81,9 +106,13 @@ function NewCommentForm({ pageId }: NewCommentFormProps) {
       );
 
     if (shouldReset) {
-      setExpanded(false);
-      setError("");
-      setCurrentInput("");
+      if (closeCallback) {
+        closeCallback();
+      } else {
+        setExpanded(false);
+        setError("");
+        setCurrentInput("");
+      }
     }
   }
 
@@ -120,7 +149,7 @@ function NewCommentForm({ pageId }: NewCommentFormProps) {
                 handleReset();
               }
             }}
-            disabled={isLoading}
+            disabled={isPostLoading}
             placeholder="Type a comment (up to 512 characters) here..."
           />
           {error && <Error>{error}</Error>}
@@ -135,14 +164,14 @@ function NewCommentForm({ pageId }: NewCommentFormProps) {
                 &nbsp;Markdown reference
               </a>
             </div>
-            <button type="submit" disabled={isLoading}>
+            <button type="submit" disabled={isPostLoading}>
               <FontAwesomeIcon
-                icon={isLoading ? faSpinner : faCheck}
-                spin={isLoading}
+                icon={isPostLoading ? faSpinner : faCheck}
+                spin={isPostLoading}
               />
               &nbsp;Submit
             </button>
-            <button type="reset" disabled={isLoading}>
+            <button type="reset" disabled={isPostLoading}>
               <FontAwesomeIcon icon={faTimes} />
               &nbsp;Cancel
             </button>
