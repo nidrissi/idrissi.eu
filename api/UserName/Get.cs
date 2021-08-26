@@ -34,11 +34,7 @@ namespace BlogApi.Username
         log.LogInformation("Getting username of user={userId}.", userId);
 
         var userUri = UriFactory.CreateDocumentUri("Blogging", "Users", userId);
-        var partitionKey = new PartitionKey(userId);
-        var requestOptions = new RequestOptions()
-        {
-          PartitionKey = partitionKey,
-        };
+        var requestOptions = new RequestOptions() { PartitionKey = new PartitionKey(userId) };
         UserDetails details = await client.ReadDocumentAsync<UserDetails>(userUri, requestOptions, token);
         log.LogInformation("Found name={Username}.", details.Username);
         return new OkObjectResult(new { userId = details.Id, username = details.Username });

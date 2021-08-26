@@ -13,6 +13,9 @@ namespace BlogApi.Comment
     [JsonProperty("timestamp")]
     public long Timestamp { get; set; }
 
+    [JsonProperty("lastEditTimestamp")]
+    public long? LastEditTimestamp { get; set; }
+
     [JsonProperty("content")]
     public string Content { get; set; }
 

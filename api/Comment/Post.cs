@@ -14,7 +14,7 @@ namespace BlogApi.Comment
   using Microsoft.Azure.WebJobs.Extensions.Http;
   using Microsoft.Extensions.Logging;
 
-  public static class Post
+  public static partial class Post
   {
     [FunctionName("Comment_POST")]
     public static async Task<IActionResult> Run(
@@ -32,26 +32,21 @@ namespace BlogApi.Comment
           return new UnauthorizedResult();
         }
 
-        var body = await JsonSerializer.DeserializeAsync<PostCommentBody>(
+        var body = await JsonSerializer.DeserializeAsync<PartialComment>(
           req.Body,
            new JsonSerializerOptions
            {
              PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
            },
            token);
-        string content = body.Content;
-        string trimmedContent = content.Trim();
 
-        if (string.IsNullOrWhiteSpace(trimmedContent))
+        if (!body.TrimAndCheck(out var msgTrim))
         {
-          log.LogError("Empty post.");
+          log.LogWarning(msgTrim);
           return new BadRequestResult();
         }
-        else if (trimmedContent.Length < 10 || trimmedContent.Length > 512)
-        {
-          log.LogError("Incorrect post length: {l}.", trimmedContent.Length);
-          return new BadRequestResult();
-        }
+
+        string content = body.Content;
 
         ClaimsPrincipal principal = Auth.Parse(req);
         if (!Auth.Check(principal, out var msg))
@@ -91,7 +86,7 @@ namespace BlogApi.Comment
         var comment = new Comment()
         {
           PageId = pageId,
-          Content = trimmedContent,
+          Content = content,
           Username = details.Username,
           UserId = userId,
           Timestamp = jsNow,
@@ -123,11 +118,6 @@ namespace BlogApi.Comment
             throw ex;
         }
       }
-    }
-
-    private class PostCommentBody
-    {
-      public string Content { get; set; }
     }
   }
 }

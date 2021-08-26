@@ -3,15 +3,18 @@ namespace BlogApi.Comment
 {
   using System;
   using System.IO;
-  using System.Threading.Tasks;
+  using System.Net;
+  using System.Security.Claims;
+  using System.Text.Json;
   using System.Threading;
+  using System.Threading.Tasks;
   using Microsoft.AspNetCore.Http;
   using Microsoft.AspNetCore.Mvc;
+  using Microsoft.Azure.Documents;
   using Microsoft.Azure.Documents.Client;
   using Microsoft.Azure.WebJobs;
   using Microsoft.Azure.WebJobs.Extensions.Http;
   using Microsoft.Extensions.Logging;
-  using Newtonsoft.Json;
 
   public static class Patch
   {
@@ -24,19 +27,106 @@ namespace BlogApi.Comment
         CancellationToken token,
         ILogger log)
     {
-      log.LogInformation("C# HTTP trigger function processed a request.");
+      try
+      {
+        if (!Pages.AllowedPageIds.TryGetValue(pageId, out var allowed) || !allowed)
+        {
+          log.LogError("Received a request to patch on an unauthorized page={pageId}.", pageId);
+          return new UnauthorizedResult();
+        }
 
-      string name = req.Query["name"];
+        ClaimsPrincipal principal = Auth.Parse(req);
+        if (!Auth.Check(principal, out var authMsg))
+        {
+          log.LogWarning(authMsg);
+          return new UnauthorizedResult();
+        }
 
-      string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-      dynamic data = JsonConvert.DeserializeObject(requestBody);
-      name = name ?? data?.name;
+        var body = await JsonSerializer.DeserializeAsync<PartialComment>(
+          req.Body,
+           new JsonSerializerOptions
+           {
+             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+           },
+           token);
 
-      string responseMessage = string.IsNullOrEmpty(name)
-          ? "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response."
-          : $"Hello, {name}. This HTTP triggered function executed successfully.";
+        if (!body.TrimAndCheck(out var trimMsg))
+        {
+          log.LogWarning(trimMsg);
+          return new BadRequestResult();
+        }
 
-      return new OkObjectResult(responseMessage);
+        string content = body.Content;
+
+        // TODO: extract a method or something
+        var userId = principal.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+        log.LogInformation("Getting details of user={userId}.", userId);
+
+        var userUri = UriFactory.CreateDocumentUri("Blogging", "Users", userId);
+        var requestOptions = new RequestOptions() { PartitionKey = new PartitionKey(userId) };
+        UserDetails details = await client.ReadDocumentAsync<UserDetails>(userUri, requestOptions, token);
+        principal.AddIdentity(Auth.Parse(details));
+
+        if (principal.HasClaim("banned", "true"))
+        {
+          log.LogError("Rejecting request from banned user={userId}.", details.Id);
+          return new UnauthorizedResult();
+        }
+
+        DateTime lastTime = Util.FromJSTime(details.LastAttemptToPost);
+
+        long jsNow = Util.ToJSTime(DateTime.UtcNow);
+        details.LastAttemptToPost = jsNow;
+        log.LogInformation("Updating lastAttemptToPost for user={userId}.", details.Id);
+        await client.ReplaceDocumentAsync(userUri, details, requestOptions, token);
+
+        if (DateTime.Now - lastTime < TimeSpan.FromSeconds(10))
+        {
+          log.LogWarning("User={userId} posting too much!", details.Id);
+          return new StatusCodeResult((int)HttpStatusCode.TooManyRequests);
+        }
+
+        var commentUri = UriFactory.CreateDocumentUri("Blogging", "Comment", commentId);
+        Comment comment = await client.ReadDocumentAsync<Comment>(commentUri, requestOptions, token);
+
+        if (DateTime.Now - Util.FromJSTime(comment.LastEditTimestamp ?? 0) < TimeSpan.FromSeconds(10))
+        {
+          log.LogWarning("User={userId} editing too much!", details.Id);
+          return new StatusCodeResult((int)HttpStatusCode.TooManyRequests);
+        }
+        if (comment.UserId != userId)
+        {
+          log.LogError("User={userId} trying to edit comment={commentId} that belongs to user={otherUserId}.", userId, comment.Id, comment.UserId);
+          return new UnauthorizedResult();
+        }
+
+        comment.Content = content;
+        comment.LastEditTimestamp = jsNow;
+
+        var response = await client.ReplaceDocumentAsync(commentUri, comment, requestOptions, token);
+
+        return new OkResult();
+      }
+      catch (JsonException ex)
+      {
+        log.LogError("JSON error: {msg}", ex.Message);
+        return new BadRequestObjectResult(ex.Message);
+      }
+      catch (DocumentClientException ex)
+      {
+        log.LogError("Cosmos error: {msg}", ex.Message);
+        switch (ex.StatusCode.Value)
+        {
+          case HttpStatusCode.NotFound:
+            return new StatusCodeResult((int)HttpStatusCode.NotFound);
+          case HttpStatusCode.TooManyRequests:
+            return new StatusCodeResult((int)HttpStatusCode.TooManyRequests);
+          default:
+            throw ex;
+        }
+      }
+
     }
   }
 }

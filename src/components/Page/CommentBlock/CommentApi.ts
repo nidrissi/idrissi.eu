@@ -40,9 +40,20 @@ export const commentApi = createApi({
           content,
         },
       }),
-      invalidatesTags: (_result, _error, { pageId }) => [
-        { type: "comment", id: pageId },
-      ],
+      invalidatesTags: (_result, error, { pageId }) =>
+        error ? [] : [{ type: "comment", id: pageId }],
+    }),
+    editComment: builder.mutation<
+      {},
+      { pageId: string; id: string; content: string }
+    >({
+      query: ({ pageId, id, content }) => ({
+        url: `api/comment/${pageId}/${id}`,
+        method: "PATCH",
+        body: { content },
+      }),
+      invalidatesTags: (_result, error, { pageId }) =>
+        error ? [] : [{ type: "comment", id: pageId }],
     }),
     deleteComment: builder.mutation<
       {},
