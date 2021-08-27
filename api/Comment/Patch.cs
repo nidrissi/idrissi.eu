@@ -92,14 +92,23 @@ namespace BlogApi.Comment
         Comment comment = await client.ReadDocumentAsync<Comment>(commentUri, commentRequestOptions, token);
         log.LogInformation("Found comment={commentId}", comment.Id);
 
-        if (DateTime.Now - Util.FromJSTime(comment.LastEditTimestamp ?? 0) < TimeSpan.FromSeconds(10))
-        {
-          log.LogWarning("User={userId} editing too much!", details.Id);
-          return new StatusCodeResult((int)HttpStatusCode.TooManyRequests);
-        }
         if (comment.UserId != userId)
         {
           log.LogError("User={userId} trying to edit comment={commentId} that belongs to user={otherUserId}.", userId, comment.Id, comment.UserId);
+          return new UnauthorizedResult();
+        }
+
+        DateTime lastEdit = Util.FromJSTime(comment.LastEditTimestamp ?? 0);
+
+        if (DateTime.Now - lastEdit < TimeSpan.FromSeconds(10))
+        {
+          log.LogWarning("User={userId} editing too much.", details.Id);
+          return new StatusCodeResult((int)HttpStatusCode.TooManyRequests);
+        }
+
+        if (DateTime.Now - lastEdit > TimeSpan.FromMinutes(5))
+        {
+          log.LogWarning("Comment too old to be edited.", details.Id);
           return new UnauthorizedResult();
         }
 

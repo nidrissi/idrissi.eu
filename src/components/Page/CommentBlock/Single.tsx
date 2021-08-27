@@ -84,13 +84,16 @@ export default function Single({ comment }: SingleProps) {
         </div>
         {comment.userId === client?.userId && !comment.deleted && (
           <>
-            <button
-              data-edit
-              title="Edit this comment"
-              onClick={() => setIsEditing((v) => !v)}
-            >
-              <FontAwesomeIcon icon={isEditing ? faTimes : faEdit} />
-            </button>
+            {new Date().getTime() - comment.timestamp < 1000 * 60 * 60 * 5 && (
+              // Edit allowed for five minutes
+              <button
+                data-edit
+                title="Edit this comment"
+                onClick={() => setIsEditing((v) => !v)}
+              >
+                <FontAwesomeIcon icon={isEditing ? faTimes : faEdit} />
+              </button>
+            )}
             <button
               data-del
               onClick={() => onClickDelete()}
