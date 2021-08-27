@@ -1,14 +1,16 @@
 .wrapper {
+  margin-top: 0.25rem;
   display: flex;
   flex-wrap: wrap;
   gap: 0.25rem;
   align-content: center;
+  align-items: baseline;
 }
 
 .wrapper a {
   display: block;
-  padding: 0.33rem;
-  font-size: 80%;
+  padding: 0.25rem;
+  font-size: 75%;
   color: var(--gray-900);
   border: 1px solid var(--gray-200);
 }

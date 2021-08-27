@@ -52,18 +52,16 @@ interface MetaProps {
 
 export default function Meta({ frontmatter, type }: MetaProps) {
   return (
-    <div>
-      <div className={styles.meta}>
-        {type === "research" ? (
-          <MetaResearch frontmatter={frontmatter} />
-        ) : type === "class" ? (
-          <MetaClass frontmatter={frontmatter} />
-        ) : type === "talk" ? (
-          <MetaTalk frontmatter={frontmatter} />
-        ) : (
-          <MetaData frontmatter={frontmatter} />
-        )}
-      </div>
+    <div className={styles.meta}>
+      {type === "research" ? (
+        <MetaResearch frontmatter={frontmatter} />
+      ) : type === "class" ? (
+        <MetaClass frontmatter={frontmatter} />
+      ) : type === "talk" ? (
+        <MetaTalk frontmatter={frontmatter} />
+      ) : (
+        <MetaData frontmatter={frontmatter} />
+      )}
       {frontmatter.urls && (
         <Links urls={frontmatter.urls} title={actualTitle(frontmatter, type)} />
       )}
