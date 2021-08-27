@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { skipToken } from "@reduxjs/toolkit/query";
 
 import Error from "./Error";
 import { useGetClientQuery, useGetUsernameQuery } from "./CommentApi";
 import { UsernameForm } from "./UsernameForm";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { faInfoCircle, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function Username() {
@@ -16,6 +16,8 @@ export default function Username() {
     error,
     refetch,
   } = useGetUsernameQuery(client ? {} : skipToken);
+
+  const [detailsExpanded, setDetailsExpanded] = useState(false);
 
   if (!client) {
     return null;
@@ -33,7 +35,17 @@ export default function Username() {
   } else if (username) {
     return (
       <div>
-        Logged-in as <strong title={client.toString()}>{username}</strong>.
+        Logged-in as <strong>{username}</strong>{" "}
+        <button
+          onClick={() => setDetailsExpanded((e) => !e)}
+          title="Show user id"
+        >
+          {detailsExpanded ? (
+            <>Id: {client.userId}</>
+          ) : (
+            <FontAwesomeIcon icon={faInfoCircle} size="sm" />
+          )}
+        </button>
       </div>
     );
   } else {

@@ -38,7 +38,11 @@ export default function Wrapper({ children, num, retry }: WrapperProps) {
             {title}
           </div>
           {retry && (
-            <button onClick={() => retry()} className={styles.retry}>
+            <button
+              onClick={() => retry()}
+              className={styles.retry}
+              title="Reload comments"
+            >
               <FontAwesomeIcon icon={faSync} />
             </button>
           )}
@@ -53,6 +57,7 @@ export default function Wrapper({ children, num, retry }: WrapperProps) {
                 );
               }}
               className={styles.logout}
+              title="Logout"
             >
               <FontAwesomeIcon icon={faSignOutAlt} />
             </button>
