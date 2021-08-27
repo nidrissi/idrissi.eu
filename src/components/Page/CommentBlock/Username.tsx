@@ -2,9 +2,10 @@ import React from "react";
 import { skipToken } from "@reduxjs/toolkit/query";
 
 import Error from "./Error";
-import { formatClient } from "./ClientPrincipal";
 import { useGetClientQuery, useGetUsernameQuery } from "./CommentApi";
 import { UsernameForm } from "./UsernameForm";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function Username() {
   const { data: client } = useGetClientQuery({});
@@ -23,11 +24,16 @@ export default function Username() {
   if (error && "status" in error && error.status === 404) {
     return <UsernameForm id={client.userId} />;
   } else if (isFetching) {
-    return null;
+    return (
+      <>
+        <FontAwesomeIcon icon={faSpinner} spin />
+        &nbsp;Loading username...
+      </>
+    );
   } else if (username) {
     return (
       <>
-        Logged-in as <strong title={formatClient(client)}>{username}</strong>.
+        Logged-in as <strong title={client.toString()}>{username}</strong>.
       </>
     );
   } else {

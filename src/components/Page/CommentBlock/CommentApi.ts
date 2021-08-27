@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
-import { ClientPrincipal } from "./ClientPrincipal";
+import ClientPrincipal from "./ClientPrincipal";
 import { Comment } from "./Single";
 
 export const commentApi = createApi({
@@ -10,11 +10,7 @@ export const commentApi = createApi({
     getClient: builder.query<ClientPrincipal, {}>({
       query: () => ".auth/me",
       providesTags: ["client"],
-      transformResponse: ({
-        clientPrincipal,
-      }: {
-        clientPrincipal: ClientPrincipal;
-      }) => clientPrincipal,
+      transformResponse: ({ client }: { client: ClientPrincipal }) => client,
     }),
     getUsername: builder.query<string, {}>({
       query: () => "api/user",
