@@ -15,7 +15,7 @@ import {
   usePatchCommentMutation,
   usePostCommentMutation,
 } from "./CommentApi";
-import UserDetails from "./UserDetails";
+import User from "./User";
 import Error from "./Error";
 
 import * as styles from "./WriteComment.module.css";
@@ -26,7 +26,7 @@ export default function WriteComment({ pageId }: { pageId: string }) {
 
   return (
     <>
-      <UserDetails />
+      <User />
       {client !== null && username && (
         <div className={styles.wrapDiv}>
           <WriteCommentForm pageId={pageId} />
