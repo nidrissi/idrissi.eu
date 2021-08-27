@@ -23,6 +23,7 @@ export interface Comment {
   id: string;
   pageId: string;
   timestamp: number;
+  lastEditTimestamp?: number;
   content: string;
   deleted: boolean;
   userId: string;
@@ -73,6 +74,13 @@ export default function Single({ comment }: SingleProps) {
           <strong>{comment.username}</strong>
           {", "}
           <em>{new Date(comment.timestamp).toLocaleString()}</em>.
+          {comment.lastEditTimestamp && (
+            <em>
+              {" "}
+              Last edited{" "}
+              {new Date(comment.lastEditTimestamp).toLocaleDateString()}
+            </em>
+          )}
         </div>
         {comment.userId === client?.userId && !comment.deleted && (
           <>
