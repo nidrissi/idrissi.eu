@@ -77,10 +77,6 @@
     "Roboto Mono", Menlo, Monaco, Consolas, monospace;
 }
 
-html {
-  scroll-padding-top: 3.25rem;
-}
-
 body {
   font-family: var(--ff-serif);
   color: var(--gray-900);
@@ -164,10 +160,13 @@ ol ol {
 .prose a {
   font-weight: 500;
   color: var(--blue-800);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition: text-decoration-color 0.25s;
 }
 
 .prose a:hover {
-  text-decoration: underline;
+  text-decoration-color: currentColor;
 }
 
 .prose img {
